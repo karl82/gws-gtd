@@ -4,7 +4,7 @@ name: gws-doc-review-sync
 
 ## Purpose
 
-Use this skill when Markdown is the source of truth and Google Docs is the review surface.
+Use this skill for Markdown-first Google Docs review workflows plus one-way export of Google Docs into Markdown for AI review.
 
 ## Supported Modes
 
@@ -14,10 +14,12 @@ Use this skill when Markdown is the source of truth and Google Docs is the revie
 - `gdoc-apply-feedback`
 - `gdoc-reply-resolve`
 - `gdoc-status`
+- `gdoc-export-md`
+- `gdoc-review-context`
 
 ## Router
 
-1. Resolve the review-sync intent.
+1. Resolve the review intent.
 2. Use the matching reference:
    - `gdoc-bootstrap` -> `references/bootstrap.md`
    - `gdoc-publish` -> `references/publish.md`
@@ -25,17 +27,24 @@ Use this skill when Markdown is the source of truth and Google Docs is the revie
    - `gdoc-apply-feedback` -> `references/apply-feedback.md`
    - `gdoc-reply-resolve` -> `references/resolve.md`
    - `gdoc-status` -> `references/status.md`
-3. Treat Markdown as canonical and Google Docs as the review surface.
+   - `gdoc-export-md` -> `references/export-md.md`
+   - `gdoc-review-context` -> `references/review-context.md`
+3. Treat exported Markdown as a read-only mirror when the source lives in Google Docs.
 
 ## Review Contract
 
 - Store both `gdoc_id` and full `gdoc_url` in frontmatter.
-- If multiple `.md` files live in one directory, treat one note as `main` and sibling notes as tabs in the same Google Doc.
+- Markdown-authored review bundles may publish sibling `.md` files as tabs in one Google Doc.
 - Apply accepted feedback in Markdown, then reply and resolve the corresponding Google Docs threads.
+- For Docs-authored reference docs, export the whole Google Doc to one Markdown file with provenance metadata.
+- Treat exported Markdown mirrors as read-only reference material.
 
 ## Supporting Files
 
 - Overview: `README.md`
+- Helper:
+  - `scripts/export_gdoc_markdown.py`
 - Examples:
   - `examples/gdoc-source-note.md`
   - `examples/gdoc-tab-note.md`
+  - `examples/gdoc-reference-note.md`

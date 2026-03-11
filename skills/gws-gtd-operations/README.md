@@ -31,7 +31,13 @@ Not needed for current ceremony flow:
 - `https://www.googleapis.com/auth/tasks`
 - Gmail send/compose/insert/settings scopes
 - `https://www.googleapis.com/auth/cloud-platform`
-- Docs/Drive write scopes
+- Docs/Drive write scopes for GTD ceremonies alone
+
+Needed by sibling skills, not by core ceremonies:
+
+- `https://www.googleapis.com/auth/documents`
+- `https://www.googleapis.com/auth/drive`
+  - required by `gws-doc-review-sync` for Google Docs publish, comment sync, and Markdown export flows
 
 ## Capture Model
 

@@ -16,7 +16,7 @@ Use this procedure to push canonical Markdown content into an existing linked Go
 - Prefer minimal structural churn.
 - Preserve stable headings when possible.
 - Do not silently overwrite the Doc if the plan would destroy open comment context.
-- If sibling `.md` files in the same directory are part of the same review bundle, publish them as tabs in the same Google Doc.
+- If sibling `.md` files are part of the same review bundle, publish them as tabs in the same Google Doc.
 
 ### Rendering Contract
 
@@ -42,15 +42,14 @@ Initial renderer support should be intentionally narrow:
 1. Pull open comments for the linked Doc.
 2. If open comments exist and the publish would substantially rewrite structure, warn before proceeding.
 3. Prefer section-preserving updates over whole-document replacement.
-4. In tabbed bundles, preserve existing tab IDs and titles when possible.
+4. In tabbed review bundles, preserve existing tab titles when possible.
 
 ### Step 2 - Build Update Requests
 
 1. Translate Markdown into Docs API requests.
-2. If the note is a main note and sibling tab notes exist, build one update plan for the root tab plus sibling tabs.
-3. Use `documents.batchUpdate` for structured writes.
-4. Target each write request to the intended `tabId`.
-5. Avoid plain-text append helpers for publish flows.
+2. Use `documents.batchUpdate` for structured writes.
+3. If the note is `main` and sibling tab notes exist, build one update plan for the root doc plus sibling tabs.
+4. Avoid plain-text append helpers for publish flows.
 
 ### Step 3 - Update Metadata
 
@@ -59,10 +58,10 @@ After successful publish, update frontmatter:
 - `gdoc_last_published_sha`
 - `gdoc_last_published_at`
 
-If a tabbed bundle was published:
+If a tabbed review bundle was published:
 
 - keep the shared `gdoc_url` on all related notes
-- keep one `main` note and sibling `tab` roles stable across republishes
+- keep stable `gdoc_role` and `gdoc_tab_title` values across republishes
 
 ### Publish Output
 

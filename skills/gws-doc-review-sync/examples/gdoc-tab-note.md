@@ -11,7 +11,8 @@ gdoc_last_comment_sync: "2026-03-09T16:10:00Z"
 
 # Risks
 
-This sibling note belongs to the same Google Doc as the main note, but publishes into its own tab.
+This sibling note belongs to a Markdown-authored review bundle.
 
-- Use one main note per directory bundle.
-- Use sibling notes as tab content when they should stay in the same review surface.
+- The `main` note owns the bundle.
+- This note publishes as a tab in the same Google Doc.
+- The Google Doc remains a review surface; Markdown stays canonical.

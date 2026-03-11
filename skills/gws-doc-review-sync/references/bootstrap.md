@@ -24,15 +24,15 @@ Use this procedure to prepare a Markdown file for Google Docs review sync.
    - `gdoc_id`
    - `gdoc_url`
    - `gdoc_source_of_truth: markdown`
-4. Inspect the source file's directory for sibling `.md` files.
-5. If sibling `.md` files exist, decide whether this note is the main note for a tabbed review bundle.
+4. Inspect the source file's directory for sibling `.md` files when the user wants tabbed publish.
+5. If sibling `.md` files should become one review bundle, decide which note is `main` and which notes are `tab` notes.
 
 ### Step 2 - Link or Create Google Doc
 
 1. If `gdoc_id` already exists, validate that the file still exists in Drive.
 2. Otherwise create a new Google Doc or accept an existing `gdoc_id` supplied by the user.
 3. Record both the long-lived `gdoc_id` and the full `gdoc_url` in frontmatter.
-4. If the directory is a tabbed bundle, make sure sibling tab notes also reference the same `gdoc_id` and `gdoc_url`.
+4. If the source directory is a tabbed review bundle, make sure sibling tab notes also reference the same `gdoc_id` and `gdoc_url`.
 
 ### Step 3 - Initialize Sync Metadata
 
