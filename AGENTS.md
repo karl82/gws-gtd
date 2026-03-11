@@ -5,6 +5,7 @@ Source of truth:
 - The package skill lives in `skills/gws-gtd/`.
 - GTD references live in `skills/gws-gtd/references/gtd/`.
 - GWS references live in `skills/gws-gtd/references/gws/`.
+- Google Docs review-sync references live in `skills/gws-gtd/references/gdoc/`.
 - transcrypt references live in `skills/gws-gtd/references/transcrypt/`.
 - Vault runtime files live in `System/`.
 

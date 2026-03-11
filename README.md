@@ -1,10 +1,10 @@
 # gws-gtd
 
-`gws-gtd` is an opinionated OpenPackage package for running a GTD vault with Google Workspace (`gws`) and git/transcrypt support.
+`gws-gtd` is an opinionated OpenPackage package for running a GTD vault with Google Workspace (`gws`), Google Docs review sync, and git/transcrypt support.
 
 ## What It Installs
 
-- one unified `gws-gtd` skill with GTD, GWS, vault-retrofit, and transcrypt modes
+- one unified `gws-gtd` skill with GTD, GWS, Google Docs review sync, vault-retrofit, and transcrypt modes
 - vault runtime files under `System/`, including templates, queries, and email triage policy
 
 ## Package Layout
