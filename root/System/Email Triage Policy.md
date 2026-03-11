@@ -1,0 +1,101 @@
+# Email Triage Policy
+
+This note is the canonical source for Gmail GTD label meaning and email classification rules across daily, weekly, monthly, and ad-hoc workflows.
+
+Use heuristics to classify unlabeled email. Once a GTD label already exists, respect that label unless the thread is clearly mislabeled or already represented elsewhere.
+
+## Label Contract
+
+| Label | Meaning | Default handling |
+|---|---|---|
+| `gtd/import` | Explicit task-import gate | Create or update a canonical task now. Dedupe by `gmail_thread_id`. |
+| `gtd/waiting` | Explicit waiting gate | Create or update a mandatory `#waiting` task now. |
+| `gtd/review` | Deferred classification queue | Archive in Gmail, do not create a vault task yet, and sweep during weekly review or ad-hoc triage. |
+| `gtd/reference` | Non-actionable but worth retaining | Archive in Gmail and keep no task. |
+| `gtd/imported` | Already processed marker | Use for dedupe/post-import hygiene when available. |
+
+Notes:
+
+- `gtd/import` is stronger than heuristics. If a thread already has `gtd/import`, it should still create a task unless it is a duplicate or clearly mislabeled.
+- `gtd/review` items should normally be archived, not left in Gmail inbox.
+- `gtd/review` items should not create `Inbox.md` entries or `#inbox` tasks by default.
+- If an email may need action before the next weekly review, prefer `gtd/import` over `gtd/review`.
+
+## Recommended Capture Setup
+
+- Gmail is the only mobile capture inbox.
+- Recommended alias: `karel.rank+gtd@gmail.com`.
+- Recommended filter: `to:karel.rank+gtd@gmail.com` -> apply `gtd/import`.
+
+## Classification Defaults
+
+| Email type | Default action | Notes / exceptions |
+|---|---|---|
+| Message already labeled `gtd/import` | task | Create or update a task even if the task is phrased as review. |
+| Message already labeled `gtd/waiting` | waiting task | Create or update the waiting task immediately. |
+| Statement notice | trash | Override only when there is an amount due, a problem, or a real next step. |
+| Insurance or travel-plan upsell | trash | Treat as marketing by default. |
+| Policy, booking, or plan document worth keeping | reference + archive | Keep searchable, out of inbox. |
+| Confirmation already covered by an existing `#waiting` task | match existing | No duplicate task; clear from import flow. |
+| Appointment or reservation confirmation | calendar first | If already on calendar, archive. If not, create/update calendar and archive. |
+| Recruiter outreach with plausible opportunity | review | Usually review and send a generic decline unless the opportunity is unusually compelling. |
+| Clearly actionable message where you are the next actor | import | Create a task now. |
+| Delegated thread where the next move belongs to someone else | waiting | Create or update a `#waiting` task. |
+| Ambiguous but potentially relevant informational mail | review | Archive with `gtd/review` and revisit later. |
+| Pure noise, promotion, or accepted invitation notification | trash | Recommend unsubscribe when appropriate. |
+
+## Heuristics
+
+Use these heuristics when deciding how unlabeled email should be labeled.
+
+### Next-Actor Check
+
+- If you must do the next step, prefer `gtd/import`.
+- If someone else must do the next step, prefer `gtd/waiting`.
+- If no action is needed now and it can safely wait until review, prefer `gtd/review`.
+
+### Timing Check
+
+- Ask: does this need attention before the next weekly review?
+- If yes, prefer `gtd/import`.
+- If no, `gtd/review` is acceptable.
+
+### Existing-System Check
+
+- If the thread already maps to an existing task by `gmail_thread_id`, update or match that task instead of creating a duplicate.
+- If the thread is already represented by a `#waiting` task, match the existing task and clear the email from intake.
+- If the thread is already represented on calendar, archive the email rather than creating a vault task.
+
+### Retention Check
+
+- Keep `gtd/reference` only when the message is realistically useful later for proof, policy details, travel, taxes, legal records, or similar reference.
+- Do not keep generic notices that can be re-fetched or do not support a later decision.
+
+### Recruiter Heuristic
+
+- Default recruiter outreach to `gtd/review` unless it is clearly time-sensitive or unusually strong on role fit, scope, compensation, company quality, location, or personal relevance.
+- If a recruiter thread already has `gtd/import`, still create a task, but phrase it as a review task such as `Review recruiter outreach from <name>/<company> and send decline unless compelling`.
+
+## Review Queue Rules
+
+- `gtd/review` is a deferred-classification queue, not an execution queue.
+- Review it during weekly review and optionally during ad-hoc mailbox cleanup.
+- During review, every thread should move toward one of these outcomes:
+  - `gtd/import`
+  - `gtd/waiting`
+  - `gtd/reference`
+  - `trash`
+- Avoid leaving the same thread in `gtd/review` indefinitely.
+
+## Overrides
+
+- A billing or statement email with an amount due, a payment failure, or a problem becomes `gtd/import`, not trash.
+- A renewal notice tied to an active project becomes `gtd/import` when there is a real next step; otherwise use `gtd/reference` or trash based on retention value.
+- Time-sensitive ambiguous mail should become `gtd/import` as a review-style task rather than `gtd/review`.
+
+## Operational Notes
+
+- Keep one canonical task line in the vault for each imported thread.
+- Do not create `Inbox.md` entries for `gtd/review` items unless they have been promoted into actionable GTD capture.
+- When a mail-driven task is completed and no immediate follow-up is expected, archive the Gmail thread.
+- Use `System/Templates/Recruiter Decline Email.md` as the reusable baseline when a recruiter-review task resolves to a polite decline.
