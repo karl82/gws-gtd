@@ -52,7 +52,7 @@
 
 ### Bundled Script
 
-- Run the bundled `scripts/sync_gtd_signals.py` helper from the installed `gws-gtd` skill directory.
+- Run the bundled `scripts/sync_gtd_signals.py` helper from the installed `gws-gtd-operations` skill directory.
 - Claude Code example:
   - `python3 "${CLAUDE_SKILL_DIR}/scripts/sync_gtd_signals.py"`
 - Claude Code apply example:

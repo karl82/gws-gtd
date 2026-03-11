@@ -4,14 +4,24 @@
 
 ## What It Installs
 
-- one unified `gws-gtd` skill with GTD, GWS, Google Docs review sync, vault-retrofit, and transcrypt modes
+- `gtd-getting-things-done` for GTD ceremonies
+- `gws-gtd-operations` for Gmail, Calendar, People, and signal-sync workflows
+- `gws-doc-review-sync` for Markdown-as-source Google Docs review
+- `transcrypt-git-repo` for git encryption operations
+- commands for vault analysis and retrofit
 - vault runtime files under `System/`, including templates, queries, and email triage policy
 
 ## Package Layout
 
 ```text
 skills/
-  gws-gtd/
+  gtd-getting-things-done/
+  gws-gtd-operations/
+  gws-doc-review-sync/
+  transcrypt-git-repo/
+commands/
+  analyze-vault.md
+  retrofit-vault.md
 root/
   System/
     GTD Config.md

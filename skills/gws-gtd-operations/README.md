@@ -1,4 +1,4 @@
-# GWS Overview
+# gws-gtd-operations
 
 This skill integrates Google Workspace (`gws`) into the opinionated `gws-gtd` GTD workflow.
 
@@ -52,7 +52,7 @@ Not needed for current ceremony flow:
 - You can use the bundled `scripts/gmail_thread_reply.py` helper to build or send a correctly threaded reply.
 - If you want normal reply-style context, pass `--quote` or `--quote-file` and optionally `--quote-header` so the outgoing message includes the original text as a quoted block.
 - Do not use Google Tasks as a parallel capture or execution system.
-- Use `references/gws/command-reference.md` for one-off `gws` command lookup and mailbox-maintenance recipes.
+- Use `references/command-reference.md` for one-off `gws` command lookup and mailbox-maintenance recipes.
 - Daily intake should batch repetitive email and calendar decisions first, then apply the confirmed actions in one go.
 
 ## Calendar Signal Model
@@ -88,7 +88,7 @@ Not needed for current ceremony flow:
 
 Use the bundled skill script:
 
-Run the bundled `scripts/sync_gtd_signals.py` helper from the installed `gws-gtd` skill directory. On Claude Code the common form is:
+Run the bundled `scripts/sync_gtd_signals.py` helper from the installed `gws-gtd-operations` skill directory. On Claude Code the common form is:
 
 ```bash
 python3 "${CLAUDE_SKILL_DIR}/scripts/sync_gtd_signals.py"
@@ -138,7 +138,7 @@ gws people people connections list --params '{"resourceName":"people/me","person
 - When an email-driven task is done and no immediate follow-up is expected, archive by removing `INBOX` from the thread.
 - Accepted calendar invitation notification emails should be trashed by default unless they add actionable context beyond the calendar event itself.
 - Use permanent delete only when explicitly requested.
-- For examples such as cleaning old promotional email, archiving stale notifications, or checking unsubscribe headers, see `references/gws/command-reference.md`.
+- For examples such as cleaning old promotional email, archiving stale notifications, or checking unsubscribe headers, see `references/command-reference.md`.
 
 ## GTD Label Bootstrap
 

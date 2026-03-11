@@ -2,11 +2,11 @@ This vault uses the `gws-gtd` package as its opinionated GTD + Google Workspace 
 
 Source of truth:
 
-- The package skill lives in `skills/gws-gtd/`.
-- GTD references live in `skills/gws-gtd/references/gtd/`.
-- GWS references live in `skills/gws-gtd/references/gws/`.
-- Google Docs review-sync references live in `skills/gws-gtd/references/gdoc/`.
-- transcrypt references live in `skills/gws-gtd/references/transcrypt/`.
+- GTD ceremony skill lives in `skills/gtd-getting-things-done/`.
+- Google Workspace operations skill lives in `skills/gws-gtd-operations/`.
+- Google Docs review-sync skill lives in `skills/gws-doc-review-sync/`.
+- transcrypt utility skill lives in `skills/transcrypt-git-repo/`.
+- Analyze and retrofit commands live in `commands/`.
 - Vault runtime files live in `System/`.
 
 Core runtime files:

@@ -1,4 +1,4 @@
-# Google Docs Review Overview
+# gws-doc-review-sync
 
 This workflow is for Markdown-as-source review using Google Docs as the collaborative comment surface.
 
