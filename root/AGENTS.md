@@ -6,6 +6,7 @@ Source of truth:
 - Google Workspace operations skill lives in `skills/gws-gtd-operations/`.
 - Google Docs review-sync skill lives in `skills/gws-doc-review-sync/`.
 - transcrypt utility skill lives in `skills/transcrypt-git-repo/`.
+- GTD ceremony agents live in `agents/`.
 - Analyze and retrofit commands live in `commands/`.
 - Vault runtime files live in `System/`.
 

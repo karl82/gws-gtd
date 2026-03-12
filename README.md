@@ -8,6 +8,7 @@
 - `gws-gtd-operations` for Gmail, Calendar, People, and signal-sync workflows
 - `gws-doc-review-sync` for Markdown-as-source Google Docs review
 - `transcrypt-git-repo` for git encryption operations
+- GTD ceremony agents under `agents/`
 - commands for vault analysis and retrofit
 - vault runtime files under `System/`, including templates, queries, and email triage policy
 
@@ -19,16 +20,21 @@ skills/
   gws-gtd-operations/
   gws-doc-review-sync/
   transcrypt-git-repo/
+agents/
+  gtd-daily.md
+  gtd-weekly.md
+  gtd-monthly.md
+  gtd-organizing.md
 commands/
   analyze-vault.md
   retrofit-vault.md
 root/
+  AGENTS.md
   System/
     GTD Config.md
     Email Triage Policy.md
     Templates/
     Queries/
-AGENTS.md
 openpackage.yml
 ```
 
@@ -49,6 +55,20 @@ opkg install gh@karl82/gws-gtd
 ```
 
 Then review the installed `AGENTS.md`, `System/GTD Config.md`, and `System/Email Triage Policy.md` in the target vault.
+
+## Maintenance Workflow
+
+Preferred default: edit package-managed files in a consumer vault, then save them back to the package.
+
+From the vault root:
+
+```bash
+opkg save gws-gtd
+```
+
+Then review and commit in `gws-gtd`, and reinstall where needed.
+
+Detailed guidance lives in `CONTRIBUTING.md`.
 
 ## Scope
 
