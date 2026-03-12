@@ -27,6 +27,24 @@
 - Every active project should define a measurable outcome.
 - Every active project should have at least one open linked `#task`.
 - Plain subtasks do not satisfy the open-task requirement.
+- Canonical project notes live at `Projects/<Domain>/<Project>.md`.
+- Deeper project artifacts may live under `Projects/<Domain>/<Project>/`.
+- Project-owned design notes live under `Projects/<Domain>/<Project>/designs/`.
+- Active project design notes should not live in a separate top-level `Designs/` folder in the canonical end state.
+
+### Linking Rules
+
+- Use full vault-relative links for canonical entities under `Projects/`, `Areas/`, and `People/`.
+- Every active project task must include a full `[[Projects/<Domain>/<Project>]]` link.
+- Every active area task must include a full `[[Areas/...]]` link.
+- Design-specific tasks may include both the project link and the design link, but never the design link alone.
+- Every design note must link back to its canonical project note using the full project path.
+
+### Design Metadata Rules
+
+- Design notes intended for review or export must keep `project`, `gdoc_id`, `gdoc_url`, and `gdoc_source_of_truth` in frontmatter.
+- Shared Google Docs tab bundles use stable `gdoc_role` and `gdoc_tab_title` metadata.
+- Exported Google Docs mirrors remain read-only in Markdown.
 
 ### Inbox Rules
 
@@ -54,6 +72,7 @@
 - Do not auto-complete tasks.
 - Do not create hidden states outside the canonical model.
 - Do not convert reference notes into GTD tasks without `#task`.
+- Do not rely on ambiguous short links for canonical entities.
 
 ### Areas and Archive
 

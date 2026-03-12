@@ -22,6 +22,7 @@ const hasSomedayTag = (task) => tagPattern("someday").test(task.text);
 const toMillis = (dt) => dt?.toMillis?.() ?? Number.MAX_SAFE_INTEGER;
 const inlineMetadataPattern = /\s*(?:\[[^\]]+::[^\]]*\]|\([^()]*::[^()]*\))/g;
 const areaOrProjectLinkPattern = /\[\[(Projects|Areas)\/[^\]|]+(?:\|[^\]]+)?\]\]/;
+const canonicalProjectPathPattern = /^Projects\/[^/]+\/[^/]+\.md$/;
 
 const isExecutionPath = (path) => path.startsWith("Projects/") || path.startsWith("Areas/");
 
@@ -189,7 +190,10 @@ if (preset === "project-health") {
       .where((task) => !hasInboxTag(task))
       .where((task) => isTaskLinkedToProject(task, projectPath)).length;
 
-  const projects = dv.pages('"Projects"').sort((page) => page.file.mtime, "asc");
+  const projects = dv
+    .pages('"Projects"')
+    .where((page) => canonicalProjectPathPattern.test(page.file.path))
+    .sort((page) => page.file.mtime, "asc");
   dv.table(
     ["Project", "Last Modified", "Open #task"],
     projects.map((page) => [
@@ -217,6 +221,7 @@ if (preset === "stalled-14") {
 
   const projects = dv
     .pages('"Projects"')
+    .where((page) => canonicalProjectPathPattern.test(page.file.path))
     .where((page) => {
       const openCount = openLinkedCount(page.file.path);
       return toMillis(page.file.mtime) < stalledBefore || openCount === 0;
@@ -256,6 +261,7 @@ if (preset === "stalled-30") {
 
   const projects = dv
     .pages('"Projects"')
+    .where((page) => canonicalProjectPathPattern.test(page.file.path))
     .where((page) => toMillis(page.file.mtime) < stalledBefore)
     .sort((page) => page.file.mtime, "asc");
 
