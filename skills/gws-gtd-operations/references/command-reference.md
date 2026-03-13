@@ -23,10 +23,7 @@ Prefer the least risky operation that solves the problem:
 1. inspect: `+triage`, `threads.list`, `threads.get`, `messages.get`
 2. label: `threads.modify`, `messages.batchModify`
 3. archive: remove `INBOX` label
-4. trash: `threads.trash`, `messages.trash`
-5. delete permanently: `threads.delete`, `messages.delete`, `messages.batchDelete`
-
-Use permanent delete only when the user explicitly asks for irreversible removal.
+4. trash: `threads.trash`, `messages.trash`, `messages.batchModify` with `TRASH`
 
 ### Auth and Discovery
 
@@ -71,7 +68,7 @@ Use permanent delete only when the user explicitly asks for irreversible removal
 - `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/reference","labelListVisibility":"labelShow","messageListVisibility":"show"}'`
 - `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/imported","labelListVisibility":"labelHide","messageListVisibility":"hide"}'`
   - Use when: completing the full structured GTD label bootstrap on a new account.
-- `gws gmail users settings filters create --params '{"userId":"me"}' --json '{"criteria":{"to":"karel.rank+gtd@gmail.com"},"action":{"addLabelIds":["<gtd-import-label-id>"]}}'`
+- `gws gmail users settings filters create --params '{"userId":"me"}' --json '{"criteria":{"to":"<your-address>+gtd@gmail.com"},"action":{"addLabelIds":["<gtd-import-label-id>"]}}'`
   - Use when: creating the single Gmail capture alias rule.
 - `gws gmail users settings filters list --params '{"userId":"me"}'`
   - Use when: verifying that the capture alias filter already exists.
@@ -83,10 +80,13 @@ Use permanent delete only when the user explicitly asks for irreversible removal
   - Use when: routing a whole thread into the waiting queue after resolving the label ID for `gtd/waiting`.
 - `gws gmail users messages batchModify --params '{"userId":"me"}' --json '{"ids":["<message-1>","<message-2>"],"removeLabelIds":["UNREAD"]}'`
   - Use when: performing the same label change across many specific messages.
+- `gws gmail users messages batchModify --params '{"userId":"me"}' --json '{"ids":["<message-1>","<message-2>"],"addLabelIds":["TRASH"]}'`
+  - Use when: moving many specific messages to Trash in one call after review.
 
 Notes:
 
 - Gmail system labels such as `INBOX`, `UNREAD`, and `TRASH` can be used directly.
+- `messages.batchModify` with `addLabelIds:["TRASH"]` works in practice for batch trashing specific messages, even though Gmail's docs emphasize the dedicated `trash` methods.
 - User-created labels usually need their actual label ID from `users.labels.list`.
 - Prefer `threads.modify` when your intent is conversation-level cleanup.
 
@@ -98,10 +98,15 @@ Notes:
   - Use when: restoring a thread you moved by mistake.
 - `gws gmail users messages trash --params '{"userId":"me","id":"<message-id>"}'`
   - Use when: only one message in a thread should be trashed.
-- `gws gmail users messages batchDelete --params '{"userId":"me"}' --json '{"ids":["<message-1>","<message-2>"]}'`
-  - Use when: the user explicitly wants permanent deletion of exact messages.
-- `gws gmail users threads delete --params '{"userId":"me","id":"<thread-id>"}'`
-  - Use when: the user explicitly wants irreversible removal of a whole thread.
+- `gws gmail users messages batchModify --params '{"userId":"me"}' --json '{"ids":["<message-1>","<message-2>"],"addLabelIds":["TRASH"]}'`
+  - Use when: trashing many exact messages at once while keeping recovery possible.
+- Ready-made reviewed-ID snippet:
+  ```bash
+  gws gmail users messages batchModify \
+    --params '{"userId":"me"}' \
+    --json '{"ids":["<reviewed-message-1>","<reviewed-message-2>","<reviewed-message-3>"],"addLabelIds":["TRASH"]}'
+  ```
+  - Use when: the review step already produced the exact message IDs to trash.
 
 ### Gmail Helpers Beyond GTD Intake
 

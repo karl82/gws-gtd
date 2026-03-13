@@ -43,6 +43,7 @@ The vault is the task system of record. Gmail is the capture/intake layer. Calen
 - Do not use Google Tasks as a parallel capture system.
 - Keep one canonical task line per commitment.
 - Prefer batch-first review before applying repetitive Gmail or Calendar actions.
+- For reviewed message-level Gmail cleanup, prefer one `messages.batchModify` call with `addLabelIds:["TRASH"]` over many `messages.trash` calls.
 
 ## Supporting Files
 

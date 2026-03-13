@@ -43,8 +43,8 @@ Needed by sibling skills, not by core ceremonies:
 
 - Use Gmail as the only mobile capture channel.
 - GTD Gmail labels are structured under the parent label `gtd`.
-- Recommended capture alias: `karel.rank+gtd@gmail.com`.
-- Create a Gmail filter for `to:karel.rank+gtd@gmail.com` that applies `gtd/import`.
+- Recommended capture alias: `<your-address>+gtd@gmail.com`.
+- Create a Gmail filter for `to:<your-address>+gtd@gmail.com` that applies `gtd/import`.
 - Use `gtd/waiting` only for real waiting threads or messages that should become mandatory `#waiting` items.
 
 ## Replying to Existing Email Threads
@@ -140,10 +140,9 @@ gws people people connections list --params '{"resourceName":"people/me","person
 ## Ad-hoc maintenance
 
 - Prefer read-only inspection first: `+triage`, `threads.list`, `threads.get`, `messages.get`.
-- Prefer reversible cleanup next: `threads.modify` or `threads.trash`.
+- Prefer reversible cleanup next: `threads.modify`, `threads.trash`, or `messages.batchModify` with `TRASH` for reviewed message sets.
 - When an email-driven task is done and no immediate follow-up is expected, archive by removing `INBOX` from the thread.
 - Accepted calendar invitation notification emails should be trashed by default unless they add actionable context beyond the calendar event itself.
-- Use permanent delete only when explicitly requested.
 - For examples such as cleaning old promotional email, archiving stale notifications, or checking unsubscribe headers, see `references/command-reference.md`.
 
 ## GTD Label Bootstrap

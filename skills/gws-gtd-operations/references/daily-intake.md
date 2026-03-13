@@ -63,7 +63,8 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
     - ask for compact replies such as `A1 i, A2 f` or `trash G1-G8`
     - wait to mutate labels until the batch decisions are confirmed
 5. Apply confirmed labels at thread level in one batch operation when possible.
-6. Treat messages sent to the capture alias as pre-routed candidates for `IMPORT_LABEL` unless the content clearly belongs in another policy outcome.
+6. For confirmed message-level garbage decisions, prefer one `messages.batchModify` call with `addLabelIds:["TRASH"]` over many single-message trash calls.
+7. Treat messages sent to the capture alias as pre-routed candidates for `IMPORT_LABEL` unless the content clearly belongs in another policy outcome.
 
 ### Step 2 - Gmail Intake Gates
 
