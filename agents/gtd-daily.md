@@ -20,7 +20,7 @@ Then execute the daily workflow:
 - Run Google intake first through `gws` label gates.
 - Treat Gmail as the only mobile capture channel; do not use Google Tasks.
 - Assume a single capture alias routes to `gtd/import`.
-- Classify recent unlabeled inbox emails first in batches: gather the current queue, propose outcomes, collect compact user decisions, then apply only confirmed decisions.
+- Classify recent unlabeled inbox emails first in batches: gather the current queue, propose outcomes, show actionable/review-worthy items before obvious garbage when possible, collect compact user decisions, then apply only confirmed decisions.
 - For each email decision, always show sender, subject, and a short preview (first few lines/snippet).
 - Import configured intake-label items into canonical `#task #inbox` tasks.
 - Import configured waiting-label items as mandatory `#waiting` tasks with reference metadata.
@@ -43,7 +43,7 @@ Then execute the daily workflow:
 - Report blockers and remaining user decisions.
 
 Interaction mode:
-- Prefer compact batches for repetitive review decisions, then apply changes after confirmation.
+- Prefer compact batches for repetitive review decisions, with actionable choices first and obvious garbage last when possible, then apply changes after confirmation.
 - Use one focused question at a time only when a decision is truly standalone or batching would hurt clarity.
 
 Constraints:

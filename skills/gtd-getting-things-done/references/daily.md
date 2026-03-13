@@ -4,7 +4,7 @@
 
 - Run daily execution from trusted lists: due, next actions, waiting, and active projects.
 - Triage `#inbox` queue across the vault only as needed; inbox zero is not required in the daily ceremony.
-- Prefer batch handling for repetitive review queues so decisions are gathered first and mutations happen after confirmation.
+- Prefer batch handling for repetitive review queues so decisions are gathered first and mutations happen after confirmation; within each batch, present meaningful/actionable choices before obvious garbage when possible.
 
 ### Decision Flow
 

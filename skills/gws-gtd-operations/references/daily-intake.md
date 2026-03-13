@@ -21,8 +21,8 @@ Default label mapping for this procedure:
 
 Recommended mobile capture filter:
 
-- Gmail alias: `karel.rank+gtd@gmail.com`
-- Filter: `to:karel.rank+gtd@gmail.com` -> apply `IMPORT_LABEL`
+- Gmail alias: `<your-address>+gtd@gmail.com`
+- Filter: `to:<your-address>+gtd@gmail.com` -> apply `IMPORT_LABEL`
 
 ### Step 0 - Label Bootstrap and Mapping
 
@@ -57,8 +57,10 @@ Recommended mobile capture filter:
 Use `#waiting` ONLY when the next step belongs to someone else (you delegated, you sent a request, you are blocked on an external party). Never use `#waiting` for tasks where you are the next actor.
 4. Default to batch review for unlabeled email candidates:
     - gather the current candidate set first
-    - present all candidates in one compact batch with recommendation and rationale
-    - ask for compact replies such as `A1 g, A2 r, A3 i`
+    - split the batch into actionable-first vs obvious-garbage groups when possible
+    - show the actionable/review-worthy items first so the user can focus on meaningful choices
+    - group obvious `garbage` recommendations last and make them easy to approve in one shot
+    - ask for compact replies such as `A1 i, A2 f` or `trash G1-G8`
     - wait to mutate labels until the batch decisions are confirmed
 5. Apply confirmed labels at thread level in one batch operation when possible.
 6. Treat messages sent to the capture alias as pre-routed candidates for `IMPORT_LABEL` unless the content clearly belongs in another policy outcome.
