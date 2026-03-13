@@ -24,8 +24,8 @@ Notes:
 ## Recommended Capture Setup
 
 - Gmail is the only mobile capture inbox.
-- Recommended alias: `karel.rank+gtd@gmail.com`.
-- Recommended filter: `to:karel.rank+gtd@gmail.com` -> apply `gtd/import`.
+- Recommended alias: `<your-address>+gtd@gmail.com`.
+- Recommended filter: `to:<your-address>+gtd@gmail.com` -> apply `gtd/import`.
 
 ## Classification Defaults
 
