@@ -4,14 +4,34 @@ name: gws-gtd
 
 ## Purpose
 
-Use this skill for the opinionated `gws-gtd` workflow.
+Unified skill for the opinionated `gws-gtd` workflow. Combines GTD vault conventions and Google Workspace operations into one integrated operating model.
 
-This package treats GTD conventions and Google Workspace operations as one integrated operating model. The vault is the task system of record. Gmail is the capture/intake layer. Calendar is a signal/review layer.
+- The vault is the task system of record.
+- Gmail is the capture/intake layer.
+- Calendar is a signal/review layer.
+
+## Prerequisites
+
+The `gws` CLI must be installed and authenticated before running any ceremony:
+
+```
+gws auth status
+```
+
+Upstream `gws` AI agent skills (`gws-gmail`, `gws-calendar`, `gws-people`, etc.) are available separately via:
+
+```
+npx skills add https://github.com/googleworkspace/cli
+```
+
+These are optional supplements. The `references/command-reference.md` in this skill covers all `gws` commands needed for GTD ceremonies.
 
 ## Canonical References
 
 - Conventions: `references/conventions.md`
 - Email triage policy: `references/email-triage-policy.md`
+- Canonical vault model: `references/canonical-vault.md`
+- Project structure: `references/project-structure.md`
 - Templates: `System/Templates/`
 - Queries: `System/Queries/`
 
@@ -32,17 +52,18 @@ This package treats GTD conventions and Google Workspace operations as one integ
 
 1. Resolve the user intent.
 2. Use the matching reference:
-   - `daily` -> `../gtd-getting-things-done/references/daily.md`
-   - `weekly` -> `../gtd-getting-things-done/references/weekly.md`
-   - `monthly` -> `../gtd-getting-things-done/references/monthly.md`
-   - `organizing` -> `../gtd-getting-things-done/references/organizing.md`
-   - `daily-intake` -> `../gws-gtd-operations/references/daily-intake.md`
-   - `weekly-reconcile` -> `../gws-gtd-operations/references/weekly-reconcile.md`
-   - `event-capture` -> `../gws-gtd-operations/references/event-capture.md`
-   - `people-linking` -> `../gws-gtd-operations/references/people-linking.md`
-   - `signal-sync` -> `../gws-gtd-operations/references/signal-sync.md`
-   - `ad-hoc-maintenance` -> `../gws-gtd-operations/references/command-reference.md`
-3. Apply `references/conventions.md` and `references/email-triage-policy.md` as the fixed workflow contract.
+   - `daily`              -> `references/daily.md`
+   - `weekly`             -> `references/weekly.md`
+   - `monthly`            -> `references/monthly.md`
+   - `organizing`         -> `references/organizing.md`
+   - `daily-intake`       -> `references/daily-intake.md`
+   - `weekly-reconcile`   -> `references/weekly-reconcile.md`
+   - `event-capture`      -> `references/event-capture.md`
+   - `people-linking`     -> `references/people-linking.md`
+   - `signal-sync`        -> `references/signal-sync.md`
+   - `ad-hoc-maintenance` -> `references/command-reference.md`
+3. Always apply `references/conventions.md` and `references/email-triage-policy.md` as the fixed workflow contract.
+4. Apply `references/canonical-vault.md` for vault structure and task syntax rules.
 
 ## Guardrails
 
@@ -55,3 +76,26 @@ This package treats GTD conventions and Google Workspace operations as one integ
 - Do not invent deadlines.
 - Do not auto-complete tasks.
 - Prefer minimal, reversible edits.
+
+## Supporting References
+
+| Reference | Purpose |
+|---|---|
+| `references/conventions.md` | Fixed workflow conventions and label model |
+| `references/email-triage-policy.md` | Gmail label meanings, classification defaults, heuristics |
+| `references/canonical-vault.md` | Vault folder semantics, task syntax, link rules |
+| `references/project-structure.md` | Project/design note layout and Google Docs metadata |
+| `references/daily.md` | Daily GTD ceremony |
+| `references/weekly.md` | Weekly GTD review |
+| `references/monthly.md` | Monthly GTD review |
+| `references/organizing.md` | Vault organization and cleanup |
+| `references/daily-intake.md` | Gmail and calendar intake during daily ceremony |
+| `references/weekly-reconcile.md` | Gmail and calendar reconciliation during weekly review |
+| `references/event-capture.md` | Event context capture procedure |
+| `references/people-linking.md` | Google Contacts to People/ note linking |
+| `references/signal-sync.md` | GTD Signals calendar sync procedure |
+| `references/command-reference.md` | Full `gws` command reference for GTD ceremonies |
+
+## Scripts
+
+- `scripts/sync_gtd_signals.py` — syncs clarified dated tasks to the `GTD Signals` Google Calendar. See `references/signal-sync.md` for usage.

@@ -115,12 +115,12 @@ Notes:
 - `gws gmail +send --to alice@example.com --subject 'Hello' --body 'Quick note'`
   - Use when: sending a new plain-text message without constructing raw MIME.
   - Do not use for replies to existing threads.
-- `python3 <installed-gws-gtd-operations-skill-dir>/scripts/gmail_thread_reply.py --thread-id '<thread-id>' --to 'alice@example.com' --subject 'Re: Hello' --in-reply-to '<message-id@example.com>' --references '<message-id@example.com>' --body 'Quick reply' --send`
-  - Use when: replying inside an existing Gmail thread without forking the conversation.
-- `python3 <installed-gws-gtd-operations-skill-dir>/scripts/gmail_thread_reply.py --thread-id '<thread-id>' --to 'alice@example.com' --subject 'Re: Hello' --in-reply-to '<message-id@example.com>' --references '<message-id@example.com>' --body 'Quick reply' --quote-file /tmp/original.txt --quote-header 'On Wed, Mar 11, 2026, Alice wrote:' --send`
-  - Use when: you want the reply to stay threaded and include a visible quoted copy of the original text.
-- `gws gmail users messages send --params '{"userId":"me"}' --json '{"threadId":"<thread-id>","raw":"<base64url-rfc2822-message>"}'`
-  - Use when: you need full control over a reply message and want to preserve the existing thread explicitly.
+- `gws gmail +reply --message-id '<message-id>' --body 'Quick reply'`
+  - Use when: replying inside an existing Gmail thread. Handles `In-Reply-To` and `References` threading automatically.
+- `gws gmail +reply-all --message-id '<message-id>' --body 'Quick reply'`
+  - Use when: replying to all recipients of an existing thread.
+- `gws gmail +forward --message-id '<message-id>' --to 'bob@example.com' --body 'FYI'`
+  - Use when: forwarding a message to new recipients.
 - `gws gmail users getProfile --params '{"userId":"me"}'`
   - Use when: confirming the authenticated mailbox address.
 
