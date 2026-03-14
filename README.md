@@ -1,23 +1,21 @@
 # gws-gtd
 
-`gws-gtd` is an opinionated OpenPackage package for running a GTD vault with Google Workspace (`gws`), Google Docs review sync, and git/transcrypt support.
+`gws-gtd` is an opinionated OpenPackage package for running GTD on Google Workspace (`gws`), with Google Docs review sync and git/transcrypt support.
 
 ## What It Installs
 
-- `gtd-getting-things-done` for GTD ceremonies
-- `gws-gtd-operations` for Gmail, Calendar, People, and signal-sync workflows
+- `gws-gtd` for the integrated GTD + Google Workspace workflow
 - `gws-doc-review-sync` for Markdown-as-source Google Docs review
 - `transcrypt-git-repo` for git encryption operations
 - GTD ceremony agents under `agents/`
 - commands for vault analysis and retrofit
-- vault runtime files under `System/`, including templates, queries, and email triage policy
+- vault runtime assets under `System/`, including templates and queries
 
 ## Package Layout
 
 ```text
 skills/
-  gtd-getting-things-done/
-  gws-gtd-operations/
+  gws-gtd/
   gws-doc-review-sync/
   transcrypt-git-repo/
 agents/
@@ -31,8 +29,6 @@ commands/
 root/
   AGENTS.md
   System/
-    GTD Config.md
-    Email Triage Policy.md
     Templates/
     Queries/
 openpackage.yml
@@ -54,7 +50,7 @@ Once the repo exists on GitHub, install with:
 opkg install gh@karl82/gws-gtd
 ```
 
-Then review the installed `AGENTS.md`, `System/GTD Config.md`, and `System/Email Triage Policy.md` in the target vault.
+Then review the installed `AGENTS.md`, `.opencode/skills/gws-gtd/references/conventions.md`, and `.opencode/skills/gws-gtd/references/email-triage-policy.md` in the target vault.
 
 ## Maintenance Workflow
 

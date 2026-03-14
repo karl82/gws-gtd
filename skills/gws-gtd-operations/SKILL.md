@@ -4,7 +4,9 @@ name: gws-gtd-operations
 
 ## Purpose
 
-Use this skill to operate the Google Workspace parts of the `gws-gtd` workflow.
+Legacy split skill retained during transition to the unified `gws-gtd` skill.
+
+Prefer `skills/gws-gtd/SKILL.md` for new work.
 
 The vault is the task system of record. Gmail is the capture/intake layer. Calendar is a signal/review layer.
 
@@ -27,14 +29,7 @@ The vault is the task system of record. Gmail is the capture/intake layer. Calen
    - `people-linking` -> `references/people-linking.md`
    - `signal-sync` -> `references/signal-sync.md`
    - `ad-hoc-maintenance` -> `references/command-reference.md`
-3. Follow `gtd-getting-things-done` invariants and `System/Email Triage Policy.md` first.
-
-## Runtime Contract
-
-- `System/Email Triage Policy.md`
-- `System/GTD Config.md`
-- `System/Templates/`
-- `System/Queries/`
+3. Follow `../gws-gtd/references/conventions.md` and `../gws-gtd/references/email-triage-policy.md` first.
 
 ## Guardrails
 

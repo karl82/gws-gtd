@@ -5,7 +5,7 @@
 - Extend weekly review with Google inbox safety nets.
 - Ensure no important email/calendar input remains outside GTD control.
 - Respect strict weekly gate: `#inbox` Zero in vault before exiting Get Clear.
-- Use `System/Email Triage Policy.md` as the canonical source for label meaning and promotion rules.
+- Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meaning and promotion rules.
 
 ### Step 1 - Review Deferred Gmail Intake
 

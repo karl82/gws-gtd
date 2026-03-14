@@ -8,7 +8,7 @@
 - Use classify-then-import flow so the user reviews email quality before labels drive automation.
 - Treat Gmail as the only mobile capture inbox; do not import from Google Tasks.
 - `GTD Signals` is output-only and must never be treated as capture.
-- Use `System/Email Triage Policy.md` as the canonical source for label meanings, classification defaults, and heuristics.
+- Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meanings, classification defaults, and heuristics.
 
 Default label mapping for this procedure:
 
@@ -42,7 +42,7 @@ Recommended mobile capture filter:
     - sender
     - subject
     - short preview (first few lines/snippet)
-3. For each candidate email, propose one outcome and brief rationale using the policy defaults and heuristics from `System/Email Triage Policy.md`.
+3. For each candidate email, propose one outcome and brief rationale using the policy defaults and heuristics from `skills/gws-gtd/references/email-triage-policy.md`.
    Allowed outcomes in this procedure:
     - `IMPORT_LABEL`
     - `WAITING_LABEL`

@@ -79,23 +79,20 @@ Use these heuristics when deciding how unlabeled email should be labeled.
 ## Review Queue Rules
 
 - `gtd/review` is a deferred-classification queue, not an execution queue.
-- Review it during weekly review and optionally during ad-hoc mailbox cleanup.
-- During review, every thread should move toward one of these outcomes:
+- Weekly review should sweep:
   - `gtd/import`
   - `gtd/waiting`
   - `gtd/reference`
-  - `trash`
+  - unlabeled inbox older than threshold
 - Avoid leaving the same thread in `gtd/review` indefinitely.
 
-## Overrides
+## Billing and Time-Sensitive Mail
 
 - A billing or statement email with an amount due, a payment failure, or a problem becomes `gtd/import`, not trash.
 - A renewal notice tied to an active project becomes `gtd/import` when there is a real next step; otherwise use `gtd/reference` or trash based on retention value.
 - Time-sensitive ambiguous mail should become `gtd/import` as a review-style task rather than `gtd/review`.
 
-## Operational Notes
+## Vault Hygiene
 
-- Keep one canonical task line in the vault for each imported thread.
 - Do not create `Inbox.md` entries for `gtd/review` items unless they have been promoted into actionable GTD capture.
-- When a mail-driven task is completed and no immediate follow-up is expected, archive the Gmail thread.
-- Use `System/Templates/Recruiter Decline Email.md` as the reusable baseline when a recruiter-review task resolves to a polite decline.
+- Keep Gmail cleanup and vault task creation aligned so the inbox state reflects actual review state.

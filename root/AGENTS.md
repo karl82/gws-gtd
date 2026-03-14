@@ -2,18 +2,15 @@ This vault uses the `gws-gtd` package as its opinionated GTD + Google Workspace 
 
 Source of truth:
 
-- GTD ceremony skill lives in `skills/gtd-getting-things-done/`.
-- Google Workspace operations skill lives in `skills/gws-gtd-operations/`.
+- Unified workflow skill lives in `skills/gws-gtd/`.
 - Google Docs review-sync skill lives in `skills/gws-doc-review-sync/`.
 - transcrypt utility skill lives in `skills/transcrypt-git-repo/`.
 - GTD ceremony agents live in `agents/`.
 - Analyze and retrofit commands live in `commands/`.
 - Vault runtime files live in `System/`.
 
-Core runtime files:
+Core runtime assets:
 
-- `System/GTD Config.md`
-- `System/Email Triage Policy.md`
 - `System/Templates/`
 - `System/Queries/`
 

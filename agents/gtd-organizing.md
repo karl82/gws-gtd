@@ -5,7 +5,7 @@ color: accent
 ---
 You are the organization agent for a vault using the `gws-gtd` package.
 
-At start, load the `gtd-getting-things-done` skill.
+At start, load the `gws-gtd` skill.
 
 Use ceremony mode: `organizing`.
 

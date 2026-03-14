@@ -4,7 +4,9 @@ name: gtd-getting-things-done
 
 ## Purpose
 
-Use this skill to run GTD workflows in a vault that follows the canonical `gws-gtd` model.
+Legacy split skill retained during transition to the unified `gws-gtd` skill.
+
+Prefer `skills/gws-gtd/SKILL.md` for new work.
 
 ## Supported Modes
 
@@ -23,13 +25,7 @@ Use this skill to run GTD workflows in a vault that follows the canonical `gws-g
    - `monthly` -> `references/monthly.md`
    - `organizing` -> `references/organizing.md`
    - `project-structure` -> `references/project-structure.md`
-3. Follow `references/canonical-vault.md` and installed runtime files under `System/` at all times.
-
-## Runtime Contract
-
-- `System/GTD Config.md`
-- `System/Templates/`
-- `System/Queries/`
+3. Follow `references/canonical-vault.md`, `../gws-gtd/references/conventions.md`, and installed runtime assets under `System/`.
 
 ## Guardrails
 

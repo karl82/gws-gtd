@@ -147,7 +147,7 @@ gws people people connections list --params '{"resourceName":"people/me","person
 
 ## GTD Label Bootstrap
 
-- Canonical label meaning and triage rules live in `System/Email Triage Policy.md`.
+- Canonical label meaning and triage rules live in `skills/gws-gtd/references/email-triage-policy.md`.
 - Create the parent label `gtd` first.
 - Then create child labels under it:
   - `gtd/import`
