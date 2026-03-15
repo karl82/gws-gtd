@@ -38,7 +38,7 @@ Notes:
 | Policy, booking, or plan document worth keeping | reference + archive | Keep searchable, out of inbox. |
 | Confirmation already covered by an existing `#waiting` task | match existing | No duplicate task; clear from import flow. |
 | Appointment or reservation confirmation | calendar first | If already on calendar, archive. If not, create/update calendar and archive. |
-| Datová schránka notification | import | Official Czech government data mailbox delivery. Always treat as actionable — create a task and review the attached document for deadlines or required responses. |
+| Datová schránka notification | review + archive | Official Czech government data mailbox delivery notification. Archive the Gmail notification immediately and open the Datová schránka portal to review the document. Do not create a vault task from the email alone. |
 | Recruiter outreach with plausible opportunity | review | Usually review and send a generic decline unless the opportunity is unusually compelling. |
 | Clearly actionable message where you are the next actor | import | Create a task now. |
 | Delegated thread where the next move belongs to someone else | waiting | Create or update a `#waiting` task. |
@@ -74,11 +74,11 @@ Use these heuristics when deciding how unlabeled email should be labeled.
 
 ### Datová Schránka Heuristic
 
-- Any email notifying of a new Datová schránka (Czech government data mailbox) delivery is always `gtd/import`, never `gtd/review` or trash.
-- These are official government or legal documents with mandatory response windows.
-- Create a task immediately: `Review Datová schránka delivery: <subject/sender>` with a follow-up date if a deadline is visible.
-- Open and read the attached document before classifying further — do not defer.
-- If a response or action is required, track it as a separate `#next` task with a `📅` deadline.
+- Datová schránka (Czech government data mailbox) notifications in Gmail are delivery pings only — the document itself lives in the portal, not in Gmail.
+- Archive the Gmail notification immediately with `gtd/review`.
+- Open the Datová schránka portal to read the actual document.
+- Only create a vault task if the document requires a response or action — in that case create a `#next` task with a `📅` deadline based on the document's response window.
+- Do not create a task from the Gmail notification alone.
 
 ### Recruiter Heuristic
 
