@@ -108,12 +108,12 @@ Notes:
   ```
   - Use when: the review step already produced the exact message IDs to trash.
 
-### Gmail Helpers Beyond GTD Intake
+### Gmail: Composing and Replying (Mandatory)
 
-- `gws gmail +watch --project <gcp-project> --label-ids INBOX --once`
-  - Use when: debugging new-mail capture or a watcher workflow.
+Always use these helpers for outbound email. Never construct raw MIME or call `users.messages.send` directly. Always show the user a draft and get explicit confirmation before sending.
+
 - `gws gmail +send --to alice@example.com --subject 'Hello' --body 'Quick note'`
-  - Use when: sending a new plain-text message without constructing raw MIME.
+  - Use when: sending a new plain-text message.
   - Do not use for replies to existing threads.
 - `gws gmail +reply --message-id '<message-id>' --body 'Quick reply'`
   - Use when: replying inside an existing Gmail thread. Handles `In-Reply-To` and `References` threading automatically.
@@ -121,6 +121,8 @@ Notes:
   - Use when: replying to all recipients of an existing thread.
 - `gws gmail +forward --message-id '<message-id>' --to 'bob@example.com' --body 'FYI'`
   - Use when: forwarding a message to new recipients.
+- `gws gmail +watch --project <gcp-project> --label-ids INBOX --once`
+  - Use when: debugging new-mail capture or a watcher workflow.
 - `gws gmail users getProfile --params '{"userId":"me"}'`
   - Use when: confirming the authenticated mailbox address.
 

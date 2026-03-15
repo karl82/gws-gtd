@@ -11,7 +11,11 @@ Template incorporation:
 
 ### Prerequisites
 
-Before starting the weekly review, run the daily intake ceremony (`references/daily-intake.md`) to ensure all new Gmail threads and calendar events are imported and processed. The weekly review operates on a current vault — do not skip this step.
+Before starting the weekly review, check whether a daily journal note exists
+for today (`Journal/YYYY/MM/YYYY-MM-DD.md` with today's date substituted). If
+it does not exist, invoke the `gtd-daily` agent interactively as a prerequisite
+— run the full daily ceremony with the user and wait for it to complete before
+proceeding. Do not begin Get Clear until the daily ceremony is done.
 
 ### Steps
 

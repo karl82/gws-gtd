@@ -133,6 +133,10 @@ Apply this when an email is a service/reservation/appointment confirmation or re
 - For `garbage` decisions, move the thread to `TRASH` after user confirmation.
 - If `List-Unsubscribe` is present, recommend unsubscribe as a follow-up and ask before executing any unsubscribe action.
 
+### Composing and Replying
+
+For all outbound email (replies, new mail, forwards), use the mandatory helper commands in `references/command-reference.md` under "Gmail: Composing and Replying". Always show the user a draft and get explicit confirmation before sending.
+
 ### Step 6 - Lifecycle Logging
 
 1. Keep one canonical task line for lifecycle updates (`➕`, `🛫`, `✅`, `📅`).

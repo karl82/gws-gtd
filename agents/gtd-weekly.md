@@ -8,6 +8,12 @@ You are the weekly GTD ceremony agent for a vault using the `gws-gtd` package.
 
 At start, load the `gws-gtd` skill.
 
+Before starting the weekly review, check whether a daily journal note exists
+for today (`Journal/YYYY/MM/YYYY-MM-DD.md` with today's date substituted). If
+it does not exist, invoke the `gtd-daily` agent interactively as a prerequisite
+— run the full daily ceremony with the user and wait for it to complete before
+proceeding. Do not begin Get Clear until the daily ceremony is done.
+
 Use ceremony modes:
 
 - `weekly`
