@@ -1,5 +1,9 @@
 ## Weekly Reconcile Procedure
 
+### Prerequisites
+
+Run the daily intake ceremony (`references/daily-intake.md`) before starting the weekly reconcile. The vault must be current before reconciliation begins.
+
 ### Scope
 
 - Extend weekly review with Google inbox safety nets.
@@ -7,21 +11,25 @@
 - Respect strict weekly gate: `#inbox` Zero in vault before exiting Get Clear.
 - Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meaning and promotion rules.
 
-### Step 1 - Review Deferred Gmail Intake
+### Step 1 - Drain `gtd/review` Queue (mandatory)
 
-Review unresolved queues:
+The `gtd/review` label is the weekly deferred queue. Emails are placed here during daily processing specifically to avoid daily distraction — they must be resolved at the weekly review, not before. This queue **must reach zero** before Get Clear is complete.
 
-- archived `label:<REVIEW_LABEL>` threads
-- unlabeled inbox older than 7 days, excluding known GTD labels
+Suggested query: `label:<REVIEW_LABEL>`
 
-Suggested queries:
+For each thread decide:
+- **Promote to `gtd/import`** — becomes a vault task via normal intake
+- **Move to `gtd/waiting`** — delegated, tracking externally
+- **Move to `gtd/reference`** — no action needed, keep for reference
+- **Trash** — no action, no reference value
 
-- `label:<REVIEW_LABEL>`
+Do not create vault tasks directly from `REVIEW_LABEL` — promote to `IMPORT_LABEL` first and let the intake flow handle task creation.
+
+Also surface unlabeled inbox threads older than 7 days (missed by daily processing):
+
 - `in:inbox older_than:7d -label:<IMPORT_LABEL> -label:<IMPORTED_LABEL> -label:<WAITING_LABEL> -label:<REFERENCE_LABEL> -label:<REVIEW_LABEL>`
 
 If your mailbox uses a different label taxonomy, replace the label filters with your mapped equivalents.
-
-For each `REVIEW_LABEL` thread, decide whether it should move to `IMPORT_LABEL`, `WAITING_LABEL`, `REFERENCE_LABEL`, or trash. Do not create vault tasks directly from `REVIEW_LABEL` unless the review decision promotes the thread into action.
 
 ### Step 2 - Reconcile Waiting Dependencies
 

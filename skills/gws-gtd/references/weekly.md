@@ -9,12 +9,17 @@ Template incorporation:
 - If the weekly note does not exist, create it at a matching path so Templater applies `System/Templates/Weekly Review.md`.
 - Use the template sections as the interactive agenda.
 
+### Prerequisites
+
+Before starting the weekly review, run the daily intake ceremony (`references/daily-intake.md`) to ensure all new Gmail threads and calendar events are imported and processed. The weekly review operates on a current vault — do not skip this step.
+
 ### Steps
 
 1. Get Clear
     - Run `#inbox` Zero to completion as a strict gate.
     - Clarify ambiguous captures into explicit outcomes plus either a `#task` next action or a plain local checklist step.
     - If `#inbox` queue is not zero, stop and report: `Get Clear incomplete (#inbox not zero)`.
+    - **Drain the `gtd/review` Gmail label queue.** These are emails deferred from daily processing for weekly decision. For each thread: promote to `gtd/import` (becomes a task), move to `gtd/waiting`, `gtd/reference`, or trash. This queue must reach zero before Get Clear is complete.
 2. Get Current
    - Review overdue and next-7-day due tasks.
    - Review `#waiting` items.
