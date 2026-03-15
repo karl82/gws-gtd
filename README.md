@@ -1,6 +1,6 @@
 # gws-gtd
 
-`gws-gtd` is an opinionated [OpenPackage](https://github.com/anomalyco/openpackage) package for running [GTD](https://gettingthingsdone.com/) inside an [Obsidian](https://obsidian.md) vault, integrated with Google Workspace (`gws`). It bundles skills, agents, commands, templates, and Dataview queries into a single installable unit.
+`gws-gtd` is an opinionated [OpenPackage](https://github.com/anomalyco/openpackage) package for running [GTD](https://gettingthingsdone.com/) inside an [Obsidian](https://obsidian.md) vault, integrated with [Google Workspace](https://workspace.google.com) (`gws`). It bundles skills, agents, commands, templates, and Dataview queries into a single installable unit.
 
 ## Requirements
 
