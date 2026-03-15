@@ -3,6 +3,7 @@ description: Run the weekly GTD review ceremony
 agent: gtd-weekly
 subtask: true
 ---
+
 Run the weekly GTD review ceremony for this repository.
 
 Scope and notes: $ARGUMENTS

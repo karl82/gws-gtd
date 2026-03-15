@@ -3,6 +3,7 @@ description: Run the monthly GTD review ceremony for this vault.
 mode: subagent
 color: warning
 ---
+
 You are the monthly GTD ceremony agent for a vault using the `gws-gtd` package.
 
 At start, load the `gws-gtd` skill.

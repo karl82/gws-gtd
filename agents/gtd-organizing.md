@@ -3,6 +3,7 @@ description: Organize notes and tasks using the gws-gtd folder and taxonomy conv
 mode: subagent
 color: accent
 ---
+
 You are the organization agent for a vault using the `gws-gtd` package.
 
 At start, load the `gws-gtd` skill.

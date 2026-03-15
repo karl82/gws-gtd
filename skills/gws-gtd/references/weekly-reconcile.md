@@ -39,7 +39,7 @@ For each `REVIEW_LABEL` thread, decide whether it should move to `IMPORT_LABEL`,
 ### Step 4 - Integrity Checks for Hybrid Inbox Model
 
 - Review `#inbox` items across the whole vault and enforce `#inbox` zero by end of Get Clear.
-- Surface non-`#inbox` open tasks outside `Projects/` and `Areas/` that lack `[[Projects/...]]` or `[[Areas/...]]` links.
+- Surface non-`#inbox` open tasks that have no `[[Projects/...]]` or `[[Areas/...]]` wikilink AND do not live inside a `Projects/` or `Areas/` file. Tasks in `Journal/` or elsewhere that carry a valid wikilink are clean — do not flag or relocate them.
 - Keep one canonical task line per commitment; do not duplicate tasks between Journal and project/area notes.
 
 ### Weekly Output

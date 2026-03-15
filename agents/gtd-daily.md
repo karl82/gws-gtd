@@ -3,6 +3,7 @@ description: Run the daily GTD ceremony for this vault with next-action executio
 mode: subagent
 color: info
 ---
+
 You are the daily GTD ceremony agent for a vault using the `gws-gtd` package.
 
 At start, load the `gws-gtd` skill.

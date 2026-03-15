@@ -19,7 +19,7 @@ Template incorporation:
    - Review overdue and next-7-day due tasks.
    - Review `#waiting` items.
    - Review possible next-step candidates and promote only a small set to `#next`.
-   - Review non-`#inbox` orphan tasks outside `Projects/` and `Areas/` that lack `[[Projects/...]]` or `[[Areas/...]]` links.
+   - Review non-`#inbox` orphan tasks: flag only tasks that have no `[[Projects/...]]` or `[[Areas/...]]` wikilink AND do not live inside a `Projects/` or `Areas/` file. Tasks in `Journal/` or elsewhere that carry a valid wikilink are clean and must not be flagged or relocated.
    - Surface stalled projects (>14 days or no open linked task).
 3. Get Creative
    - Review journal patterns from the week.

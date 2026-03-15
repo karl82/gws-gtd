@@ -3,6 +3,7 @@ description: Run the daily GTD ceremony for this vault
 agent: gtd-daily
 subtask: true
 ---
+
 Run the daily GTD ceremony for this repository.
 
 Scope and notes: $ARGUMENTS
