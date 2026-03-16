@@ -29,7 +29,7 @@
 - Use `#next` to distinguish the small set of tasks that are truly actionable now from the larger pool of open commitments.
 - When one task can only start after another task completes, use Tasks dependency markers (`🆔`, `⛔`, or Dataview `id` / `dependsOn`) instead of only describing the dependency in prose.
 - Keep minor implementation subtasks as plain checklist items unless they need independent GTD tracking.
-- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task.
+- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task. Use `System/Templates/Daily.md` as the required format: heading `# Daily - YYYY-MM-DD` with a `## Notes` section containing plain linked bullet entries.
 - Keep due dates for hard commitments only.
 - Keep context tags sparse and execution-focused.
 

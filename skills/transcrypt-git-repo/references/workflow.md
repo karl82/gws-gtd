@@ -2,11 +2,38 @@
 
 ## 1) Bootstrap
 
-1. Confirm clean working tree.
-2. Run transcrypt with agreed cipher and password.
-3. Add encrypted patterns to `.gitattributes`.
-4. Stage and commit encrypted files and attributes.
-5. Share credentials through a secure out-of-band channel.
+1. Back up vault files outside of git.
+2. Confirm clean working tree.
+3. Discard plaintext history by creating an orphan branch:
+   ```bash
+   git checkout --orphan fresh
+   git add .
+   git commit -m "initial commit"
+   git branch -D main
+   git branch -m main
+   ```
+4. Run transcrypt with agreed cipher and password:
+   ```bash
+   transcrypt -c aes-256-cbc -p 'your-strong-password'
+   ```
+5. Configure `.gitattributes` to encrypt all vault files:
+   ```bash
+   echo '*' >> .gitattributes
+   echo '.gitattributes !filter !diff' >> .gitattributes
+   git add .gitattributes && git commit -m "enable transcrypt encryption"
+   git add . && git commit -m "encrypted vault"
+   ```
+6. Force push to remote:
+   ```bash
+   git push --force origin main
+   ```
+7. Verify remote stores only ciphertext:
+   ```bash
+   git clone <remote-url> /tmp/vault-check
+   cat /tmp/vault-check/some-note.md  # should show binary ciphertext
+   ```
+8. Store transcrypt password securely (e.g. 1Password).
+9. Share credentials through a secure out-of-band channel.
 
 ## 2) Add Pattern
 
