@@ -36,3 +36,4 @@ Requirements:
 - Run as an interactive facilitation session.
 - Prefer compact batch questions for repetitive decisions; show actionable choices first and obvious garbage last when possible; use one focused question only when batching is not helpful.
 - Output decisions, blockers, and unresolved questions after each step.
+- At the end of the ceremony, run signal sync: dry-run `scripts/sync_gtd_signals.py`, show the diff (creates / updates / deletes), and apply after confirmation.

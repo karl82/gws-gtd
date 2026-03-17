@@ -13,7 +13,7 @@
 
 ### Folder Semantics
 
-- `Inbox.md` is an optional capture surface.
+- `Inbox.md` is a live query view of all `#task #inbox` items across the vault. It is not a capture file — tasks are never written directly into it.
 - `Projects/` are finite outcomes.
 - `Areas/` are ongoing responsibilities.
 - `People/` stores relationship notes and stable contact references.
@@ -49,8 +49,18 @@
 ### Inbox Rules
 
 - Inbox state is tag-driven through `#inbox`, not file-driven.
-- Clarify by removing `#inbox` and moving the task to the right project/area or linking it there.
+- `Inbox.md` is a live query view of all `#task #inbox` items across the entire vault — not a capture file.
+- Clarify by removing `#inbox` and adding a `[[Projects/...]]` or `[[Areas/...]]` wikilink.
+- Daily ceremony clarifies only urgent `#inbox` items. Weekly ceremony sweeps all remaining `#inbox` items.
 - Inbox tasks should never remain completed.
+
+### Task Placement Rules
+
+- Tasks can be created anywhere: journal, project file, area file.
+- The wikilink (`[[Projects/...]]` or `[[Areas/...]]`) is the ownership declaration — not the file the task lives in.
+- Do not move tasks after creation. Leave them where they were born.
+- Journal-born tasks with a wikilink are fully visible in project and area query views via `project-linked-open.js`.
+- Tasks without a wikilink and outside `Projects/` or `Areas/` are orphans — surface in `orphan-open` preset and clarify during weekly ceremony.
 
 ### Review Rules
 

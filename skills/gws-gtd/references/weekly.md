@@ -20,10 +20,12 @@ proceeding. Do not begin Get Clear until the daily ceremony is done.
 ### Steps
 
 1. Get Clear
-    - Run `#inbox` Zero to completion as a strict gate.
-    - Clarify ambiguous captures into explicit outcomes plus either a `#task` next action or a plain local checklist step.
-    - If `#inbox` queue is not zero, stop and report: `Get Clear incomplete (#inbox not zero)`.
-    - **Drain the `gtd/review` Gmail label queue.** These are emails deferred from daily processing for weekly decision. For each thread: promote to `gtd/import` (becomes a task), move to `gtd/waiting`, `gtd/reference`, or trash. This queue must reach zero before Get Clear is complete.
+    - Sweep all `#task #inbox` items across the vault to zero. This is a strict gate — Get Clear is not complete until `#inbox` is empty.
+    - The `#inbox` queue includes both urgent items from daily intake and deferred review-style tasks (recruiter outreach, ambiguous mail, etc.) that were intentionally left for weekly sweep.
+    - For deferred review-style items, use batch decisions: group by type (recruiter, ambiguous, informational), propose outcomes in bulk, and apply after confirmation. Do not review each one individually.
+    - For each `#inbox` item decide: clarify (add wikilink, remove `#inbox`, set `#next` or `#waiting`) or delete (task no longer relevant; archive source Gmail thread).
+    - If `#inbox` queue is not zero after sweep, stop and report: `Get Clear incomplete (#inbox not zero)`.
+    - Also surface unlabeled Gmail inbox threads older than 7 days via `weekly-reconcile.md` Step 1.
 2. Get Current
    - Review overdue and next-7-day due tasks.
    - Review `#waiting` items.

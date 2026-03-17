@@ -17,7 +17,7 @@ For each attendee event in the daily ask queue:
 1. Pre-classify with recommendation and brief rationale:
    - `task`, `journal`, `project-note`, or `skip`
 2. Is there an actionable next step?
-   - Yes -> create canonical `#task` in Inbox or linked project note.
+    - Yes -> create canonical `#task` in the daily journal or linked project/area note with a `[[Projects/...]]` or `[[Areas/...]]` wikilink.
    - No -> create/append note context only.
 3. Is this project-related?
    - Yes -> create project-linked event note and mention in daily journal.
@@ -25,7 +25,7 @@ For each attendee event in the daily ask queue:
 
 ### Storage Policy
 
-- One-off event context: append to `Journal/YYYY-MM-DD.md`.
+- One-off event context: append to `Journal/YYYY/MM/YYYY-MM-DD.md`.
 - Project-related context:
   - create `Resources/Events/YYYY/YYYY-MM-DD <event-title>.md`
   - include `[[Projects/...]]` link in the note

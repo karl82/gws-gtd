@@ -3,7 +3,7 @@
 ### Scope
 
 - Run daily execution from trusted lists: due, next actions, waiting, and active projects.
-- Triage `#inbox` queue across the vault only as needed; inbox zero is not required in the daily ceremony.
+- Triage `#inbox` queue only for urgent items identified during intake — items that need action before the next weekly review. Leave all other `#inbox` items for the weekly ceremony sweep. Inbox zero is not a daily goal.
 - Prefer batch handling for repetitive review queues so decisions are gathered first and mutations happen after confirmation; within each batch, present meaningful/actionable choices before obvious garbage when possible.
 
 ### Decision Flow
@@ -22,14 +22,14 @@
 
 ### Daily Guardrails
 
-- Do not require inbox zero in daily mode.
+- Do not require inbox zero in daily mode. Only clarify `#inbox` items that are urgent or time-sensitive. All other `#inbox` items are swept during the weekly ceremony.
 - Keep `#inbox` tasks free of completed items.
 - Use `#inbox` as capture state across the vault; remove `#inbox` when clarified.
 - Keep one canonical task line; update lifecycle on the same line (`➕`, `🛫`, `✅`, `📅`) instead of creating duplicates.
 - Use `#next` to distinguish the small set of tasks that are truly actionable now from the larger pool of open commitments.
 - When one task can only start after another task completes, use Tasks dependency markers (`🆔`, `⛔`, or Dataview `id` / `dependsOn`) instead of only describing the dependency in prose.
 - Keep minor implementation subtasks as plain checklist items unless they need independent GTD tracking.
-- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task. Use `System/Templates/Daily.md` as the required format: heading `# Daily - YYYY-MM-DD` with a `## Notes` section containing plain linked bullet entries.
+- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task and **not** as a `📝` sub-bullet under the task. Use `System/Templates/Daily.md` as the required format: heading `# Daily - YYYY-MM-DD` with a `## Notes` section containing plain linked bullet entries pointing to the relevant `[[Projects/...]]` or `[[Areas/...]]`.
 - Keep due dates for hard commitments only.
 - Keep context tags sparse and execution-focused.
 

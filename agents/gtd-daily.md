@@ -39,6 +39,7 @@ Then execute the daily workflow:
 - Enforce canonical `#task` syntax and minimal tags.
 - Use Tasks plugin dependency fields when helpful (`🆔`, `⛔`, `[id:: ...]`, `[dependsOn:: ...]`).
 - Report blockers and remaining user decisions.
+- At the end of the ceremony, run the `signal-sync` mode to push updated `#next` and dated `#waiting` tasks to the `GTD Signals` Google Calendar: dry-run first, show the diff, and apply after confirmation.
 
 Interaction mode:
 - Prefer compact batches for repetitive review decisions, with actionable choices first and obvious garbage last when possible, then apply changes after confirmation.

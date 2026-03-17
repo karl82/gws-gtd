@@ -15,7 +15,6 @@ Default label mapping for this procedure:
 - `ROOT_LABEL = "gtd"`
 - `IMPORT_LABEL = "gtd/import"`
 - `WAITING_LABEL = "gtd/waiting"`
-- `REVIEW_LABEL = "gtd/review"`
 - `REFERENCE_LABEL = "gtd/reference"`
 - `IMPORTED_LABEL = "gtd/imported"` (optional)
 
@@ -44,17 +43,13 @@ Recommended mobile capture filter:
     - short preview (first few lines/snippet)
 3. For each candidate email, propose one outcome and brief rationale using the policy defaults and heuristics from `skills/gws-gtd/references/email-triage-policy.md`.
    Allowed outcomes in this procedure:
-    - `IMPORT_LABEL`
+    - `IMPORT_LABEL` (actionable now, or deferred review-style task for weekly clarification)
     - `WAITING_LABEL`
     - `appointment` (service/reservation confirmation or reschedule — see Appointment Workflow below)
-    - `REVIEW_LABEL`
     - `REFERENCE_LABEL`
     - `garbage` (move to TRASH/delete; recommend unsubscribe when available)
    Accepted calendar invitation notifications default to `garbage` unless they carry additional actionable context.
 
-#### `#waiting` Tag Semantics
-
-Use `#waiting` ONLY when the next step belongs to someone else (you delegated, you sent a request, you are blocked on an external party). Never use `#waiting` for tasks where you are the next actor.
 4. Default to batch review for unlabeled email candidates:
     - gather the current candidate set first
     - split the batch into actionable-first vs obvious-garbage groups when possible
@@ -76,6 +71,8 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
    - `gws gmail +triage --query '<QUERY>' --format json`
    - or `gws gmail users threads list --params '{"userId":"me","q":"<QUERY>"}'`
 
+Note: `gtd/review` is not used. Emails that can wait until weekly review are still imported via `gtd/import` and become `#task #inbox` vault tasks. The weekly ceremony sweeps all unclarified `#inbox` items.
+
 ### Step 3 - Convert to GTD Tasks
 
 1. For import label: create canonical tasks with `#inbox` capture state.
@@ -83,7 +80,7 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
 3. Clarification rule: remove `#inbox` only when destination is explicit (`Projects/`, `Areas/`, or line has `[[Projects/...]]` / `[[Areas/...]]` link).
 4. For waiting label: always create or update a `#waiting` task with reference metadata.
 5. Dedupe by `gmail_thread_id` so reruns are idempotent.
-6. `REVIEW_LABEL` threads should usually be archived and should not create a vault task until they are promoted during weekly review or ad-hoc triage.
+6. Review-style tasks (recruiter outreach, ambiguous but potentially relevant mail) are imported via `IMPORT_LABEL` as `#task #inbox` with a review-style description. They are clarified during the weekly ceremony, not the daily ceremony.
 7. Do not assign `🛫` or `📅` during raw import unless the source message contains a true external commitment that the user confirms.
 8. If created date is needed, use `➕ YYYY-MM-DD` on the same task line.
 9. During clarify, if an imported action takes <=5 minutes and tools/context are available, execute it immediately.
@@ -97,7 +94,10 @@ Task pattern:
 
 1. Pull upcoming events (today and tomorrow):
    - `gws calendar +agenda --days 2 --format json`
-2. Keep only events with attendees.
+2. Keep only events that meet ALL of the following:
+   - Has at least one attendee other than yourself
+   - Is not self-created (organizer is not you)
+   - Is not on the `GTD Signals` calendar
 3. For each event, always show:
    - summary/title
    - when
@@ -111,6 +111,18 @@ Task pattern:
     - present all candidate events together with recommendation and rationale
     - collect compact user decisions for the whole batch
     - then apply event-note/task actions in one go
+
+### Calendar Event Creation Guardrail
+
+Before creating **any** Google Calendar event — whether from the Appointment Workflow, an e-ticket, an event confirmation, or any other source:
+
+1. Search Google Calendar across **all calendars** for an existing event matching the occasion (search by venue name, event title, service type, date, or ticket order number).
+2. If a matching event is found in any calendar:
+   - Compare details (date, time, location, description).
+   - If the existing event is already accurate: do not create a new event; archive the email and note the existing event.
+   - If the existing event needs enrichment (missing seats, wrong price, missing links): patch the existing event, do not create a duplicate.
+3. Only create a new event when no matching event exists in any calendar.
+4. Never create duplicate events. If unsure, show the candidate match to the user and ask before creating.
 
 ### Appointment Workflow
 
