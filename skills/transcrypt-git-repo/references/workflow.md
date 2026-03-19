@@ -4,7 +4,8 @@
 
 1. Back up vault files outside of git.
 2. Confirm clean working tree.
-3. Discard plaintext history by creating an orphan branch:
+3. Copy the patched transcrypt script into `scripts/transcrypt` (uses `-pbkdf2 -iter 256000 -md sha512` for LibreSSL compatibility).
+4. Discard plaintext history by creating an orphan branch:
    ```bash
    git checkout --orphan fresh
    git add .
@@ -12,28 +13,28 @@
    git branch -D main
    git branch -m main
    ```
-4. Run transcrypt with agreed cipher and password:
+5. Run transcrypt with agreed cipher and password:
    ```bash
    transcrypt -c aes-256-cbc -p 'your-strong-password'
    ```
-5. Configure `.gitattributes` to encrypt all vault files:
+6. Configure `.gitattributes` to encrypt all vault files:
    ```bash
    echo '*' >> .gitattributes
    echo '.gitattributes !filter !diff' >> .gitattributes
    git add .gitattributes && git commit -m "enable transcrypt encryption"
    git add . && git commit -m "encrypted vault"
    ```
-6. Force push to remote:
+7. Force push to remote:
    ```bash
    git push --force origin main
    ```
-7. Verify remote stores only ciphertext:
+8. Verify remote stores only ciphertext:
    ```bash
    git clone <remote-url> /tmp/vault-check
    cat /tmp/vault-check/some-note.md  # should show binary ciphertext
    ```
-8. Store transcrypt password securely (e.g. 1Password).
-9. Share credentials through a secure out-of-band channel.
+9. Store transcrypt password securely (e.g. 1Password).
+10. Share credentials through a secure out-of-band channel.
 
 ## 2) Add Pattern
 

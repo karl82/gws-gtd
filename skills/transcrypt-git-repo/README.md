@@ -14,7 +14,7 @@
 ## Prerequisites
 
 - Git available in `PATH`
-- `transcrypt` installed and executable
+- `transcrypt` installed and executable — use the patched version from `scripts/transcrypt` in this skill, which uses `-pbkdf2 -iter 256000 -md sha512` (lowercase, LibreSSL-compatible) instead of upstream `-md MD5`
 - `openssl` available (or explicitly configured with `transcrypt.openssl-path`)
 - a clean working tree before bootstrap, rekey, or force checkout operations
 

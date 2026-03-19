@@ -1,5 +1,19 @@
 # Command Reference
 
+**Important:** Use the patched transcrypt from this skill's `scripts/transcrypt`, which
+uses `-pbkdf2 -iter 256000 -md sha512` instead of the upstream `-md MD5`. This is
+required for LibreSSL compatibility on macOS. Always use lowercase `sha512`, not
+`SHA-512` — LibreSSL rejects the hyphenated form.
+
+## Install Patched Script
+
+Copy the patched transcrypt into the target repository:
+
+```bash
+cp <skill-path>/scripts/transcrypt <repo>/scripts/transcrypt
+chmod +x <repo>/scripts/transcrypt
+```
+
 ## Inspect Current State
 
 ```bash
@@ -63,6 +77,8 @@ transcrypt --flush-credentials
 ```
 
 ## OpenSSL Path Override
+
+On macOS, prefer LibreSSL for compatibility with the patched digest:
 
 ```bash
 git config transcrypt.openssl-path /usr/bin/openssl

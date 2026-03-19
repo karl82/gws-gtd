@@ -11,10 +11,15 @@ Using -iter or -pbkdf2 would be better.
 
 Cause:
 
-- transcrypt relies on legacy OpenSSL KDF parameters for compatibility.
-- OpenSSL 3 emits warnings on each clean/smudge invocation.
+- Upstream transcrypt uses `-md MD5` which triggers warnings on OpenSSL 3.
 
-Mitigation on macOS when LibreSSL is available:
+Fix:
+
+Use the patched transcrypt from this skill's `scripts/transcrypt`, which replaces
+`-md MD5` with `-pbkdf2 -iter 256000 -md sha512`. This eliminates the warning
+and uses modern key derivation.
+
+Additionally, on macOS point transcrypt at LibreSSL:
 
 ```bash
 git config transcrypt.openssl-path /usr/bin/openssl
@@ -25,6 +30,22 @@ Then verify:
 ```bash
 git status
 ```
+
+## SHA-512 vs sha512 — LibreSSL Case Sensitivity
+
+Symptom:
+
+- LibreSSL rejects `SHA-512` as an unknown digest.
+
+Cause:
+
+- LibreSSL requires lowercase digest names (`sha512`), while OpenSSL 3 accepts
+  both `SHA-512` and `sha512`.
+
+Fix:
+
+- Always use lowercase `sha512` in the `-md` flag, never `SHA-512`.
+- The patched transcrypt in `scripts/transcrypt` already uses the correct form.
 
 ## File Appears Unencrypted In Index
 
