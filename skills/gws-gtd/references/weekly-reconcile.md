@@ -1,32 +1,27 @@
 ## Weekly Reconcile Procedure
 
-### Prerequisites
-
-Run the daily intake ceremony (`references/daily-intake.md`) before starting the weekly reconcile. The vault must be current before reconciliation begins.
-
 ### Scope
 
 - Extend weekly review with Google inbox safety nets.
 - Ensure no important email/calendar input remains outside GTD control.
-- Sweep all unclarified `#inbox` tasks in the vault.
+- Respect strict weekly gate: `#inbox` Zero in vault before exiting Get Clear.
 - Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meaning and promotion rules.
 
-### Step 1 - Sweep Unclarified `#inbox` Tasks (mandatory)
+### Step 1 - Review Gmail Intake Safety Nets
 
-The vault `#inbox` queue is the single clarification queue for all imported emails — both urgent items handled during daily ceremonies and deferred review-style tasks. Weekly review must clarify all remaining `#inbox` items before Get Clear is complete.
+Review unresolved queues:
 
-Query vault-wide for open `#task #inbox` items:
-- Items without a `[[Projects/...]]` or `[[Areas/...]]` wikilink need a destination decision.
+- unlabeled inbox older than 7 days, excluding known GTD labels
+- `label:<IMPORT_LABEL> -label:<IMPORTED_LABEL>` for captures that still need clarification
 
-For each unclarified `#inbox` task decide:
-- **Clarify** — add wikilink, remove `#inbox`, add `#next` or `#waiting` as appropriate
-- **Trash** — task is no longer relevant; delete it and archive the source Gmail thread
+Suggested queries:
 
-Also surface unlabeled inbox threads older than 7 days (missed by daily processing):
-
+- `label:<IMPORT_LABEL> -label:<IMPORTED_LABEL>`
 - `in:inbox older_than:7d -label:<IMPORT_LABEL> -label:<IMPORTED_LABEL> -label:<WAITING_LABEL> -label:<REFERENCE_LABEL>`
 
-For each stale thread decide: import as `#task #inbox`, move to `gtd/reference`, or trash.
+If your mailbox uses a different label taxonomy, replace the label filters with your mapped equivalents.
+
+For each stale intake candidate, decide whether it should move to `IMPORT_LABEL`, `WAITING_LABEL`, `REFERENCE_LABEL`, or trash. Use `IMPORT_LABEL` for anything that still needs an `Inbox.md` clarify step.
 
 ### Step 2 - Reconcile Waiting Dependencies
 
@@ -43,12 +38,13 @@ For each stale thread decide: import as `#task #inbox`, move to `gtd/reference`,
 
 ### Step 4 - Integrity Checks for Hybrid Inbox Model
 
+- Review `#inbox` items across the whole vault and enforce `#inbox` zero by end of Get Clear.
 - Surface non-`#inbox` open tasks that have no `[[Projects/...]]` or `[[Areas/...]]` wikilink AND do not live inside a `Projects/` or `Areas/` file. Tasks in `Journal/` or elsewhere that carry a valid wikilink are clean — do not flag or relocate them.
 - Keep one canonical task line per commitment; do not duplicate tasks between Journal and project/area notes.
 
 ### Weekly Output
 
-- Count of clarified `#inbox` tasks and stale unlabeled emails processed
+- Count of reviewed deferred/unlabeled emails
 - Waiting loop risks and owner/follow-up decision points
 - Calendar load risks for the next 7 days
 - Hybrid inbox/orphan integrity actions performed

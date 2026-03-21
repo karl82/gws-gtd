@@ -9,7 +9,6 @@ Classify, normalize, and clean up notes and tasks according to vault lifecycle r
 - `Projects/` = finite outcomes.
 - `Areas/` = ongoing responsibilities.
 - Use `#task` for globally tracked GTD actions; use plain `- [ ]` for project-local subtasks.
-- Tasks can live in journal, project, or area files. The `[[Projects/...]]` or `[[Areas/...]]` wikilink is the ownership declaration — not the file location. Do not relocate tasks that already have a valid wikilink.
 - Canonical project notes live at `Projects/<Domain>/<Project>.md`.
 - Add `Projects/<Domain>/<Project>/` only when the project needs deeper artifacts.
 - Keep project-owned designs under `Projects/<Domain>/<Project>/designs/`.
@@ -25,7 +24,7 @@ Classify, normalize, and clean up notes and tasks according to vault lifecycle r
 
 ### Taxes Convention
 
-- Annual notes live in `Projects/Taxes/Taxes YYYY.md`.
+- Annual notes live in `Projects/Taxes/YYYY.md`.
 - Required parent groups: `US`, `CZ`, `Payments`.
 - Keep tax tags minimal:
   - `#payment` for payment items.

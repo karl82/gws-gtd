@@ -17,10 +17,8 @@ Tags serve two purposes only: **GTD lifecycle state** and **execution context**.
 
 | Tier | Tags | Meaning |
 |---|---|---|
-| **GTD state** | `#task`, `#inbox`, `#next`, `#waiting`, `#someday` | Lifecycle position of the action. `#inbox` = captured, not yet clarified (no wikilink). `#next` = currently actionable. `#waiting` = delegated or blocked on external party. `#someday` = incubated, not committed. |
+| **GTD state** | `#task`, `#inbox`, `#next`, `#waiting`, `#someday` | Lifecycle position of the action |
 | **Context / mode** | `#phone`, `#email`, `#errand`, `#internet`, `#deep`, `#buy`, `#idea`, `#payment` | How or where the action is performed |
-
-**`#waiting` rule:** Use `#waiting` ONLY when the next step belongs to someone else — you delegated, sent a request, or are blocked on an external party. Never use `#waiting` for tasks where you are the next actor.
 
 **Rules:**
 - Domain/area tags (`#home`, `#admin`, `#work`, `#personal`, etc.) are not used. Ownership is declared by wikilink (`[[Areas/Home]]`, `[[Projects/...]]`) or by the file the task lives in.
@@ -31,12 +29,10 @@ Tags serve two purposes only: **GTD lifecycle state** and **execution context**.
 ### Gmail Label Model
 
 - Root label: `gtd`
-- Intake gate: `gtd/import` → creates `#task #inbox` vault task
-- Waiting gate: `gtd/waiting` → creates `#task #waiting` vault task
-- Reference retention: `gtd/reference` → archive in Gmail, no vault task
+- Intake gate: `gtd/import`
+- Waiting gate: `gtd/waiting`
+- Reference retention: `gtd/reference`
 - Post-import dedupe marker: `gtd/imported`
-
-`gtd/review` is not used. Emails that can wait until weekly review are still imported via `gtd/import` — the vault `#inbox` queue is the single clarification queue for both urgent and deferred items.
 
 ### Calendar Model
 
@@ -44,19 +40,21 @@ Tags serve two purposes only: **GTD lifecycle state** and **execution context**.
 - `GTD Signals` is output-only.
 - Mirror clarified dated `#next` tasks and dated `#waiting` follow-ups only.
 
-### Journal vs Project Notes
-
-**Journal** (`Journal/YYYY/MM/YYYY-MM-DD.md`) is the canonical place for timeline narrative — what happened, when, and why. Format: `# Daily - YYYY-MM-DD` with a `## Notes` section of plain linked bullet entries.
-
-**Project and Area files** hold tasks, reference data, and stable context (tables, docs, links). They do not hold narrative timeline notes.
-
-Rules:
-- When something happens (decision made, action taken, reply sent, filing submitted), record it as a bullet in the daily journal with a `[[wikilink]]` to the relevant project or area.
-- Do **not** append `📝 YYYY-MM-DD: ...` narrative sub-bullets under tasks in project files. The task line itself (with lifecycle emojis `➕ 🛫 ✅ 📅`) is the only thing that changes on the task.
-- Exception: structured metadata that belongs to the task record itself (e.g. `(gmail_thread_id:: ...)`, `(web_link:: ...)`, checklist sub-items) may remain under the task line.
-
 ### Vault Model
 
 - Canonical folders: `Projects/`, `Areas/`, `People/`, `Resources/`, `Archive/`, `Journal/`, `System/`
 - `System/Templates/` and `System/Queries/` are runtime assets.
 - Workflow doctrine lives in package skill references, not in `System/` config notes.
+
+### Journal Hygiene
+
+- Journal notes capture real-world timeline events and outcomes, not GTD system maintenance.
+- Do not write ceremony logs, inbox statistics, label routing, task creation counts, or completion banners into journal notes.
+- Every journal entry should link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
+- If nothing meaningful happened beyond review/maintenance, do not add a journal entry.
+
+### User-Facing Context
+
+- When summarizing work to the user, identify tasks and notes with enough context to be recognizable immediately.
+- Do not use bare references like `Inbox.md:10` or "the item on line 10" as the main identifier.
+- Pair any file reference with the task text, sender, subject, person, or linked project/area.

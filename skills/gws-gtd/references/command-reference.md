@@ -64,7 +64,6 @@ Prefer the least risky operation that solves the problem:
 - `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/import","labelListVisibility":"labelShow","messageListVisibility":"show"}'`
   - Use when: bootstrapping a missing GTD child label after the `gtd` parent already exists.
 - `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/waiting","labelListVisibility":"labelShow","messageListVisibility":"show"}'`
-- `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/review","labelListVisibility":"labelShow","messageListVisibility":"show"}'`
 - `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/reference","labelListVisibility":"labelShow","messageListVisibility":"show"}'`
 - `gws gmail users labels create --params '{"userId":"me"}' --json '{"name":"gtd/imported","labelListVisibility":"labelHide","messageListVisibility":"hide"}'`
   - Use when: completing the full structured GTD label bootstrap on a new account.
@@ -108,12 +107,12 @@ Notes:
   ```
   - Use when: the review step already produced the exact message IDs to trash.
 
-### Gmail: Composing and Replying (Mandatory)
+### Gmail Helpers Beyond GTD Intake
 
-Always use these helpers for outbound email. Never construct raw MIME or call `users.messages.send` directly. Always show the user a draft and get explicit confirmation before sending.
-
+- `gws gmail +watch --project <gcp-project> --label-ids INBOX --once`
+  - Use when: debugging new-mail capture or a watcher workflow.
 - `gws gmail +send --to alice@example.com --subject 'Hello' --body 'Quick note'`
-  - Use when: sending a new plain-text message.
+  - Use when: sending a new plain-text message without constructing raw MIME.
   - Do not use for replies to existing threads.
 - `gws gmail +reply --message-id '<message-id>' --body 'Quick reply'`
   - Use when: replying inside an existing Gmail thread. Handles `In-Reply-To` and `References` threading automatically.
@@ -121,8 +120,6 @@ Always use these helpers for outbound email. Never construct raw MIME or call `u
   - Use when: replying to all recipients of an existing thread.
 - `gws gmail +forward --message-id '<message-id>' --to 'bob@example.com' --body 'FYI'`
   - Use when: forwarding a message to new recipients.
-- `gws gmail +watch --project <gcp-project> --label-ids INBOX --once`
-  - Use when: debugging new-mail capture or a watcher workflow.
 - `gws gmail users getProfile --params '{"userId":"me"}'`
   - Use when: confirming the authenticated mailbox address.
 
@@ -210,7 +207,7 @@ Use when: weekly review needs a quick view of external dependencies that may nee
 
 - `gws gmail +triage --max 10 --query 'label:gtd/import -label:gtd/imported' --format json`
 - `gws gmail +triage --max 10 --query 'label:gtd/waiting' --format json`
-- `gws gmail +triage --max 10 --query 'in:inbox newer_than:2d -label:gtd/import -label:gtd/waiting -label:gtd/review -label:gtd/reference -label:gtd/imported' --format json`
+- `gws gmail +triage --max 10 --query 'in:inbox newer_than:2d -label:gtd/import -label:gtd/waiting -label:gtd/reference -label:gtd/imported' --format json`
 
 Use when: checking whether alias-routed capture is landing correctly and whether unlabeled mail still needs triage.
 

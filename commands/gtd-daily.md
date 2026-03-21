@@ -14,13 +14,15 @@ Requirements:
 - Start with Google intake via `gws`:
   - Use Gmail as the only mobile capture channel; ignore Google Tasks.
   - Assume a single capture alias routes messages into `gtd/import`.
-  - Classify recent unlabeled inbox emails with recommendation-first batch review; gather the batch first, show actionable/review-worthy items before obvious garbage, collect compact decisions, and apply labels only after confirmation.
+  - Treat self-sent messages to the `+gtd@gmail.com` capture alias as plain capture notes by default, not as email references that must keep Gmail metadata on the task line.
+  - Classify the full current unlabeled Gmail inbox in one pass by default, not in small batches.
+  - Use recommendation-first bulk review: gather the whole current queue, bulk-group obvious garbage/reference classes where safe, show actionable/review-worthy items before obvious garbage, present one final compact classification review, and apply labels only after confirmation.
   - Always present email context for decisions: sender, subject, and a short preview (first few lines/snippet).
-  - Import configured intake-label emails into canonical `#task #inbox` tasks.
+  - Import configured intake-label emails into canonical `#task #inbox` tasks in `Inbox.md` first.
   - Import configured waiting-label emails as mandatory `#waiting` tasks with references.
-  - Treat `gtd/review` as an archived deferred-review queue; do not create vault tasks from it unless promoted.
-  - Treat `#inbox` as the cross-vault clarification queue (not only `Inbox.md`).
-  - Clarify by removing `#inbox` and either moving to `Projects/`/`Areas/` or keeping in place with `[[Projects/...]]` / `[[Areas/...]]` link.
+  - Treat `Inbox.md` as the mandatory landing zone for `gtd/import` captures so the user can apply the <=5-minute rule and clarify before filing elsewhere.
+  - Treat `#inbox` as the cross-vault clarification state after import, but do not bypass `Inbox.md` during raw Gmail intake.
+  - Clarify from `Inbox.md` by either completing the task via the <=5-minute rule or removing `#inbox` and moving/linking it into `Projects/`/`Areas/` only after the destination is explicit.
   - Review attendee-only calendar events in batches when possible.
   - Always present calendar context for decisions: summary plus a short preview (first few lines from description/notes/location when present).
   - Pre-classify each attendee event with recommendation (`task`, `journal`, `project-note`, `skip`) and rationale before asking.
@@ -29,11 +31,11 @@ Requirements:
 - Keep one canonical task line; track lifecycle on that line with `➕`, `🛫`, `✅`, `📅`.
 - Use `#next` to mark the small set of currently actionable tasks; leave other open tasks active but off the main execution list.
 - Use Tasks plugin dependency markers when useful: `🆔`, `⛔`, `[id:: ...]`, `[dependsOn:: ...]`.
-- Apply the <=5-minute rule during clarify when context/tools are available.
+- Apply the <=5-minute rule during clarify from `Inbox.md` when context/tools are available.
 - Use the assistant proactively to analyze emails, attachments, and event details so review decisions can often be completed immediately.
 - When a mail-driven task is completed and no immediate follow-up is expected, archive the thread from inbox.
 - Treat `GTD Signals` as an output-only calendar layer for dated `#next` tasks and dated `#waiting` follow-ups only.
 - Run as an interactive facilitation session.
-- Prefer compact batch questions for repetitive decisions; show actionable choices first and obvious garbage last when possible; use one focused question only when batching is not helpful.
+- Prefer one compact final review for Gmail classification instead of repeated small-batch questions; show actionable choices first and obvious garbage last when possible; use one focused question only when something is truly ambiguous.
+- In user-facing output, always identify tasks with recognizable context such as task text, sender, subject, person, or linked project/area; do not rely on bare file references or line numbers alone.
 - Output decisions, blockers, and unresolved questions after each step.
-- At the end of the ceremony, run signal sync: dry-run `scripts/sync_gtd_signals.py`, show the diff (creates / updates / deletes), and apply after confirmation.

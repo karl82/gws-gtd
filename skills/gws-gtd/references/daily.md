@@ -3,7 +3,7 @@
 ### Scope
 
 - Run daily execution from trusted lists: due, next actions, waiting, and active projects.
-- Triage `#inbox` queue only for urgent items identified during intake — items that need action before the next weekly review. Leave all other `#inbox` items for the weekly ceremony sweep. Inbox zero is not a daily goal.
+- Triage `#inbox` queue across the vault only as needed; inbox zero is not required in the daily ceremony.
 - Prefer batch handling for repetitive review queues so decisions are gathered first and mutations happen after confirmation; within each batch, present meaningful/actionable choices before obvious garbage when possible.
 
 ### Decision Flow
@@ -22,14 +22,19 @@
 
 ### Daily Guardrails
 
-- Do not require inbox zero in daily mode. Only clarify `#inbox` items that are urgent or time-sensitive. All other `#inbox` items are swept during the weekly ceremony.
+- Do not require inbox zero in daily mode.
 - Keep `#inbox` tasks free of completed items.
 - Use `#inbox` as capture state across the vault; remove `#inbox` when clarified.
 - Keep one canonical task line; update lifecycle on the same line (`➕`, `🛫`, `✅`, `📅`) instead of creating duplicates.
 - Use `#next` to distinguish the small set of tasks that are truly actionable now from the larger pool of open commitments.
 - When one task can only start after another task completes, use Tasks dependency markers (`🆔`, `⛔`, or Dataview `id` / `dependsOn`) instead of only describing the dependency in prose.
 - Keep minor implementation subtasks as plain checklist items unless they need independent GTD tracking.
-- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task and **not** as a `📝` sub-bullet under the task. Use `System/Templates/Daily.md` as the required format: heading `# Daily - YYYY-MM-DD` with a `## Notes` section containing plain linked bullet entries pointing to the relevant `[[Projects/...]]` or `[[Areas/...]]`.
+- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task.
+- Do not persist ceremony mechanics to the journal: no inbox counts, no email classification summaries, no import/waiting counts, no task-list snapshots, and no "daily review completed" markers.
+- Journal entries are only for real-world timeline events or outcomes with later narrative value.
+- Every journal entry should link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
+- If the ceremony produced no meaningful real-world event, leave the journal untouched.
+- In user-facing ceremony output, always identify tasks by recognizable context (task text, linked project/area/person, sender, or subject). Do not rely on bare file paths or line numbers as the primary identifier.
 - Keep due dates for hard commitments only.
 - Keep context tags sparse and execution-focused.
 
@@ -38,3 +43,4 @@
 - Decisions made (counts by destination)
 - Items requiring user decision
 - Risks or blockers (`#waiting`, `#blocked`)
+- Keep this output in the ceremony/session response, not in the journal.

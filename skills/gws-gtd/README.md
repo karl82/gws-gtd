@@ -81,7 +81,6 @@ Create the parent label first, then child labels:
 gtd
 gtd/import
 gtd/waiting
-gtd/review
 gtd/reference
 gtd/imported
 ```

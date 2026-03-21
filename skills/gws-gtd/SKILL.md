@@ -77,7 +77,6 @@ These are optional supplements. The `references/command-reference.md` in this sk
 - Do not auto-complete tasks.
 - Prefer minimal, reversible edits.
 
-
 ## Supporting References
 
 | Reference | Purpose |
@@ -96,7 +95,6 @@ These are optional supplements. The `references/command-reference.md` in this sk
 | `references/people-linking.md` | Google Contacts to People/ note linking |
 | `references/signal-sync.md` | GTD Signals calendar sync procedure |
 | `references/command-reference.md` | Full `gws` command reference for GTD ceremonies |
-| `references/opkg.md` | Skill package lifecycle — saving and installing changes via `opkg` |
 
 ## Scripts
 

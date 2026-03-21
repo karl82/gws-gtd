@@ -9,23 +9,12 @@ Template incorporation:
 - If the weekly note does not exist, create it at a matching path so Templater applies `System/Templates/Weekly Review.md`.
 - Use the template sections as the interactive agenda.
 
-### Prerequisites
-
-Before starting the weekly review, check whether a daily journal note exists
-for today (`Journal/YYYY/MM/YYYY-MM-DD.md` with today's date substituted). If
-it does not exist, invoke the `gtd-daily` agent interactively as a prerequisite
-— run the full daily ceremony with the user and wait for it to complete before
-proceeding. Do not begin Get Clear until the daily ceremony is done.
-
 ### Steps
 
 1. Get Clear
-    - Sweep all `#task #inbox` items across the vault to zero. This is a strict gate — Get Clear is not complete until `#inbox` is empty.
-    - The `#inbox` queue includes both urgent items from daily intake and deferred review-style tasks (recruiter outreach, ambiguous mail, etc.) that were intentionally left for weekly sweep.
-    - For deferred review-style items, use batch decisions: group by type (recruiter, ambiguous, informational), propose outcomes in bulk, and apply after confirmation. Do not review each one individually.
-    - For each `#inbox` item decide: clarify (add wikilink, remove `#inbox`, set `#next` or `#waiting`) or delete (task no longer relevant; archive source Gmail thread).
-    - If `#inbox` queue is not zero after sweep, stop and report: `Get Clear incomplete (#inbox not zero)`.
-    - Also surface unlabeled Gmail inbox threads older than 7 days via `weekly-reconcile.md` Step 1.
+    - Run `#inbox` Zero to completion as a strict gate.
+    - Clarify ambiguous captures into explicit outcomes plus either a `#task` next action or a plain local checklist step.
+    - If `#inbox` queue is not zero, stop and report: `Get Clear incomplete (#inbox not zero)`.
 2. Get Current
    - Review overdue and next-7-day due tasks.
    - Review `#waiting` items.
