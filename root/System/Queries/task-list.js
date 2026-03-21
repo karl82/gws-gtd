@@ -14,11 +14,13 @@ const isExcludedPath = (path) =>
   excludedPathPrefixes.some((prefix) => path.startsWith(prefix));
 
 const tagPattern = (tag) => new RegExp(`(^|\\s)#${tag}(?=\\s|$)`);
-const hasTaskTag = (task) => tagPattern("task").test(task.text);
-const hasInboxTag = (task) => tagPattern("inbox").test(task.text);
-const hasNextTag = (task) => tagPattern("next").test(task.text);
-const hasWaitingTag = (task) => tagPattern("waiting").test(task.text);
-const hasSomedayTag = (task) => tagPattern("someday").test(task.text);
+const taskTags = (task) => Array.isArray(task.tags) ? task.tags : [];
+const hasTag = (task, tag) => taskTags(task).includes(`#${tag}`) || tagPattern(tag).test(task.text);
+const hasTaskTag = (task) => hasTag(task, "task");
+const hasInboxTag = (task) => hasTag(task, "inbox");
+const hasNextTag = (task) => hasTag(task, "next");
+const hasWaitingTag = (task) => hasTag(task, "waiting");
+const hasSomedayTag = (task) => hasTag(task, "someday");
 const toMillis = (dt) => dt?.toMillis?.() ?? Number.MAX_SAFE_INTEGER;
 const inlineMetadataPattern = /\s*(?:\[[^\]]+::[^\]]*\]|\([^()]*::[^()]*\))/g;
 const areaOrProjectLinkPattern = /\[\[(Projects|Areas)\/[^\]|]+(?:\|[^\]]+)?\]\]/;
