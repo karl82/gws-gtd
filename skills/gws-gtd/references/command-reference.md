@@ -123,6 +123,27 @@ Notes:
 - `gws gmail users getProfile --params '{"userId":"me"}'`
   - Use when: confirming the authenticated mailbox address.
 
+### LinkedIn Messaging via Claude in Chrome (when MCP available)
+
+Use when a recruiter thread is a LinkedIn InMail notification (see email-triage-policy.md → LinkedIn InMail Detection) and `mcp__claude-in-chrome__*` tools are available.
+
+```
+1. Load tools: ToolSearch select:mcp__claude-in-chrome__tabs_context_mcp,navigate,javascript_tool,find,computer
+2. tabs_context_mcp (createIfEmpty: true) → get tabId
+3. navigate tabId → https://www.linkedin.com/messaging/
+4. javascript_tool: inject contact name into search box
+   const box = document.querySelector('input[placeholder="Search messages"]');
+   box.focus(); document.execCommand('insertText', false, 'Name'); → key: Return
+5. computer: left_click the matching thread in results panel
+   → URL becomes the canonical sent_reply:: link
+6. javascript_tool: inject message text
+   const box = document.querySelector('.msg-form__contenteditable');
+   box.focus(); document.execCommand('insertText', false, body);
+7. find: "Send message button" → computer: left_click ref
+```
+
+Log the thread URL as `(sent_reply:: https://www.linkedin.com/messaging/thread/...)` in the vault.
+
 ### Calendar: Read and Review
 
 - `gws calendar +agenda --today --format table`

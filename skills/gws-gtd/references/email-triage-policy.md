@@ -94,6 +94,25 @@ Use these heuristics when deciding how unlabeled email should be labeled.
 - Default recruiter outreach to `gtd/import` as a review-style task unless it is clearly noise or an immediate trash candidate.
 - If a recruiter thread already has `gtd/import`, still create a task, but phrase it as a review task such as `Review recruiter outreach from <name>/<company> and send decline unless compelling`.
 
+### LinkedIn InMail Detection
+
+Recruiter emails that arrived as LinkedIn InMail notifications **cannot be replied to via `gws gmail +reply`** — replies must go through LinkedIn messaging.
+
+Identify LinkedIn InMail notifications by checking the thread headers (`gws gmail users threads get`):
+- `Delivered-To` ends in `+linkedin@gmail.com`, OR
+- `Return-Path` contains `@bounce.linkedin.com`
+
+Subject patterns are a weaker signal but often correlate: `"Message replied: ..."` prefix, or heavy emoji subjects like `"💬 ... 💬"`.
+
+**Reply channel when Claude in Chrome is available:**
+1. Navigate to `https://www.linkedin.com/messaging/`
+2. Search for the contact by name in the messages search box (press Enter)
+3. Click their thread — the URL becomes the canonical `sent_reply::` link
+4. Inject message text via `javascript_tool` into `.msg-form__contenteditable` using `document.execCommand('insertText', false, text)`
+5. Click Send via `find` → `computer left_click`
+
+Log the LinkedIn thread URL as `(sent_reply:: https://www.linkedin.com/messaging/thread/...)` in the vault, same as Gmail sent links.
+
 ## Review Queue Rules
 
 - Weekly review should sweep:
