@@ -115,6 +115,16 @@ if (preset === "waiting") {
   return;
 }
 
+if (preset === "someday") {
+  const tasks = allTasks
+    .where((task) => !task.completed)
+    .where((task) => !hasInboxTag(task))
+    .where((task) => hasSomedayTag(task))
+    .sort((task) => task.path, "asc");
+  renderTaskList(tasks);
+  return;
+}
+
 if (preset === "overdue") {
   const today = dv.date("today").toMillis();
   const tasks = sortByDue(

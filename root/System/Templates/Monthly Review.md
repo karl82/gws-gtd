@@ -40,6 +40,16 @@ await dv.view("System/Queries/task-list", { preset: "next-explicit", file: dv.cu
 
 - [ ] Mark zombie projects for archive or reactivation.
 
+## Someday/Maybe
+
+```dataviewjs
+await dv.view("System/Queries/task-list", { preset: "someday", file: dv.current().file.path });
+```
+
+- [ ] Promote items ready for active projects/tasks.
+- [ ] Delete stale ideas that no longer resonate.
+- [ ] Confirm remaining items still deserve incubation.
+
 ## Pattern Analysis
 
 ```dataviewjs

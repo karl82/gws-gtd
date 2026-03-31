@@ -22,7 +22,10 @@ Template incorporation:
 4. Pattern and Capacity Analysis
    - Review journal signals and recurring blockers.
    - Detect due-date clustering and constraints.
-5. Next Month Commitments
+5. Someday/Maybe Review
+   - Review all `#someday` items: promote to active projects/tasks, delete stale ideas, or leave incubated.
+   - This is the deeper pass that complements the weekly quick scan.
+6. Next Month Commitments
    - Recommend top commitments and elimination candidates.
 
 ### Monthly Guardrails

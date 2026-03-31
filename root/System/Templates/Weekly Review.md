@@ -90,6 +90,14 @@ await dv.view("System/Queries/journal-weekly", { file: dv.current().file.path })
 - Risks to resolve:
 - Opportunities to pursue:
 
+### Someday/Maybe
+
+```dataviewjs
+await dv.view("System/Queries/task-list", { preset: "someday", file: dv.current().file.path });
+```
+
+- [ ] Scan for items to promote to active `#task` or delete as stale.
+
 ### Next Week Focus
 
 - [ ] Top outcome 1:

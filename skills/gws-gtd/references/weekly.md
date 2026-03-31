@@ -23,6 +23,7 @@ Template incorporation:
    - Surface stalled projects (>14 days or no open linked task).
 3. Get Creative
    - Review journal patterns from the week.
+   - Scan `#someday` items for any that should be promoted to active `#task` or deleted as stale.
    - Recommend top 3 outcomes for next week.
 
 ### Weekly Guardrails
