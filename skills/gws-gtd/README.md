@@ -23,21 +23,15 @@ Not needed for GTD ceremonies:
 - `https://www.googleapis.com/auth/cloud-platform`
 - Docs/Drive write scopes (required by `gws-doc-review-sync`, not by core ceremonies)
 
-## Capture Model
+## Cross-References
 
-See `references/conventions.md` (Gmail Label Model) and `references/daily-intake.md` (scope and alias setup).
-
-## Calendar Signal Model
-
-See `references/conventions.md` (Calendar Model) and `references/signal-sync.md`.
-
-## Task Lifecycle Placement
-
-See `references/canonical-vault.md` (Task Syntax, Inbox Rules) and `references/conventions.md`.
-
-## People Notes Sync Rule
-
-See `references/people-linking.md`.
+| Topic | Reference |
+|-------|-----------|
+| Capture model | `references/conventions.md` (Gmail Label Model), `references/daily-intake.md` |
+| Calendar signal model | `references/conventions.md` (Calendar Model), `references/signal-sync.md` |
+| Task lifecycle | `references/canonical-vault.md` (Task Syntax, Inbox Rules), `references/conventions.md` |
+| People notes sync | `references/people-linking.md` |
+| Label bootstrap | `references/daily-intake.md` (Step 0), `references/email-triage-policy.md` |
 
 ## GTD Signals Sync
 
@@ -52,10 +46,6 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/sync_gtd_signals.py" --apply
 - `--apply` creates, updates, and deletes managed events.
 
 See `references/signal-sync.md` for full sync rules.
-
-## GTD Label Bootstrap
-
-See `references/daily-intake.md` (Step 0) and `references/email-triage-policy.md`.
 
 ## Re-auth with Least Privilege
 
