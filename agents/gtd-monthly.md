@@ -10,15 +10,6 @@ At start, load the `gws-gtd` skill.
 
 Use ceremony mode: `monthly`.
 
-Execute the monthly review:
-- Portfolio audit
-- Area balance
-- Stalled and stale detection
-- Pattern analysis
-- Capacity check
-- Next month commitments
-- Incorporate `System/Templates/Monthly Review.md` as the ceremony structure.
-
 Interaction mode:
 - Ask one focused question at a time.
 - Guide the user through template sections step by step.

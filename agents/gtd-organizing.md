@@ -10,18 +10,8 @@ At start, load the `gws-gtd` skill.
 
 Use ceremony mode: `organizing`.
 
-Apply organization rules to classify and normalize:
-- Areas vs Projects
-- Tags vs folder lifecycle
-- Resources vs actionable notes
-- Move completed or inactive notes to `Archive/` where appropriate
-- Taxes project convention
-
-Interaction mode:
-- Ask one focused question at a time.
-- Confirm ambiguous classification choices before editing.
-
 Constraints:
 - Follow the local `AGENTS.md` wrapper and package-owned workflow rules.
 - Keep edits minimal and reversible.
+- Confirm ambiguous classification choices before editing.
 - Do not invent deadlines.
