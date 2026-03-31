@@ -1,15 +1,8 @@
 ## Conventions
 
-`gws-gtd` is an opinionated GTD-on-Google-Workspace workflow. These conventions are fixed package doctrine, not per-vault configuration.
+> **Scope:** Behavioral doctrine — HOW to operate within the vault. For the structural model (task syntax, folder semantics, project/linking rules), see `canonical-vault.md`.
 
-### Canonical Task Syntax
-
-- Task marker: `#task`
-- Capture state: `#inbox`
-- Action-now marker: `#next`
-- Delegated/external dependency marker: `#waiting`
-- Keep one canonical task line per commitment.
-- Track lifecycle on that same line using `➕`, `🛫`, `✅`, and `📅`.
+`gws-gtd` is an opinionated GTD-on-Google-Workspace workflow. These conventions are fixed package doctrine, not per-vault configuration. Workflow doctrine lives in package skill references, not in `System/` config notes.
 
 ### Tag Taxonomy
 
@@ -39,12 +32,6 @@ Tags serve two purposes only: **GTD lifecycle state** and **execution context**.
 - Signal calendar: `GTD Signals`
 - `GTD Signals` is output-only.
 - Mirror clarified dated `#next` tasks and dated `#waiting` follow-ups only.
-
-### Vault Model
-
-- Canonical folders: `Projects/`, `Areas/`, `People/`, `Resources/`, `Archive/`, `Journal/`, `System/`
-- `System/Templates/` and `System/Queries/` are runtime assets.
-- Workflow doctrine lives in package skill references, not in `System/` config notes.
 
 ### Journal Hygiene
 

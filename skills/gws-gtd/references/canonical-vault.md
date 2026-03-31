@@ -1,9 +1,14 @@
 ## Canonical Vault Model
 
+> **Scope:** Structural model — WHAT the vault looks like. For behavioral doctrine (tag taxonomy, label semantics, journal hygiene, calendar rules), see `conventions.md`.
+
 ### Task Syntax
 
 - Globally tracked GTD actions use canonical syntax: `- [ ] #task ...`
 - Plain checklists stay local and should not replace canonical GTD tasks.
+- GTD state tags: `#inbox` (capture), `#next` (action-now), `#waiting` (delegated/external dependency), `#someday`.
+- Keep one canonical task line per commitment.
+- Track lifecycle on that same line using `➕`, `🛫`, `✅`, and `📅`.
 - Due dates use `📅 YYYY-MM-DD`.
 - Optional task dependency markers are supported:
   - `🆔 task-id`
@@ -61,17 +66,13 @@
 
 ### Journal Rules
 
-- Journal notes are for real-world events, outcomes, and timeline context only.
-- Do not persist GTD ceremony output in the journal: no inbox counts, no classification summaries, no task maintenance logs, and no process-complete markers.
-- Journal entries created from GTD work must link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
-- If there is no meaningful event beyond maintaining the system, do not write a journal entry.
+- See `conventions.md` — Journal Hygiene.
 
 ### Calendar and GWS Rules
 
 - The vault is the task system of record.
 - Gmail is the capture/intake mailbox.
-- `GTD Signals` is output-only and mirrors only qualified tasks.
-- Waiting items should appear on calendar only when follow-up is dated.
+- For calendar and GTD Signals behavioral rules, see `conventions.md` — Calendar Model.
 
 ### Anti-Rules
 
