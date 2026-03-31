@@ -20,6 +20,14 @@
     - Delegate and mark `#waiting`.
     - Defer into the correct project or area.
 
+### Context-Based Execution (Optional)
+
+After reviewing due/next/waiting lists, optionally group `#next` tasks by context tag for batch execution:
+
+1. Filter `#next` tasks by current context (e.g., all `#phone` calls, all `#email` replies, all `#errand` tasks).
+2. Execute the batch, then switch context.
+3. Skip this step when the task list is short or context variety is low.
+
 ### Daily Guardrails
 
 - Do not require inbox zero in daily mode.

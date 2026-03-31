@@ -80,6 +80,37 @@ if (preset === "next-explicit") {
   return;
 }
 
+if (preset === "next-by-context") {
+  const contextTags = ["phone", "email", "errand", "internet", "deep", "buy", "idea", "payment"];
+  const nextTasks = allTasks
+    .where((task) => !task.completed)
+    .where((task) => !hasInboxTag(task))
+    .where((task) => hasNextTag(task));
+
+  const groups = {};
+  for (const tag of contextTags) {
+    const matched = nextTasks.where((task) => hasTag(task, tag));
+    if (matched.length > 0) {
+      groups[`#${tag}`] = matched;
+    }
+  }
+  const noContext = nextTasks.where(
+    (task) => !contextTags.some((tag) => hasTag(task, tag))
+  );
+  if (noContext.length > 0) {
+    groups["No context"] = noContext;
+  }
+
+  for (const [heading, tasks] of Object.entries(groups)) {
+    dv.header(4, heading);
+    renderTaskList(tasks.sort((task) => task.text, "asc"));
+  }
+  if (Object.keys(groups).length === 0) {
+    dv.paragraph("No open #next tasks found.");
+  }
+  return;
+}
+
 if (preset === "next-candidates") {
   const tasks = allTasks
     .where((task) => !task.completed)
