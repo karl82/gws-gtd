@@ -13,7 +13,13 @@ Week Window: `<% weekStart %>` to `<% weekAnchor.clone().endOf("isoWeek").format
 
 ### Mind Sweep
 
-- [ ] Mind sweep: capture anything on your mind, open tabs, loose notes, meeting follow-ups as `#task #inbox`.
+Capture anything untracked as `#task #inbox` before processing:
+
+- [ ] Open browser tabs, recent meeting notes, physical inboxes
+- [ ] Open commitments to others (promises, delegations, replies owed)
+- [ ] Upcoming events or deadlines not yet reflected in tasks
+- [ ] People to follow up with
+- [ ] Ideas, projects, or improvements on your mind
 
 ### Inbox Sweep
 
