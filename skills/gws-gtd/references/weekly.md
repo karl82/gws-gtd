@@ -12,6 +12,7 @@ Template incorporation:
 ### Steps
 
 1. Get Clear
+    - Mind sweep: review open browser tabs, recent meeting notes, physical inboxes, and anything on your mind. Capture new items as `#task #inbox` before processing.
     - Run `#inbox` Zero to completion as a strict gate.
     - Clarify ambiguous captures into explicit outcomes plus either a `#task` next action or a plain local checklist step.
     - If `#inbox` queue is not zero, stop and report: `Get Clear incomplete (#inbox not zero)`.

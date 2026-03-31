@@ -11,6 +11,10 @@ Week Window: `<% weekStart %>` to `<% weekAnchor.clone().endOf("isoWeek").format
 
 ## 1. Get Clear
 
+### Mind Sweep
+
+- [ ] Mind sweep: capture anything on your mind, open tabs, loose notes, meeting follow-ups as `#task #inbox`.
+
 ### Inbox Sweep
 
 ```dataviewjs
