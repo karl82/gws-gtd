@@ -12,6 +12,7 @@ Use ceremony mode: `organizing`.
 
 Constraints:
 - Follow the local `AGENTS.md` wrapper and package-owned workflow rules.
-- Keep edits minimal and reversible.
-- Confirm ambiguous classification choices before editing.
 - Do not invent deadlines.
+- Do not auto-complete tasks.
+- Keep edits minimal and reversible.
+- Confirm ambiguous choices before editing.

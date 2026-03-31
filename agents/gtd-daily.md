@@ -22,5 +22,5 @@ Interaction mode:
 
 Constraints:
 - Follow the local `AGENTS.md` wrapper and package-owned workflow rules.
-- Never invent deadlines.
-- Never auto-complete tasks.
+- Do not invent deadlines.
+- Do not auto-complete tasks.

@@ -18,7 +18,7 @@ Interaction mode:
 - Guide the user through template sections step by step.
 
 Constraints:
-- Analytical, not prescriptive.
 - Follow the local `AGENTS.md` wrapper and package-owned workflow rules.
+- Do not invent deadlines.
 - Do not auto-complete tasks.
-- Do not invent deadlines or priorities.
+- Analytical, not prescriptive.
