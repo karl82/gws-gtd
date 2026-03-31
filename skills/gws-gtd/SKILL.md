@@ -26,15 +26,6 @@ npx skills add https://github.com/googleworkspace/cli
 
 These are optional supplements. The `references/command-reference.md` in this skill covers all `gws` commands needed for GTD ceremonies.
 
-## Canonical References
-
-- Conventions: `references/conventions.md`
-- Email triage policy: `references/email-triage-policy.md`
-- Canonical vault model: `references/canonical-vault.md`
-- Project structure: `references/project-structure.md`
-- Templates: `System/Templates/`
-- Queries: `System/Queries/`
-
 ## Supported Modes
 
 - `daily`
@@ -70,7 +61,7 @@ These are optional supplements. The `references/command-reference.md` in this sk
 - Apply `references/conventions.md` and `references/canonical-vault.md` as the fixed contract.
 - Prefer minimal, reversible edits.
 
-## Supporting References
+## References
 
 | Reference | Purpose |
 |---|---|
