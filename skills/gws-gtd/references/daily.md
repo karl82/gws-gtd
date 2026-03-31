@@ -10,7 +10,7 @@
 
 1. What is it?
 2. Is it actionable?
-   - No -> trash, reference, or incubate.
+   - No -> trash, reference, or incubate (`#someday`).
    - Yes -> define next physical action.
 3. If multi-step, create or update a project with measurable outcome and at least one open `#task`.
 4. For the next action:
