@@ -18,7 +18,7 @@
     - Promote to `#task` only when the action should be globally tracked; keep project-local decomposition as plain checklist items.
     - Do immediately if truly <=5 minutes and context/tools are available.
     - Delegate and mark `#waiting`.
-    - Defer into the correct project or area.
+    - Defer into the correct project, area, or keep in the daily journal with a wikilink.
 
 ### Context-Based Execution (Optional)
 
@@ -37,7 +37,8 @@ After reviewing due/next/waiting lists, optionally group `#next` tasks by contex
 - Use `#next` to distinguish the small set of tasks that are truly actionable now from the larger pool of open commitments.
 - When one task can only start after another task completes, use Tasks dependency markers (`🆔`, `⛔`, or Dataview `id` / `dependsOn`) instead of only describing the dependency in prose.
 - Keep minor implementation subtasks as plain checklist items unless they need independent GTD tracking.
-- When the timeline matters (reply sent, work started, important decision made), record that in the daily journal note as a plain linked note entry, not as a second task.
+- Tasks born from real events (meetings, calls, decisions) belong in the daily journal note with a `[[Projects/...]]` or `[[Areas/...]]` wikilink.
+- When timeline context matters but no new task is needed, record a plain linked narrative entry in the journal.
 - Do not persist ceremony mechanics to the journal: no inbox counts, no email classification summaries, no import/waiting counts, no task-list snapshots, and no "daily review completed" markers.
 - Journal entries are only for real-world timeline events or outcomes with later narrative value.
 - Every journal entry should link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.

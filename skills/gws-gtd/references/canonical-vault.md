@@ -24,7 +24,7 @@
 - `People/` stores relationship notes and stable contact references.
 - `Resources/` is reference-only.
 - `Archive/` is for completed or inactive notes.
-- `Journal/` stores time-based notes and review artifacts.
+- `Journal/` stores time-based notes, review artifacts, and tasks born from timeline events.
 - `System/` stores templates, queries, and workflow infrastructure.
 
 ### Project Rules
@@ -54,7 +54,8 @@
 ### Inbox Rules
 
 - Inbox state is tag-driven through `#inbox`, not file-driven.
-- Clarify by removing `#inbox` and moving the task to the right project/area or linking it there.
+- `Inbox.md` is a transient staging area for Gmail imports only. Tasks leave on clarify — either to a project/area file or to the daily journal note with a wikilink.
+- Journal-born `#inbox` tasks stay in the journal file. On clarify, remove `#inbox` and add the `[[Projects/...]]` or `[[Areas/...]]` wikilink.
 - Inbox tasks should never remain completed.
 
 ### Someday/Maybe Rules

@@ -35,9 +35,10 @@ Tags serve two purposes only: **GTD lifecycle state** and **execution context**.
 
 ### Journal Hygiene
 
-- Journal notes capture real-world timeline events and outcomes, not GTD system maintenance.
-- Do not write ceremony logs, inbox statistics, label routing, task creation counts, or completion banners into journal notes.
-- Every journal entry should link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
+- Journal notes capture real-world timeline events, outcomes, and the tasks they spawn.
+- `#task #inbox` lines born from real events belong in the daily journal note alongside narrative context.
+- Do not write ceremony mechanics into journal notes: no inbox counts, classification summaries, label routing, task-list snapshots, or completion banners.
+- Every journal entry and journal-born task should link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
 - If nothing meaningful happened beyond review/maintenance, do not add a journal entry.
 
 ### User-Facing Context

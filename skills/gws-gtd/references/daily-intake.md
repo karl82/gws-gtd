@@ -78,8 +78,8 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
 ### Step 3 - Convert to GTD Tasks
 
 1. For import label: create canonical tasks with `#inbox` capture state in `Inbox.md`.
-2. `Inbox.md` is the mandatory landing zone for raw Gmail imports so the user can apply the <=5-minute rule before filing elsewhere.
-3. Clarification rule: remove `#inbox` only after clarifying from `Inbox.md` and only when destination is explicit (`Projects/`, `Areas/`, or line has `[[Projects/...]]` / `[[Areas/...]]` link).
+2. `Inbox.md` is the transient landing zone for raw Gmail imports. Tasks leave on clarify — to a project/area file or the daily journal note.
+3. Clarification rule: remove `#inbox` only after clarifying. Tasks leave `Inbox.md` on clarify — either move to a project/area file, or move to the daily journal note with a `[[Projects/...]]` or `[[Areas/...]]` wikilink.
 4. For waiting label: always create or update a `#waiting` task with reference metadata.
 5. Dedupe by `gmail_thread_id` for normal email-driven imports. For self-sent capture-alias notes, prefer dedupe by task text/content and avoid forcing Gmail metadata onto the task line.
 6. Ambiguous but potentially important mail should usually become `IMPORT_LABEL` so it is clarified in `Inbox.md`, not deferred into a separate Gmail review queue.
