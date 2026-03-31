@@ -67,14 +67,7 @@ These are optional supplements. The `references/command-reference.md` in this sk
 
 ## Guardrails
 
-- Preserve canonical actionable syntax: `- [ ] #task ...`
-- Keep one canonical task line per commitment.
-- Treat `#inbox` as queue state across the vault.
-- Treat `GTD Signals` as output-only.
-- Gmail is the only supported mobile capture inbox.
-- Do not use Google Tasks as a parallel capture system.
-- Do not invent deadlines.
-- Do not auto-complete tasks.
+- Apply `references/conventions.md` and `references/canonical-vault.md` as the fixed contract.
 - Prefer minimal, reversible edits.
 
 ## Supporting References

@@ -25,37 +25,19 @@ Not needed for GTD ceremonies:
 
 ## Capture Model
 
-- Gmail is the only mobile capture channel.
-- GTD Gmail labels are structured under the parent label `gtd`.
-- Recommended capture alias: `<your-address>+gtd@gmail.com`.
-- Create a Gmail filter for `to:<your-address>+gtd@gmail.com` that applies `gtd/import`.
-- Use `gtd/waiting` only for real waiting threads or messages that should become mandatory `#waiting` items.
+See `references/conventions.md` (Gmail Label Model) and `references/daily-intake.md` (scope and alias setup).
 
 ## Calendar Signal Model
 
-- `GTD Signals` is output-only and mirrors only clarified `#next` tasks plus dated `#waiting` follow-ups.
-- Mirror only dated actions from trusted lists, not raw inbox capture.
-- Waiting items appear on `GTD Signals` only when they have a follow-up date.
-- Non-waiting tasks must have `#next` to appear on `GTD Signals`.
-- Do not mirror tasks already backed by a real calendar event (`source:: calendar`, `calendar_id::`, `event_id::`).
+See `references/conventions.md` (Calendar Model) and `references/signal-sync.md`.
 
 ## Task Lifecycle Placement
 
-- One canonical task record per commitment; no duplicate tasks across notes.
-- Capture state is `#inbox` and may appear in any note.
-- Daily clarify processes all open `#task #inbox` lines across the vault.
-- On clarification, remove `#inbox` and either move the task to `Projects/`/`Areas/` or keep it in place with `[[Projects/...]]` or `[[Areas/...]]` link.
-- Track lifecycle on the same task line (`➕`, `🛫`, `✅`, `📅`).
-- When a task is blocked by another task, use Tasks dependency markers: `🆔 blocker-id` and `⛔ blocker-id` (or Dataview `id` / `dependsOn`).
-- Journal entries should be narrative context, not duplicate `#task` copies.
+See `references/canonical-vault.md` (Task Syntax, Inbox Rules) and `references/conventions.md`.
 
 ## People Notes Sync Rule
 
-- Google Contacts is the source of truth for contact details.
-- Preserve only stable references in `People/` notes:
-  - frontmatter: `google_contact_id`, `last_contact_sync`
-  - note body: `Contact: [Google Contact](...)`
-- Do not copy email addresses or phone numbers from Google Contacts into `People/` notes.
+See `references/people-linking.md`.
 
 ## GTD Signals Sync
 
@@ -73,19 +55,7 @@ See `references/signal-sync.md` for full sync rules.
 
 ## GTD Label Bootstrap
 
-Canonical label meaning and triage rules live in `references/email-triage-policy.md`.
-
-Create the parent label first, then child labels:
-
-```
-gtd
-gtd/import
-gtd/waiting
-gtd/reference
-gtd/imported
-```
-
-Apply the same parent-first order on any Google account that uses this workflow.
+See `references/daily-intake.md` (Step 0) and `references/email-triage-policy.md`.
 
 ## Re-auth with Least Privilege
 
