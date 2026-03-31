@@ -56,7 +56,12 @@
 - Inbox state is tag-driven through `#inbox`, not file-driven.
 - Clarify by removing `#inbox` and moving the task to the right project/area or linking it there.
 - Inbox tasks should never remain completed.
-- `#someday` items are incubated, not actionable. They stay wherever filed (project, area, or standalone) and are reviewed periodically for promotion or deletion.
+
+### Someday/Maybe Rules
+
+- `#someday` marks incubated items — not currently actionable but worth keeping.
+- Someday items stay wherever filed (project, area, or standalone note).
+- Weekly review includes a quick scan; monthly review does a deeper pass for promotion or deletion.
 
 ### Review Rules
 
