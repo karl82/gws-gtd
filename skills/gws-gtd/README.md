@@ -2,6 +2,8 @@
 
 Unified skill for the opinionated `gws-gtd` workflow. Integrates GTD vault conventions with Google Workspace (`gws`) into one operating model.
 
+This skill assumes the upstream Google Workspace native skills are installed in the workspace and used directly for Gmail, Calendar, People, and shared operations.
+
 ## Permissions
 
 Recommended minimum OAuth scopes for ceremony use:
@@ -47,35 +49,32 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/sync_gtd_signals.py" --apply
 
 See `references/signal-sync.md` for full sync rules.
 
-## Re-auth with Least Privilege
+## Install Upstream GWS Skills
+
+Use the bundled installer when you want GTD-relevant Google Workspace skills from `googleworkspace/cli` in a consumer workspace such as `~/src/cml`:
 
 ```bash
-gws auth logout
-gws auth login --scopes "https://www.googleapis.com/auth/gmail.modify,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/calendar.readonly,https://www.googleapis.com/auth/contacts.readonly"
-gws auth status
+bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh
 ```
 
-To preserve a broad existing scope set and add contacts read access:
+Defaults:
+
+- workspace: `~/src/cml`
+- source: `https://github.com/googleworkspace/cli`
+- agents: `claude-code`, `codex`, `opencode`
+- skills: the built-in GTD-oriented Google Workspace bundle defined in `scripts/install_gws_skills.sh`
+
+Useful variants:
 
 ```bash
-gws auth logout
-gws auth login --scopes "email,openid,https://www.googleapis.com/auth/calendar,https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/contacts.readonly,https://www.googleapis.com/auth/gmail.compose,https://www.googleapis.com/auth/gmail.insert,https://www.googleapis.com/auth/gmail.labels,https://www.googleapis.com/auth/gmail.modify,https://www.googleapis.com/auth/gmail.readonly,https://www.googleapis.com/auth/gmail.send,https://www.googleapis.com/auth/gmail.settings.basic,https://www.googleapis.com/auth/gmail.settings.sharing,https://www.googleapis.com/auth/tasks,https://www.googleapis.com/auth/userinfo.email"
-gws auth status
+bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --dry-run
+bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --list
+bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --workspace ~/src/cml --skill gws-drive
 ```
 
-## Verification Checks
+Project installs land in the agent-specific workspace directories created by the `skills` CLI:
 
-```bash
-gws auth status
-gws gmail +triage --max 5 --query 'label:gtd/import -label:gtd/imported'
-gws gmail +triage --max 5 --query 'label:gtd/waiting'
-gws calendar +agenda --days 2 --format table
-gws people people connections list --params '{"resourceName":"people/me","personFields":"names,emailAddresses","pageSize":10}'
-```
+- Claude: `.claude/skills/`
+- Codex and OpenCode: `.agents/skills/`
 
-## Ad-Hoc Maintenance
-
-- Prefer read-only inspection first: `+triage`, `threads.list`, `threads.get`, `messages.get`.
-- Prefer reversible cleanup next: `threads.modify`, `threads.trash`, or `messages.batchModify` with `TRASH` for reviewed sets.
-- When an email-driven task is done and no follow-up is expected, archive by removing `INBOX` from the thread.
-- For command recipes (cleaning old promotions, archiving stale notifications, checking unsubscribe headers), see `references/command-reference.md`.
+After installation, use the upstream native skills directly from Claude, Codex, or OpenCode rather than invoking raw `gws` CLI commands from this skill.

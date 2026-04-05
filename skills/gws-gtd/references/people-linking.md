@@ -4,12 +4,11 @@
 
 - Link Google Contacts and meeting/email participants to `People/` notes.
 - Prefer deterministic matching and avoid noisy false positives.
+- Use the installed `gws-people` skill for contact pulls and lookups.
 
 ### Contact Pull
 
-Use People API via `gws`:
-
-`gws people people connections list --params '{"resourceName":"people/me","personFields":"names,emailAddresses,metadata","pageSize":1000}'`
+Use the installed `gws-people` skill.
 
 ### Matching Strategy
 

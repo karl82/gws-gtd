@@ -1,5 +1,6 @@
 ---
 name: transcrypt-git-repo
+description: Guidance for bootstrapping, operating, verifying, rekeying, and troubleshooting transcrypt-based transparent encryption in a Git repository.
 ---
 
 ## Purpose

@@ -6,6 +6,7 @@
 - Ensure no important email/calendar input remains outside GTD control.
 - Respect strict weekly gate: `#inbox` Zero in vault before exiting Get Clear.
 - Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meaning and promotion rules.
+- Use the installed upstream `gws-gmail*` and `gws-calendar*` skills for review queries.
 
 ### Step 1 - Review Gmail Intake Safety Nets
 
@@ -32,7 +33,7 @@ For each stale intake candidate, decide whether it should move to `IMPORT_LABEL`
 
 ### Step 3 - Calendar Pressure Check
 
-- Pull weekly agenda: `gws calendar +agenda --week --format json`
+- Pull weekly agenda through the installed calendar skills.
 - Compare meeting load with due-date clusters in vault.
 - Flag overloaded days and suggest redistribution candidates.
 

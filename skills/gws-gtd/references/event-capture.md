@@ -2,7 +2,7 @@
 
 ### Scope
 
-- Capture event context through `gws` without turning calendar into a duplicate task system.
+- Capture event context through the installed calendar skills without turning calendar into a duplicate task system.
 - Keep one-off event notes in Journal.
 - For project-related events, link project and keep explicit traceability.
 

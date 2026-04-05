@@ -9,6 +9,7 @@
 - Treat Gmail as the only mobile capture inbox; do not import from Google Tasks.
 - `GTD Signals` is output-only and must never be treated as capture.
 - Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meanings, classification defaults, and heuristics.
+- Use the installed upstream `gws-gmail*`, `gws-calendar*`, `gws-people`, and `gws-shared` skills for execution.
 
 Default label mapping for this procedure:
 
@@ -25,7 +26,7 @@ Recommended mobile capture filter:
 
 ### Step 0 - Label Bootstrap and Mapping
 
-1. Verify label availability with `gws gmail users labels list --params '{"userId":"me"}'`.
+1. Verify label availability using the installed Gmail skills.
 2. If mapped labels are missing, choose one:
    - map to existing mailbox labels
    - create missing structured `gtd` labels
@@ -71,9 +72,7 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
    - Query: `label:<IMPORT_LABEL> -label:<IMPORTED_LABEL>`
 2. Pull waiting candidates:
    - Query: `label:<WAITING_LABEL>`
-3. Pull via helper or resource methods:
-   - `gws gmail +triage --query '<QUERY>' --format json`
-   - or `gws gmail users threads list --params '{"userId":"me","q":"<QUERY>"}'`
+3. Pull candidates through the installed Gmail skills.
 
 ### Step 3 - Convert to GTD Tasks
 
@@ -98,8 +97,7 @@ Self-capture pattern:
 
 ### Step 4 - Calendar Ask Queue (Attendees Only)
 
-1. Pull upcoming events (today and tomorrow):
-   - `gws calendar +agenda --days 2 --format json`
+1. Pull upcoming events (today and tomorrow) through the installed calendar skills.
 2. Keep only events with attendees.
 3. For each event, always show:
    - summary/title

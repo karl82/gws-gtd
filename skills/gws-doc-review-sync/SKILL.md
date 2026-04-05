@@ -1,5 +1,6 @@
 ---
 name: gws-doc-review-sync
+description: Workflow for Markdown-first Google Docs review, publishing, comment intake, feedback application, resolution, and one-way export back to Markdown.
 ---
 
 ## Purpose

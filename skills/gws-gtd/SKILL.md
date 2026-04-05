@@ -1,5 +1,6 @@
 ---
 name: gws-gtd
+description: Integrated GTD workflow skill for vault maintenance plus Gmail and Calendar-based intake, review, reconciliation, and signal sync using gws.
 ---
 
 ## Purpose
@@ -12,19 +13,13 @@ Unified skill for the opinionated `gws-gtd` workflow. Combines GTD vault convent
 
 ## Prerequisites
 
-The `gws` CLI must be installed and authenticated before running any ceremony:
+Install the upstream Google Workspace skills into the target workspace before relying on Gmail, Calendar, or People operations:
 
 ```
-gws auth status
+bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh
 ```
 
-Upstream `gws` AI agent skills (`gws-gmail`, `gws-calendar`, `gws-people`, etc.) are available separately via:
-
-```
-npx skills add https://github.com/googleworkspace/cli
-```
-
-These are optional supplements. The `references/command-reference.md` in this skill covers all `gws` commands needed for GTD ceremonies.
+Treat the upstream `gws-*` skills as the primary execution path for Gmail, Calendar, People, and shared Google Workspace tasks.
 
 ## Supported Modes
 
@@ -52,9 +47,10 @@ These are optional supplements. The `references/command-reference.md` in this sk
    - `event-capture`      -> `references/event-capture.md`
    - `people-linking`     -> `references/people-linking.md`
    - `signal-sync`        -> `references/signal-sync.md`
-   - `ad-hoc-maintenance` -> `references/command-reference.md`
+   - `ad-hoc-maintenance` -> `references/daily-intake.md`, `references/weekly-reconcile.md`, `references/people-linking.md`, or `references/event-capture.md` depending on the surface involved
 3. Always apply `references/conventions.md` and `references/email-triage-policy.md` as the fixed workflow contract.
 4. Apply `references/canonical-vault.md` for vault structure and task syntax rules.
+5. For Gmail, Calendar, People, and shared Google Workspace work, load the installed upstream `gws-*` skills first and prefer them over raw `gws` CLI commands.
 
 ## Guardrails
 
@@ -78,8 +74,6 @@ These are optional supplements. The `references/command-reference.md` in this sk
 | `references/event-capture.md` | Event context capture procedure |
 | `references/people-linking.md` | Google Contacts to People/ note linking |
 | `references/signal-sync.md` | GTD Signals calendar sync procedure |
-| `references/command-reference.md` | Full `gws` command reference for GTD ceremonies |
-
 ## Scripts
 
 - `scripts/sync_gtd_signals.py` — syncs clarified dated tasks to the `GTD Signals` Google Calendar. See `references/signal-sync.md` for usage.
