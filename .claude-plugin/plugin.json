@@ -1,0 +1,11 @@
+{
+  "name": "gws-gtd",
+  "version": "0.1.0",
+  "description": "Opinionated GTD vault workflow with Google Workspace integration and transcrypt utilities.",
+  "author": {
+    "name": "Karl Rank",
+    "url": "https://github.com/karl82"
+  },
+  "homepage": "https://github.com/karl82/gws-gtd",
+  "repository": "https://github.com/karl82/gws-gtd"
+}

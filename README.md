@@ -1,12 +1,11 @@
 # gws-gtd
 
-`gws-gtd` is an opinionated [OpenPackage](https://github.com/anomalyco/openpackage) package for running [GTD](https://gettingthingsdone.com/) inside an [Obsidian](https://obsidian.md) vault, integrated with [Google Workspace](https://workspace.google.com) ([`gws`](https://github.com/googleworkspace/cli)). It bundles skills, agents, commands, templates, and Dataview queries into a single installable unit.
+`gws-gtd` is an opinionated Claude Code plugin for running [GTD](https://gettingthingsdone.com/) inside an [Obsidian](https://obsidian.md) vault, integrated with [Google Workspace](https://workspace.google.com) ([`gws`](https://github.com/googleworkspace/cli)). It bundles skills, agents, commands, templates, and Dataview queries into a single installable unit.
 
 ## Requirements
 
 - [Obsidian](https://obsidian.md) as the vault host
-- [OpenCode](https://opencode.ai) / Claude Code for AI-assisted GTD ceremonies
-- [`opkg`](https://github.com/anomalyco/openpackage) CLI for install/save
+- Claude Code for AI-assisted GTD ceremonies
 - [`transcrypt`](https://github.com/elasticdog/transcrypt) for encrypted git repos (optional)
 
 ## What It Installs
@@ -78,27 +77,27 @@ openpackage.yml
 - `GTD Signals` calendar for mirrored action/follow-up signals
 - one canonical task line per commitment
 
-## Install
+## Claude Plugin
+
+This repository also works as a Claude Code plugin because the repo root already uses Claude's default component directories: `commands/`, `agents/`, and `skills/`.
+
+Add the bundled marketplace and install `gws-gtd` from it:
 
 ```bash
-opkg install gh@karl82/gws-gtd
+claude plugin marketplace add https://github.com/karl82/gws-gtd
+claude plugin install gws-gtd@karl82-tools
 ```
 
-Then review the installed `AGENTS.md`, `.opencode/skills/gws-gtd/references/conventions.md`, and `.opencode/skills/gws-gtd/references/email-triage-policy.md` in the target vault.
-
-## Maintenance Workflow
-
-Preferred default: edit package-managed files in a consumer vault, then save them back to the package.
-
-From the vault root:
+For local testing from a clone of this repo:
 
 ```bash
-opkg save gws-gtd
+claude plugin marketplace add .
+claude plugin install gws-gtd@karl82-tools
 ```
 
-Then review and commit in `gws-gtd`, and reinstall where needed.
+## Development
 
-Detailed guidance lives in `CONTRIBUTING.md`.
+Edit the plugin source directly in this repository, then reinstall or update it in Claude from the local checkout or marketplace source as needed.
 
 ## Scope
 

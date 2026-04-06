@@ -1,0 +1,20 @@
+{
+  "name": "karl82-tools",
+  "owner": {
+    "name": "Karl Rank"
+  },
+  "plugins": [
+    {
+      "name": "gws-gtd",
+      "source": {
+        "source": "github",
+        "repo": "karl82/gws-gtd"
+      },
+      "description": "Opinionated GTD vault workflow with Google Workspace integration and transcrypt utilities.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Karl Rank"
+      }
+    }
+  ]
+}

@@ -61,7 +61,8 @@ Defaults:
 
 - workspace: `~/src/cml`
 - source: `https://github.com/googleworkspace/cli`
-- agents: `claude-code`, `codex`, `opencode`
+- obsidian MCP: install a local Claude `obsidian` MCP entry if missing
+- agents: `claude-code`
 - skills: the built-in GTD-oriented Google Workspace bundle defined in `scripts/install_gws_skills.sh`
 
 Useful variants:
@@ -69,12 +70,12 @@ Useful variants:
 ```bash
 bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --dry-run
 bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --list
+bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --skip-obsidian-mcp
 bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --workspace ~/src/cml --skill gws-drive
 ```
 
-Project installs land in the agent-specific workspace directories created by the `skills` CLI:
+Project installs land in Claude's local skill directory:
 
 - Claude: `.claude/skills/`
-- Codex and OpenCode: `.agents/skills/`
 
-After installation, use the upstream native skills directly from Claude, Codex, or OpenCode rather than invoking raw `gws` CLI commands from this skill.
+After installation, use the upstream native skills directly from Claude rather than invoking raw `gws` CLI commands from this skill.
