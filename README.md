@@ -85,14 +85,14 @@ Add the bundled marketplace and install `gws-gtd` from it:
 
 ```bash
 claude plugin marketplace add https://github.com/karl82/gws-gtd
-claude plugin install gws-gtd@karl82-tools
+claude plugin install gws-gtd@karl82-gtd
 ```
 
 For local testing from a clone of this repo:
 
 ```bash
 claude plugin marketplace add .
-claude plugin install gws-gtd@karl82-tools
+claude plugin install gws-gtd@karl82-gtd
 ```
 
 ## Development
