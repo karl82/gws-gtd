@@ -65,6 +65,7 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
 6. For confirmed message-level garbage decisions, prefer one `messages.batchModify` call with `addLabelIds:["TRASH"]` over many single-message trash calls.
 7. Treat messages sent to the capture alias as pre-routed candidates for `IMPORT_LABEL` unless the content clearly belongs in another policy outcome.
 8. If the message is a self-sent capture to the `+gtd@gmail.com` alias, import it as a pure capture note by default: do not add `source:: gmail`, `gmail_thread_id`, `subject::`, or `web_link::` unless that email metadata is actually useful for later action.
+9. Self-sent capture emails (from:self) that are already captured in the vault (in Inbox.md, a project/area file, or marked done) must be classified as `garbage` and trashed — never archived or kept in inbox.
 
 ### Step 2 - Gmail Intake Gates
 

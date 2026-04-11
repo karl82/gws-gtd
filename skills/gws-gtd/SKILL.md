@@ -56,6 +56,9 @@ Treat the upstream `gws-*` skills as the primary execution path for Gmail, Calen
 
 - Apply `references/conventions.md` and `references/canonical-vault.md` as the fixed contract.
 - Prefer minimal, reversible edits.
+- Always pass `--format json` to every `gws` command so output is structured JSON, not a human-readable table.
+- Always use `jq` to process JSON output from `gws` commands in Bash tool calls. Never use Python (`python3 -c`, inline scripts, etc.) for JSON parsing or field extraction.
+- **Interactive decisions:** Always use the `AskUserQuestion` tool when the user must make a choice during any ceremony step. Never ask decisions as plain text. Include relevant clickable URLs (Gmail thread, calendar event, project note) in option descriptions.
 
 ## References
 

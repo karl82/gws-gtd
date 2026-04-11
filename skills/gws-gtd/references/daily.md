@@ -28,6 +28,10 @@ After reviewing due/next/waiting lists, optionally group `#next` tasks by contex
 2. Execute the batch, then switch context.
 3. Skip this step when the task list is short or context variety is low.
 
+### GTD Signals Pre-Check
+
+At the start of each daily ceremony, after loading the calendar agenda, check for stale GTD Signals events whose corresponding vault tasks are already complete. Proactively offer to delete them before proceeding to the main ceremony — do not just note them as stale.
+
 ### Daily Guardrails
 
 - Do not require inbox zero in daily mode.
