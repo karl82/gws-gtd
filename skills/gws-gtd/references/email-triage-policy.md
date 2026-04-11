@@ -36,6 +36,7 @@ Notes:
 | Insurance or travel-plan upsell | trash | Treat as marketing by default. |
 | Policy, booking, or plan document worth keeping | reference + archive | Keep searchable, out of inbox. |
 | Confirmation already covered by an existing `#waiting` task | match existing | No duplicate task; clear from import flow. |
+| Flight, hotel, or car rental confirmation | forward to plans@tripit.com + archive | Forward to `plans@tripit.com` first, then archive. TripIt auto-parses and builds the itinerary. Never create a vault task. |
 | Appointment or reservation confirmation | calendar first | If already on calendar, archive. If not, create/update calendar and archive. |
 | Airline / transport check-in reminder | trash | Flight is already on calendar. Check-in reminders are transient; delete without action. |
 | Card security or fraud alert | import | Create a quick-review task: `Review [issuer] card alert — [merchant] $[amount] and confirm or dispute`. Resolve ≤5 min during daily when context is available. |
@@ -80,6 +81,13 @@ Use these heuristics when deciding how unlabeled email should be labeled.
 - Any card-not-present alert, unusual merchant flag, or fraud alert from a card issuer → `gtd/import`. Create task: `Review [issuer] card alert — [merchant] $[amount] and confirm or dispute`. The ≤5 min rule applies: if the merchant is recognizable and the amount is expected, mark done immediately; if not, dispute.
 - Any account security notification (password changed, 2FA modified, new device login, security setting updated) from any service (Fidelity, Google, bank, etc.) → `gtd/import`. Create task: `Confirm [issuer] account security change was intentional`. Resolve ≤5 min.
 - General settings-change or preference-update notifications (mailing preferences, notification settings, non-security account updates) → `trash`. No action or confirmation required.
+
+### TripIt Import
+
+- Any flight booking confirmation, hotel reservation, or car rental confirmation → forward to `plans@tripit.com`, then archive.
+- TripIt auto-parses the confirmation and adds it to the trip itinerary — no vault task needed, no calendar event needed.
+- Correct address: `plans@tripit.com` (not `import@tripit.com` or `imports@tripit.com`).
+- Scope: booking confirmations only (airlines, booking.com, hotels.com, Marriott, Delta, United, etc.). Does not apply to check-in reminders or upsells.
 
 ### Datová Schránka Heuristic
 
