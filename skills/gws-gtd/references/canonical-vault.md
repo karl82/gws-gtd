@@ -74,6 +74,10 @@
 ### Journal Rules
 
 - See `conventions.md` — Journal Hygiene.
+- Daily note path: `Journal/YYYY/MM/YYYY-MM-DD.md`. Create the month directory if it does not exist.
+- Weekly review note path: `Journal/YYYY-WNN.md` (e.g. `Journal/2026-W15.md`).
+- Monthly review note path: `Journal/YYYY-MM.md` (e.g. `Journal/2026-04.md`).
+- File clarified tasks in the daily note for the date the task was captured (`➕ YYYY-MM-DD`), not today's date.
 
 ### Calendar and GWS Rules
 

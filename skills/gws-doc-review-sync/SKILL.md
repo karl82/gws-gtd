@@ -1,7 +1,9 @@
 ---
 name: gws-doc-review-sync
-description: Workflow for Markdown-first Google Docs review, publishing, comment intake, feedback application, resolution, and one-way export back to Markdown.
+description: Use when publishing Markdown notes to Google Docs, ingesting review comments, applying feedback, resolving threads, or exporting Google Docs to Markdown.
 ---
+
+# gws-doc-review-sync
 
 ## Purpose
 
@@ -39,6 +41,14 @@ Use this skill for Markdown-first Google Docs review workflows plus one-way expo
 - Apply accepted feedback in Markdown, then reply and resolve the corresponding Google Docs threads.
 - For Docs-authored reference docs, export the whole Google Doc to one Markdown file with provenance metadata.
 - Treat exported Markdown mirrors as read-only reference material.
+
+## Common Mistakes
+
+| Mistake | Fix |
+|---|---|
+| Editing an exported Markdown mirror | Exported `.md` files are read-only — edit in Markdown source, not the export |
+| Missing `gdoc_id` or `gdoc_url` in frontmatter | Always store both before publishing; required for all subsequent modes |
+| Resolving Google Docs threads without applying feedback first | Apply feedback in Markdown first, then reply and resolve threads |
 
 ## Supporting Files
 

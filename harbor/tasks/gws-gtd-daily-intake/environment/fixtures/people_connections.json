@@ -1,0 +1,15 @@
+[
+  {
+    "resourceName": "people/alice",
+    "names": [
+      {
+        "displayName": "Alice Example"
+      }
+    ],
+    "emailAddresses": [
+      {
+        "value": "alice@example.com"
+      }
+    ]
+  }
+]

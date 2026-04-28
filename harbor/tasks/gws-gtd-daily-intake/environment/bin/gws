@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+fixtures_dir="${GWS_FIXTURES_DIR:?}"
+log_file="${GWS_MOCK_LOG:-}"
+
+log_call() {
+  if [[ -n "$log_file" ]]; then
+    python3 - "$log_file" "$@" <<'PY'
+import json
+import sys
+
+path = sys.argv[1]
+argv = sys.argv[2:]
+with open(path, "a", encoding="utf-8") as fh:
+    fh.write(json.dumps({"argv": argv}) + "\n")
+PY
+  fi
+}
+
+print_fixture() {
+  local name="$1"
+  cat "$fixtures_dir/$name"
+}
+
+log_call "$@"
+
+if [[ $# -ge 4 && "$1" == "gmail" && "$2" == "users" && "$3" == "labels" && "$4" == "list" ]]; then
+  print_fixture "gmail_labels.json"
+  exit 0
+fi
+
+if [[ $# -ge 2 && "$1" == "gmail" && "$2" == "+triage" ]]; then
+  query=""
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      --query)
+        query="${2:-}"
+        shift 2
+        ;;
+      *)
+        shift
+        ;;
+    esac
+  done
+
+  case "$query" in
+    "label:gtd/import -label:gtd/imported")
+      print_fixture "gmail_import_queue.json"
+      ;;
+    "label:gtd/waiting")
+      print_fixture "gmail_waiting_queue.json"
+      ;;
+    *)
+      print_fixture "gmail_unlabeled_queue.json"
+      ;;
+  esac
+  exit 0
+fi
+
+if [[ $# -ge 2 && "$1" == "calendar" && "$2" == "+agenda" ]]; then
+  print_fixture "calendar_agenda.json"
+  exit 0
+fi
+
+if [[ $# -ge 4 && "$1" == "people" && "$2" == "people" && "$3" == "connections" && "$4" == "list" ]]; then
+  print_fixture "people_connections.json"
+  exit 0
+fi
+
+printf '{"error":"unsupported mock gws invocation","argv":'
+python3 -c 'import json,sys; print(json.dumps(sys.argv[1:]))' "$@"
+printf '}\n' >&2
+exit 2

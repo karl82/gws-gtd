@@ -1,0 +1,27 @@
+[
+  {
+    "id": "Label_gtd",
+    "name": "gtd",
+    "type": "user"
+  },
+  {
+    "id": "Label_import",
+    "name": "gtd/import",
+    "type": "user"
+  },
+  {
+    "id": "Label_waiting",
+    "name": "gtd/waiting",
+    "type": "user"
+  },
+  {
+    "id": "Label_reference",
+    "name": "gtd/reference",
+    "type": "user"
+  },
+  {
+    "id": "Label_imported",
+    "name": "gtd/imported",
+    "type": "user"
+  }
+]

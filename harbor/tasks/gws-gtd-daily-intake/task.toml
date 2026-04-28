@@ -1,0 +1,15 @@
+version = "0.1"
+
+[task]
+id = "gws-gtd-daily-intake"
+instruction_file = "instruction.md"
+
+[agent]
+timeout_sec = 600
+
+[environment]
+dockerfile = "environment/Dockerfile"
+
+[verifier]
+command = "bash /tests/test.sh"
+timeout_sec = 120

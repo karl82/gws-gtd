@@ -9,7 +9,7 @@
 - Treat Gmail as the only mobile capture inbox; do not import from Google Tasks.
 - `GTD Signals` is output-only and must never be treated as capture.
 - Use `skills/gws-gtd/references/email-triage-policy.md` as the canonical source for label meanings, classification defaults, and heuristics.
-- Use the installed upstream `gws-gmail*`, `gws-calendar*`, `gws-people`, and `gws-shared` skills for execution.
+- Use `skills/gws-gtd/references/command-reference.md` as the canonical Gmail, Calendar, People, and shared `gws` execution reference.
 
 Default label mapping for this procedure:
 
@@ -26,7 +26,7 @@ Recommended mobile capture filter:
 
 ### Step 0 - Label Bootstrap and Mapping
 
-1. Verify label availability using the installed Gmail skills.
+1. Verify label availability using `gws gmail users labels list` from `command-reference.md`.
 2. If mapped labels are missing, choose one:
    - map to existing mailbox labels
    - create missing structured `gtd` labels
@@ -35,14 +35,24 @@ Recommended mobile capture filter:
 
 ### Step 1 - Classification Queue (Before Import)
 
-1. Pull recent unlabeled inbox candidates (example):
-   - `in:inbox newer_than:2d -label:<IMPORT_LABEL> -label:<WAITING_LABEL> -label:<REFERENCE_LABEL> -label:<IMPORTED_LABEL>`
+1. Pull unlabeled inbox candidates:
+   - `in:inbox -label:<IMPORT_LABEL> -label:<WAITING_LABEL> -label:<REFERENCE_LABEL> -label:<IMPORTED_LABEL>`
    - Omit any filter whose label is not configured.
+   - Do NOT add time filters like `newer_than:2d` — process all inbox threads regardless of age.
+
+   **Efficient snippet retrieval:** To get snippets for all candidate threads in one API call, use:
+   ```
+   gws gmail users threads list --params '{"userId":"me","q":"<same query>","maxResults":500}' --format json
+   ```
+   This returns `id` + `snippet` for all threads. Join with `+triage` output on thread ID to get subject + sender + snippet together. Do NOT call `messages.list` (returns IDs only) or `messages.get` per-message (expensive). Only call `+read` or `messages.get format=metadata` when the snippet is insufficient for a decision.
+
 2. For each candidate email, always show:
     - sender
     - subject
     - short preview (first few lines/snippet)
-3. For each candidate email, propose one outcome and brief rationale using the policy defaults and heuristics from `skills/gws-gtd/references/email-triage-policy.md`.
+3. **Use a Sonnet-class model for classification.** Haiku-class models produce unreliable results for email triage (over-classify as import). Always classify with Sonnet.
+
+   For each candidate email, propose one outcome and brief rationale using the policy defaults and heuristics from `skills/gws-gtd/references/email-triage-policy.md`.
    Allowed outcomes in this procedure:
     - `IMPORT_LABEL`
     - `WAITING_LABEL`
@@ -73,7 +83,7 @@ Use `#waiting` ONLY when the next step belongs to someone else (you delegated, y
    - Query: `label:<IMPORT_LABEL> -label:<IMPORTED_LABEL>`
 2. Pull waiting candidates:
    - Query: `label:<WAITING_LABEL>`
-3. Pull candidates through the installed Gmail skills.
+3. Pull candidates through the Gmail commands in `command-reference.md`.
 
 ### Step 3 - Convert to GTD Tasks
 
@@ -98,7 +108,7 @@ Self-capture pattern:
 
 ### Step 4 - Calendar Ask Queue (Attendees Only)
 
-1. Pull upcoming events (today and tomorrow) through the installed calendar skills.
+1. Pull upcoming events (today and tomorrow) with `gws calendar +agenda --today --format json` and `gws calendar +agenda --tomorrow --format json`.
 2. Keep only events with attendees.
 3. For each event, always show:
    - summary/title
@@ -124,7 +134,7 @@ Apply this when an email is a service/reservation/appointment confirmation or re
    - If they match: archive the email, no task needed.
    - If they differ (reschedule): patch the calendar event with the new date/time, then archive the email.
 3. If no existing event is found:
-   - Create a calendar event with the appointment date/time, summary, and location from the email.
+   - Create a calendar event with `gws calendar +insert` using the appointment date/time, summary, and location from the email.
    - Archive the email after creation.
 4. Never create a vault `#task` for an appointment that is already reflected (or can be reflected) in the calendar.
 

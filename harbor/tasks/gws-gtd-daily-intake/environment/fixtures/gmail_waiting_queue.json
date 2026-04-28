@@ -1,0 +1,10 @@
+[
+  {
+    "threadId": "thread-waiting-1",
+    "messageId": "msg-waiting-1",
+    "from": "Vendor Team <vendor@example.com>",
+    "subject": "We will send the revised contract next week",
+    "snippet": "We are updating the draft and will send the revised contract next week.",
+    "webLink": "https://mail.google.com/mail/u/0/#inbox/thread-waiting-1"
+  }
+]

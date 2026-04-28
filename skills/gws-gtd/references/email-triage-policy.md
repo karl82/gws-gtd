@@ -33,10 +33,17 @@ Notes:
 | Self-sent capture alias message | task | Import as a plain capture in `Inbox.md`; do not force `source:: gmail`, `gmail_thread_id`, `subject::`, or `web_link::`. |
 | Message already labeled `gtd/waiting` | waiting task | Create or update the waiting task immediately. |
 | Statement notice | trash | Override only when there is an amount due, a problem, or a real next step. |
+| Shipping notification (FedEx, UPS, USPS, Amazon shipped) | trash | Informational only — package is either arriving or arrived. No action needed. |
+| Order or reshipment in progress (awaiting tracking number, warehouse processing) | waiting task | Someone else's move — create `#waiting` task, not `#next`. |
+| Venmo payment you sent | trash | Outgoing payment confirmation — no action needed. |
+| Completed Airbnb post-stay message (review request, etc.) | trash | No reference value after stay. |
+| Subscription or service confirmation (Prime Video, streaming, etc.) | trash | Informational only unless there is an unexpected charge or cancellation. |
 | Insurance or travel-plan upsell | trash | Treat as marketing by default. |
 | Policy, booking, or plan document worth keeping | reference + archive | Keep searchable, out of inbox. |
 | Confirmation already covered by an existing `#waiting` task | match existing | No duplicate task; clear from import flow. |
-| Flight, hotel, or car rental confirmation | forward to plans@tripit.com + archive | Forward to `plans@tripit.com` first, then archive. TripIt auto-parses and builds the itinerary. Never create a vault task. |
+| Flight, hotel, Airbnb, car rental, or campsite booking confirmation | forward to plans@tripit.com + archive | Forward to `plans@tripit.com` first, then archive (do NOT trash). Keep as reference for disputes, taxes, and records. TripIt auto-parses and builds the itinerary. Never create a vault task. Execute silently — do not ask the user. |
+| TripIt "check out your itinerary" notification | trash | These are TripIt's auto-reply confirmations after parsing a forwarded booking. Trash immediately — no task, no archive. |
+| Brokerage order fill or partial fill notification | trash | Execution notices are informational only. No task, no review. Applies to all brokerages (Fidelity, Schwab, etc.). |
 | Appointment or reservation confirmation | calendar first | If already on calendar, archive. If not, create/update calendar and archive. |
 | Airline / transport check-in reminder | trash | Flight is already on calendar. Check-in reminders are transient; delete without action. |
 | Card security or fraud alert | import | Create a quick-review task: `Review [issuer] card alert — [merchant] $[amount] and confirm or dispute`. Resolve ≤5 min during daily when context is available. |
@@ -84,10 +91,11 @@ Use these heuristics when deciding how unlabeled email should be labeled.
 
 ### TripIt Import
 
-- Any flight booking confirmation, hotel reservation, or car rental confirmation → forward to `plans@tripit.com`, then archive.
+- Any flight booking confirmation, hotel reservation, car rental confirmation, or campsite/park reservation → forward to `plans@tripit.com`, then **archive** (never trash — keep as reference for disputes and records).
 - TripIt auto-parses the confirmation and adds it to the trip itinerary — no vault task needed, no calendar event needed.
 - Correct address: `plans@tripit.com` (not `import@tripit.com` or `imports@tripit.com`).
-- Scope: booking confirmations only (airlines, booking.com, hotels.com, Marriott, Delta, United, etc.). Does not apply to check-in reminders or upsells.
+- Scope: booking confirmations only (airlines, booking.com, hotels.com, Marriott, Delta, United, campsite/park reservations, etc.). Does not apply to check-in reminders or upsells.
+- **Do not ask the user.** Execute silently and include in the "done" report.
 
 ### Datová Schránka Heuristic
 

@@ -44,7 +44,7 @@ At the start of each daily ceremony, after loading the calendar agenda, check fo
 - Tasks born from real events (meetings, calls, decisions) belong in the daily journal note with a `[[Projects/...]]` or `[[Areas/...]]` wikilink.
 - When timeline context matters but no new task is needed, record a plain linked narrative entry in the journal.
 - Do not persist ceremony mechanics to the journal: no inbox counts, no email classification summaries, no import/waiting counts, no task-list snapshots, and no "daily review completed" markers.
-- Journal entries are only for real-world timeline events or outcomes with later narrative value.
+- Journal entries are only for real-world timeline events or outcomes with later narrative value. If a task is already tracked in a project or area file, do NOT duplicate it as a journal entry — the project file is the source of truth for task lifecycle.
 - Every journal entry should link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
 - If the ceremony produced no meaningful real-world event, leave the journal untouched.
 - In user-facing ceremony output, always identify tasks by recognizable context (task text, linked project/area/person, sender, or subject). Do not rely on bare file paths or line numbers as the primary identifier.

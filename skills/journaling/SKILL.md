@@ -1,11 +1,13 @@
 ---
 name: journaling
-description: Add entries to today's daily note. Handles meetings, 1:1s, design reviews, document shares, ad-hoc tasks, and general observations. Classifies entry type from natural language input, resolves people, and proposes tasks before creating them.
+description: Use when logging meetings, 1:1s, design reviews, document shares, or observations to today's daily note in the gws-gtd vault.
 ---
 
-# Journaling Skill
+# journaling
 
-This skill extends the `gws-gtd` workflow with daily note entry creation. It applies `gws-gtd` vault conventions (task syntax, wikilinks, canonical folders) for all formatting. Refer to the gws-gtd `references/canonical-vault.md` and `references/conventions.md` as the formatting contract.
+**REQUIRED SUB-SKILL:** Use gws-gtd for vault conventions and task syntax rules (`references/canonical-vault.md`, `references/conventions.md`).
+
+This skill extends the `gws-gtd` workflow with daily note entry creation. It applies `gws-gtd` vault conventions (task syntax, wikilinks, canonical folders) for all formatting.
 
 ## How to Use
 
@@ -71,3 +73,12 @@ After writing the entry, scan the input for action items. For each one found:
 ## Daily Note
 
 Entries go under `## Notes` in today's daily note. If the section does not exist, create it. Append — never overwrite existing content.
+
+## Common Mistakes
+
+| Mistake | Fix |
+|---|---|
+| Batching task confirmations into one question | One `AskUserQuestion` per action item |
+| Overwriting existing note content | Always append to `## Notes`; never replace |
+| Creating People stubs without checking first | Always check `People/` directory before creating a stub |
+| Skipping people resolution | Every person mentioned must be linked with `[[People/Full Name]]` |

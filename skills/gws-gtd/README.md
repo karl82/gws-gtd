@@ -2,7 +2,7 @@
 
 Unified skill for the opinionated `gws-gtd` workflow. Integrates GTD vault conventions with Google Workspace (`gws`) into one operating model.
 
-This skill assumes the upstream Google Workspace native skills are installed in the workspace and used directly for Gmail, Calendar, People, and shared operations.
+This skill is self-contained for core Gmail, Calendar, People, and shared Google Workspace operations. Use `skills/gws-gtd/references/command-reference.md` for the canonical `gws` command surface instead of installing generated `gws-*` skills.
 
 ## Permissions
 
@@ -34,6 +34,7 @@ Not needed for GTD ceremonies:
 | Task lifecycle | `references/canonical-vault.md` (Task Syntax, Inbox Rules), `references/conventions.md` |
 | People notes sync | `references/people-linking.md` |
 | Label bootstrap | `references/daily-intake.md` (Step 0), `references/email-triage-policy.md` |
+| Gmail, Calendar, People commands | `references/command-reference.md` |
 
 ## GTD Signals Sync
 
@@ -49,33 +50,6 @@ python3 "${CLAUDE_SKILL_DIR}/scripts/sync_gtd_signals.py" --apply
 
 See `references/signal-sync.md` for full sync rules.
 
-## Install Upstream GWS Skills
+## Generated GWS Skills
 
-Use the bundled installer when you want GTD-relevant Google Workspace skills from `googleworkspace/cli` in a consumer workspace such as `~/src/cml`:
-
-```bash
-bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh
-```
-
-Defaults:
-
-- workspace: `~/src/cml`
-- source: `https://github.com/googleworkspace/cli`
-- obsidian MCP: install a local Claude `obsidian` MCP entry if missing
-- agents: `claude-code`
-- skills: the built-in GTD-oriented Google Workspace bundle defined in `scripts/install_gws_skills.sh`
-
-Useful variants:
-
-```bash
-bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --dry-run
-bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --list
-bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --skip-obsidian-mcp
-bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh --workspace ~/src/cml --skill gws-drive
-```
-
-Project installs land in Claude's local skill directory:
-
-- Claude: `.claude/skills/`
-
-After installation, use the upstream native skills directly from Claude rather than invoking raw `gws` CLI commands from this skill.
+Generated `gws-*` skills are no longer part of the normal `gws-gtd` setup. The maintained path is the command reference bundled with this skill.

@@ -1,0 +1,18 @@
+[
+  {
+    "threadId": "thread-action-1",
+    "messageId": "msg-action-1",
+    "from": "Alice Example <alice@example.com>",
+    "subject": "Need draft for Friday review",
+    "snippet": "Please send the Alpha draft before Friday so I can review it.",
+    "webLink": "https://mail.google.com/mail/u/0/#inbox/thread-action-1"
+  },
+  {
+    "threadId": "thread-capture-1",
+    "messageId": "msg-capture-1",
+    "from": "Karl <me@example.com>",
+    "subject": "buy shoe polish",
+    "snippet": "buy shoe polish",
+    "webLink": "https://mail.google.com/mail/u/0/#inbox/thread-capture-1"
+  }
+]

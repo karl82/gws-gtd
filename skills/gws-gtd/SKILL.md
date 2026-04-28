@@ -1,7 +1,9 @@
 ---
 name: gws-gtd
-description: Integrated GTD workflow skill for vault maintenance plus Gmail and Calendar-based intake, review, reconciliation, and signal sync using gws.
+description: Use when running GTD ceremonies (daily, weekly, monthly), processing Gmail inbox, organizing the vault, capturing calendar events, linking contacts, or syncing tasks to Google Calendar.
 ---
+
+# gws-gtd
 
 ## Purpose
 
@@ -13,26 +15,9 @@ Unified skill for the opinionated `gws-gtd` workflow. Combines GTD vault convent
 
 ## Prerequisites
 
-Install the upstream Google Workspace skills into the target workspace before relying on Gmail, Calendar, or People operations:
+The `gws` binary must be on `PATH` and authenticated with the scopes needed for the requested Gmail, Calendar, or People operation.
 
-```
-bash <installed-gws-gtd-skill-dir>/scripts/install_gws_skills.sh
-```
-
-Treat the upstream `gws-*` skills as the primary execution path for Gmail, Calendar, People, and shared Google Workspace tasks.
-
-## Supported Modes
-
-- `daily`
-- `weekly`
-- `monthly`
-- `organizing`
-- `daily-intake`
-- `weekly-reconcile`
-- `event-capture`
-- `people-linking`
-- `signal-sync`
-- `ad-hoc-maintenance`
+Do not install or load separate generated `gws-*` skills for core GTD ceremonies. Use `references/command-reference.md` as the canonical Gmail, Calendar, People, and shared Google Workspace command surface.
 
 ## Router
 
@@ -48,9 +33,10 @@ Treat the upstream `gws-*` skills as the primary execution path for Gmail, Calen
    - `people-linking`     -> `references/people-linking.md`
    - `signal-sync`        -> `references/signal-sync.md`
    - `ad-hoc-maintenance` -> `references/daily-intake.md`, `references/weekly-reconcile.md`, `references/people-linking.md`, or `references/event-capture.md` depending on the surface involved
+   - `assistant`          -> `references/assistant.md`
 3. Always apply `references/conventions.md` and `references/email-triage-policy.md` as the fixed workflow contract.
 4. Apply `references/canonical-vault.md` for vault structure and task syntax rules.
-5. For Gmail, Calendar, People, and shared Google Workspace work, load the installed upstream `gws-*` skills first and prefer them over raw `gws` CLI commands.
+5. For Gmail, Calendar, People, and shared Google Workspace work, use `references/command-reference.md` first. Prefer the documented helper commands and API call patterns over ad-hoc `gws` invocations.
 
 ## Guardrails
 
@@ -68,6 +54,7 @@ Treat the upstream `gws-*` skills as the primary execution path for Gmail, Calen
 | `references/email-triage-policy.md` | Gmail label meanings, classification defaults, heuristics |
 | `references/canonical-vault.md` | Vault folder semantics, task syntax, link rules |
 | `references/project-structure.md` | Project/design note layout and Google Docs metadata |
+| `references/command-reference.md` | Canonical `gws` command surface for Gmail, Calendar, People, and shared rules |
 | `references/daily.md` | Daily GTD ceremony |
 | `references/weekly.md` | Weekly GTD review |
 | `references/monthly.md` | Monthly GTD review |
@@ -77,6 +64,17 @@ Treat the upstream `gws-*` skills as the primary execution path for Gmail, Calen
 | `references/event-capture.md` | Event context capture procedure |
 | `references/people-linking.md` | Google Contacts to People/ note linking |
 | `references/signal-sync.md` | GTD Signals calendar sync procedure |
+| `references/assistant.md` | Persistent GTD assistant warm-start and orchestration |
+
 ## Scripts
 
 - `scripts/sync_gtd_signals.py` — syncs clarified dated tasks to the `GTD Signals` Google Calendar. See `references/signal-sync.md` for usage.
+
+## Common Mistakes
+
+| Mistake | Fix |
+|---|---|
+| Parsing `gws` JSON output with Python | Use `jq` in Bash tool calls — never `python3 -c` |
+| Asking decisions as plain text | Use `AskUserQuestion` with clickable URLs for every user choice |
+| Running `gws` without `--format json` | Always pass `--format json` so output is structured |
+| Calling generated `gws-*` skills for Gmail/Calendar | Use `references/command-reference.md`; it is the maintained command surface |
