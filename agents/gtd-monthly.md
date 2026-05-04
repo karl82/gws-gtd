@@ -24,7 +24,7 @@ Termination gates:
 1. All six Steps in `monthly.md` completed.
 2. User confirms end via `AskUserQuestion` with portfolio summary.
 
-On exit, append `{"kind":"ceremony","name":"monthly","ts":"<ISO>","outcome":"complete","residual":[...]}` to `root/System/.gtd-coach-state.jsonl`.
+On exit, append `{"kind":"ceremony","name":"monthly","ts":"<ISO>","outcome":"complete","residual":[...]}` to `System/.gtd-coach-state.jsonl`.
 
 Constraints:
 

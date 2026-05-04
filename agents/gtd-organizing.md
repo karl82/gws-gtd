@@ -25,7 +25,7 @@ Termination gates:
 2. Link normalization pass complete.
 3. User confirms end via `AskUserQuestion` with action summary.
 
-On exit, append `{"kind":"ceremony","name":"organizing","ts":"<ISO>","outcome":"complete","residual":[...]}` to `root/System/.gtd-coach-state.jsonl`.
+On exit, append `{"kind":"ceremony","name":"organizing","ts":"<ISO>","outcome":"complete","residual":[...]}` to `System/.gtd-coach-state.jsonl`.
 
 Constraints:
 

@@ -363,7 +363,7 @@ The bulk-review sub-procedure in `gmail-intake.md` defines: (a) classify whole q
 - Classify per `email-triage-policy.md` into `garbage` or `defer` only.
 - `AskUserQuestion` with one grouped option per trash category plus "Skip" and "Override individually."
 - On confirm: one `messages.batchModify` with `addLabelIds:["TRASH"]` via `gtd-gws-fetch`.
-- Append result to `root/System/.gtd-coach-state.jsonl` as `{kind:"junk-sweep", ts, trashed, deferred, categories}`.
+- Append result to `System/.gtd-coach-state.jsonl` as `{kind:"junk-sweep", ts, trashed, deferred, categories}`.
 
 **Sweep invariants:**
 - Never import, label, classify ambiguous mail, create tasks, forward, or unsubscribe.
@@ -377,7 +377,7 @@ The bulk-review sub-procedure in `gmail-intake.md` defines: (a) classify whole q
 
 **New `references/coach.md`** owns coach doctrine. **`assistant.md`** keeps only warm-start + menu; coach runs every turn after warm-start.
 
-**State file:** `root/System/.gtd-coach-state.jsonl` — append-only JSONL, one event per line. Event kinds: `session-start`, `junk-sweep`, `ceremony`, `nudge`.
+**State file:** `System/.gtd-coach-state.jsonl` — append-only JSONL, one event per line. Event kinds: `session-start`, `junk-sweep`, `ceremony`, `nudge`.
 
 **Daily rhythm** (local wall-clock + elapsed-since triggers):
 
@@ -401,7 +401,7 @@ The bulk-review sub-procedure in `gmail-intake.md` defines: (a) classify whole q
 
 **Handoff from ceremonies:** `gtd-daily` agent writes a `kind:"ceremony", name:"daily", ts, outcome, residual:[...]` event to the JSONL on exit. Coach reads residual list as context for subsequent nudges. No separate handoff mechanism.
 
-**Vault fallback:** JSONL lives at `root/System/.gtd-coach-state.jsonl`. If `System/` is absent (retrofit vaults), fall back to vault-root `.gtd-coach-state.jsonl`. One line in `coach.md` documents this.
+**Vault fallback:** JSONL lives at `System/.gtd-coach-state.jsonl`. If `System/` is absent (retrofit vaults), fall back to vault-root `.gtd-coach-state.jsonl`. One line in `coach.md` documents this.
 
 **Loop-armed detection:** no API to query it. Show "Re-arm 2h junk-sweep loop" button unconditionally in warm-start menu; the `loop` skill handles idempotency or warns on double-arm.
 

@@ -60,7 +60,7 @@ The daily ceremony exits only when ALL of the following are true. Re-evaluate at
 
 If gate 1 or 2 reopens mid-run because new mail arrived, report "new candidates detected, N items" and ask whether to process now or defer.
 
-On exit, append `{"kind":"ceremony","name":"daily","ts":"<ISO>","outcome":"complete","residual":[...]}` to `root/System/.gtd-coach-state.jsonl` so the coach persona has handoff context.
+On exit, append `{"kind":"ceremony","name":"daily","ts":"<ISO>","outcome":"complete","residual":[...]}` to `System/.gtd-coach-state.jsonl` so the coach persona has handoff context.
 
 ## Output
 

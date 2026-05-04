@@ -14,4 +14,4 @@ Do NOT create tasks, import, forward, unsubscribe, or classify ambiguous mail. D
 
 Typical invocation via loop: `/loop 2h /gtd-junk-sweep`.
 
-Output: `{trashed: N, deferred_for_daily: N}` plus a one-line JSONL append to `root/System/.gtd-coach-state.jsonl`.
+Output: `{trashed: N, deferred_for_daily: N}` plus a one-line JSONL append to `System/.gtd-coach-state.jsonl`.

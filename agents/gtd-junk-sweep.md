@@ -21,7 +21,7 @@ Present a compound `AskUserQuestion`: one question with per-category options for
 
 On confirmation, execute exactly one `messages.batchModify` call per confirmed category via `gtd-gws-fetch` with `addLabelIds:["TRASH"]`.
 
-On completion, append one event line to `root/System/.gtd-coach-state.jsonl`:
+On completion, append one event line to `System/.gtd-coach-state.jsonl`:
 
 ```
 {"kind":"junk-sweep","ts":"<ISO>","trashed":N,"deferred":N,"categories":{...}}

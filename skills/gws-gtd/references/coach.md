@@ -4,7 +4,7 @@
 
 ## State File
 
-Path: `root/System/.gtd-coach-state.jsonl` — append-only JSONL, one event per line. If `System/` is absent (retrofit vaults), fall back to vault-root `.gtd-coach-state.jsonl`.
+Path: `System/.gtd-coach-state.jsonl` — append-only JSONL, one event per line. If `System/` is absent (retrofit vaults), fall back to vault-root `.gtd-coach-state.jsonl`.
 
 Event kinds:
 

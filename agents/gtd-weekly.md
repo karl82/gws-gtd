@@ -27,7 +27,7 @@ Termination gates:
 2. All six Steps in `weekly.md` completed.
 3. User confirms end via `AskUserQuestion` with residual summary.
 
-On exit, append `{"kind":"ceremony","name":"weekly","ts":"<ISO>","outcome":"complete","residual":[...]}` to `root/System/.gtd-coach-state.jsonl`.
+On exit, append `{"kind":"ceremony","name":"weekly","ts":"<ISO>","outcome":"complete","residual":[...]}` to `System/.gtd-coach-state.jsonl`.
 
 Constraints:
 

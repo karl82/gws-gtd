@@ -34,7 +34,7 @@ Termination gates:
 3. Calendar ask queue reviewed — every attendee event has a decision.
 4. User confirms end via `AskUserQuestion` presenting residual state and counts.
 
-Do not exit until all four gates are satisfied. Model-level "I'm done" is not sufficient. On exit, append `{"kind":"ceremony","name":"daily","ts":"<ISO>","outcome":"complete","residual":[...]}` to `root/System/.gtd-coach-state.jsonl`.
+Do not exit until all four gates are satisfied. Model-level "I'm done" is not sufficient. On exit, append `{"kind":"ceremony","name":"daily","ts":"<ISO>","outcome":"complete","residual":[...]}` to `System/.gtd-coach-state.jsonl`.
 
 Constraints:
 
