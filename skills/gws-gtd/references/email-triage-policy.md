@@ -1,17 +1,17 @@
 # Email Triage Policy
 
-This note is the canonical source for Gmail GTD label meaning and email classification rules across daily, weekly, monthly, and ad-hoc workflows.
+This note is the canonical source for Gmail GTD label meaning and email classification rules across daily, weekly, and ad-hoc workflows.
 
 Use heuristics to classify unlabeled email. Once a GTD label already exists, respect that label unless the thread is clearly mislabeled or already represented elsewhere.
 
 ## Label Contract
 
-| Label | Meaning | Default handling |
-|---|---|---|
-| `gtd/import` | Explicit task-import gate | Create or update a canonical `#task #inbox` in `Inbox.md` now. For ordinary email, dedupe by `gmail_thread_id`; for self-sent capture-alias notes, keep it as a plain capture without forced Gmail metadata. |
-| `gtd/waiting` | Explicit waiting gate | Create or update a mandatory `#waiting` task now. |
-| `gtd/reference` | Non-actionable but worth retaining | Archive in Gmail and keep no task. |
-| `gtd/imported` | Already processed marker | Use for dedupe/post-import hygiene when available. |
+| Label | Symbolic alias | Meaning | Default handling |
+|---|---|---|---|
+| `gtd/import` | `IMPORT_LABEL` | Explicit task-import gate | Create or update a canonical `#task #inbox` in `Inbox.md` now. For ordinary email, dedupe by `gmail_thread_id`; for self-sent capture-alias notes, keep it as a plain capture without forced Gmail metadata. |
+| `gtd/waiting` | `WAITING_LABEL` | Explicit waiting gate | Create or update a mandatory `#waiting` task now. |
+| `gtd/reference` | `REFERENCE_LABEL` | Non-actionable but worth retaining | Archive in Gmail and keep no task. |
+| `gtd/imported` | `IMPORTED_LABEL` | Already processed marker | Use for dedupe/post-import hygiene when available. |
 
 Notes:
 
@@ -21,11 +21,15 @@ Notes:
 
 ## Recommended Capture Setup
 
+This section is the canonical source for Gmail capture alias setup. Other references (`gmail-intake.md`) cross-reference this section rather than redefining it.
+
 - Gmail is the only mobile capture inbox.
 - Recommended alias: `<your-address>+gtd@gmail.com`.
 - Recommended filter: `to:<your-address>+gtd@gmail.com` -> apply `gtd/import`.
 
 ## Classification Defaults
+
+Rows are evaluated top-to-bottom; first match wins.
 
 | Email type | Default action | Notes / exceptions |
 |---|---|---|
