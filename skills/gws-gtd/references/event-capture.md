@@ -2,7 +2,7 @@
 
 ## Scope
 
-- Capture event context through the Calendar commands in `references/command-reference.md` without turning calendar into a duplicate task system.
+- Capture event context through the Calendar commands in `references/calendar-commands.md` without turning calendar into a duplicate task system.
 - Keep one-off event notes in Journal.
 - For project-related events, link project and keep explicit traceability.
 

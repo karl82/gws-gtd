@@ -4,11 +4,11 @@
 
 - Link Google Contacts and meeting/email participants to `People/` notes.
 - Prefer deterministic matching and avoid noisy false positives.
-- Use the People lookup commands in `references/command-reference.md` for contact pulls and lookups.
+- Use the People lookup commands in `references/people-commands.md` for contact pulls and lookups.
 
 ## Contact Pull
 
-Use `gws people people searchContacts`, `gws people people searchDirectoryPeople`, and `gws people otherContacts search` as documented in `references/command-reference.md`.
+Use `gws people people searchContacts`, `gws people people searchDirectoryPeople`, and `gws people otherContacts search` as documented in `references/people-commands.md`.
 
 ## Matching Strategy
 

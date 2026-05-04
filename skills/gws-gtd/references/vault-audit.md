@@ -16,8 +16,8 @@
 3. Verify canonical folder model is present: `Projects/`, `Areas/`, `People/`, `Resources/`, `Archive/`, `Journal/`, `System/`.
 4. Audit task syntax per `canonical-vault.md § Task Syntax`:
    - Open tasks use `- [ ] #task ...`.
-   - Inbox captures use `#inbox`.
-   - One canonical task line per commitment.
+   - Inbox captures use `#inbox` per `canonical-vault.md § Inbox Rules`.
+   - One canonical line per commitment (see `canonical-vault.md § Task Syntax`).
 5. Audit project structure per `canonical-vault.md § Canonical Project Model`:
    - Project notes live at `Projects/<Domain>/<Project>.md`.
    - Deeper artifacts under `Projects/<Domain>/<Project>/`.
