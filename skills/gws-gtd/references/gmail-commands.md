@@ -1,6 +1,6 @@
-## GWS Command Reference
+# Gmail Commands
 
-Patterns and gotchas for `gws gmail` API calls discovered during live sessions.
+Patterns and gotchas for `gws gmail` API calls discovered during live sessions. For Calendar and People command mechanics, see `calendar-commands.md` and `people-commands.md`.
 
 ### threads.modify — label changes
 
