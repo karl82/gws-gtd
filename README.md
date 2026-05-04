@@ -15,8 +15,8 @@
 | `skills/gws-gtd/` | Core GTD + Google Workspace workflow guidance |
 | `skills/gws-doc-review-sync/` | Markdown-as-source Google Docs review sync |
 | `skills/transcrypt-git-repo/` | Git encryption operations via transcrypt |
-| `agents/` | GTD ceremony agents (daily, weekly, monthly, organizing) |
-| `commands/` | Slash commands for ceremonies and vault maintenance |
+| `agents/` | GTD ceremony and support agents (daily, weekly, monthly, organizing, assistant, signals, retrofit, junk-sweep, plus three Haiku mechanical agents) |
+| `commands/` | Slash commands for ceremonies, junk-sweep loop, and vault maintenance |
 | `root/AGENTS.md` | Vault-root agent entrypoint |
 | `root/System/Templates/` | Obsidian templates (Daily, Weekly, Monthly, Project, Person, …) |
 | `root/System/Queries/` | Dataview JS queries for tasks, projects, journals, audits |
@@ -33,14 +33,24 @@ agents/
   gtd-weekly.md
   gtd-monthly.md
   gtd-organizing.md
+  gtd-assistant.md
+  gtd-signals.md
+  gtd-retrofit.md
+  gtd-junk-sweep.md
+  gtd-gws-fetch.md            ← Haiku (mechanical gws fetches)
+  gtd-vault-scan.md           ← Haiku (mechanical vault reads)
+  gtd-signal-diff.md          ← Haiku (signal-sync dry-run)
 commands/
   gtd-daily.md
   gtd-weekly.md
   gtd-monthly.md
-  gtd-cleanup.md
-  analyze-vault.md
-  retrofit-vault.md
-  verify-project-structure.md
+  gtd-organize.md
+  gtd-assistant.md
+  gtd-signals-sync.md
+  gtd-junk-sweep.md           ← invoked via `/loop 2h /gtd-junk-sweep`
+  gtd-analyze.md
+  gtd-retrofit.md
+  gtd-verify-projects.md
 root/                          ← placed at vault root on install
   AGENTS.md
   System/
