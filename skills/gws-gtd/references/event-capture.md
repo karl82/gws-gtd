@@ -1,12 +1,12 @@
-## Event Capture Procedure
+# Event Capture Procedure
 
-### Scope
+## Scope
 
 - Capture event context through the Calendar commands in `references/command-reference.md` without turning calendar into a duplicate task system.
 - Keep one-off event notes in Journal.
 - For project-related events, link project and keep explicit traceability.
 
-### Decision Rule
+## Decision Rule
 
 For each attendee event in the daily ask queue:
 
@@ -23,7 +23,7 @@ For each attendee event in the daily ask queue:
    - Yes -> create project-linked event note and mention in daily journal.
    - No -> journal-only note entry.
 
-### Storage Policy
+## Storage Policy
 
 - One-off event context: append to `Journal/YYYY-MM-DD.md`.
 - Project-related context:
@@ -31,7 +31,7 @@ For each attendee event in the daily ask queue:
   - include `[[Projects/...]]` link in the note
   - add journal mention linking to the event note and project
 
-### Metadata
+## Metadata
 
 For event-linked task or note:
 
@@ -40,7 +40,7 @@ For event-linked task or note:
 - `(event_id:: <id>)`
 - `(web_link:: <url>)`
 
-### Sync Caution
+## Sync Caution
 
 - Event description write-backs are optional and explicit.
 - If writing back via API (`gws calendar events patch`), default to `sendUpdates: none` unless user asks otherwise.

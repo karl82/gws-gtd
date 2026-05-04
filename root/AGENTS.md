@@ -15,4 +15,4 @@ Core runtime assets:
 - `System/Queries/`
 - `System/.gtd-coach-state.jsonl` — append-only event log used by the coach persona (mechanics-only, never journaled). Fallback: vault-root `.gtd-coach-state.jsonl` if `System/` is absent.
 
-Local vault notes should keep only truly local overrides or migration notes. Do not redefine GTD or GWS workflow rules here when the package already defines them.
+Local vault notes should keep only vault-specific overrides or migration notes. Do not redefine GTD or GWS workflow rules here when the package already defines them.

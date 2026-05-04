@@ -1,12 +1,12 @@
-## Signal Sync Procedure
+# Signal Sync Procedure
 
-### Scope
+## Scope
 
 - Mirror clarified dated GTD tasks into the `GTD Signals` Google calendar.
 - Keep the vault as the only task system of record.
 - Delete calendar signals when a task is completed, deleted, or no longer has the qualifying date.
 
-### Source Rules
+## Source Rules
 
 - Include open canonical `#task` items from:
   - `Projects/`
@@ -19,7 +19,7 @@
   - `System/`
   - completed tasks
 
-### Signal Rules
+## Signal Rules
 
 - `#next` task -> one `NEXT: ...` signal
 - If task has both `🛫 YYYY-MM-DD` and `📅 YYYY-MM-DD`, the signal spans from `🛫` to `📅`
@@ -29,7 +29,7 @@
 - `#waiting` task without a follow-up date -> no calendar signal
 - Non-`#next`, non-`#waiting` tasks never appear on `GTD Signals`
 
-### Event Rules
+## Event Rules
 
 - Calendar: `GTD Signals`
 - Event type: all-day
@@ -39,7 +39,7 @@
 - Managed event metadata lives in `extendedProperties.private`
 - Mobile completion marker: event summary must start with `✅`, with or without following whitespace
 
-### Sync Behavior
+## Sync Behavior
 
 1. Load desired signals from the vault.
 2. Load managed events from `GTD Signals`.
@@ -50,7 +50,7 @@
 7. Update changed events.
 8. Delete orphaned events.
 
-### Bundled Script
+## Bundled Script
 
 - Run the bundled `scripts/sync_gtd_signals.py` helper from the installed `gws-gtd` skill directory.
 - Claude Code example:

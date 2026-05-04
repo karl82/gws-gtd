@@ -1,10 +1,10 @@
-## Organizing Procedure
+# Organizing Procedure
 
-### Scope
+## Scope
 
 Classify, normalize, and clean up notes and tasks according to vault lifecycle rules.
 
-### Core Rules
+## Core Rules
 
 - `Projects/` = finite outcomes.
 - `Areas/` = ongoing responsibilities.
@@ -20,9 +20,9 @@ Classify, normalize, and clean up notes and tasks according to vault lifecycle r
   - `Areas/Admin.md`
 - Keep reference-only material in `Resources/`.
 - Treat legacy top-level `Designs/` notes as adaptable and reconcile them toward the owning project or `Resources/`.
-- Move finished or inactive project notes into `Archive/` when appropriate.
+- Move project notes with no open `#task` and no mtime update in 30+ days into `Archive/`.
 
-### Taxes Convention
+## Taxes Convention
 
 - Annual notes live in `Projects/Taxes/YYYY.md`.
 - Required parent groups: `US`, `CZ`, `Payments`.
@@ -31,7 +31,7 @@ Classify, normalize, and clean up notes and tasks according to vault lifecycle r
   - `#waiting` only when blocked externally.
 - Template source: `System/Templates/Taxes Year.md`.
 
-### Organizing Output
+## Organizing Output
 
 - Moves or renames completed
 - Integrity violations

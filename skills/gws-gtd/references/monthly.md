@@ -1,6 +1,6 @@
-## Monthly Procedure
+# Monthly Procedure
 
-### Scope
+## Scope
 
 Run the monthly GTD review using `references/canonical-vault.md` and `System/Templates/Monthly Review.md`.
 
@@ -9,7 +9,7 @@ Template incorporation:
 - If the monthly note does not exist, create it at a matching path so Templater applies `System/Templates/Monthly Review.md`.
 - Use the template sections as the interactive agenda.
 
-### Steps
+## Steps
 
 1. Portfolio Audit
     - Confirm each active project has measurable outcome and at least one open `#task`.
@@ -28,12 +28,12 @@ Template incorporation:
 6. Next Month Commitments
    - Recommend top commitments and elimination candidates.
 
-### Monthly Guardrails
+## Monthly Guardrails
 
 - Do not archive automatically.
 - Do not assume calendar availability.
 
-### Monthly Output
+## Monthly Output
 
 - Portfolio exceptions
 - Capacity and risk summary

@@ -56,7 +56,7 @@ For the full Gmail label contract, classification defaults, and heuristics, see 
 - `#task #inbox` lines born from real events belong in the daily journal note alongside narrative context.
 - Do not write ceremony mechanics into journal notes: no inbox counts, classification summaries, label routing, task-list snapshots, or completion banners.
 - Every journal entry and journal-born task must link to the relevant `[[Projects/...]]`, `[[Areas/...]]`, `[[People/...]]`, or canonical task.
-- If nothing meaningful happened beyond review/maintenance, do not add a journal entry.
+- If no real-world timeline event, outcome, or named commitment occurred beyond review/maintenance, do not add a journal entry.
 
 ## Stalled Thresholds
 

@@ -2,7 +2,7 @@
 
 This note is the canonical source for Gmail GTD label meaning and email classification rules across daily, weekly, and ad-hoc workflows.
 
-Use heuristics to classify unlabeled email. Once a GTD label already exists, respect that label unless the thread is clearly mislabeled or already represented elsewhere.
+Use heuristics to classify unlabeled email. Once a GTD label already exists, respect that label unless the thread has been mislabeled (the label does not match the rule that applies to it) or the thread is already represented by an existing vault task via `gmail_thread_id`.
 
 ## Label Contract
 
@@ -15,7 +15,7 @@ Use heuristics to classify unlabeled email. Once a GTD label already exists, res
 
 Notes:
 
-- `gtd/import` is stronger than heuristics. If a thread already has `gtd/import`, it should still create a task in `Inbox.md` unless it is a duplicate or clearly mislabeled.
+- `gtd/import` is stronger than heuristics. If a thread already has `gtd/import`, create a task in `Inbox.md` unless it is a `gmail_thread_id` duplicate or the label is mislabeled per the rule above.
 - If an email is ambiguous but plausibly important, prefer `gtd/import` so it is clarified in `Inbox.md` instead of being deferred in Gmail.
 - Self-sent messages to the `+gtd@gmail.com` capture alias are capture notes first, not reference emails. Import them as plain `#task #inbox` lines unless the Gmail metadata is genuinely useful.
 
@@ -54,11 +54,11 @@ Rows are evaluated top-to-bottom; first match wins.
 | Account security notification (password change, 2FA update, new login) | import | Create a quick-confirmation task: `Confirm [issuer] account security change was intentional`. Resolve ≤5 min. Applies to all issuers and services (Fidelity, Google, banks, etc.). |
 | General service / settings-change notification | trash | Informational only — no confirmation or action required. Override only if the change was unexpected or involves security. |
 | Datová schránka notification | review + archive | Official Czech government data mailbox delivery notification. Archive the Gmail notification immediately and open the Datová schránka portal to review the document. Do not create a vault task from the email alone. |
-| Recruiter outreach with plausible opportunity | import | Create a review-style task in `Inbox.md` unless it is clearly noise. |
+| Recruiter outreach with plausible opportunity | import | Create a review-style task in `Inbox.md`. Exception: trash only when the recruiter message is a bulk mail to a generic address AND contains no specific role/company fit. |
 | Clearly actionable message where you are the next actor | import | Create a task now. |
 | Delegated thread where the next move belongs to someone else | waiting | Create or update a `#waiting` task. |
 | Ambiguous but potentially relevant informational mail | import | Create a review-style task in `Inbox.md` so it gets clarified instead of deferred in Gmail. |
-| Pure noise, promotion, or accepted invitation notification | trash | Recommend unsubscribe when appropriate. |
+| Pure noise, promotion, or accepted invitation notification | trash | Recommend unsubscribe when `List-Unsubscribe` header is present. |
 
 ## Heuristics
 
@@ -111,7 +111,7 @@ Use these heuristics when deciding how unlabeled email should be labeled.
 
 ### Recruiter Heuristic
 
-- Default recruiter outreach to `gtd/import` as a review-style task unless it is clearly noise or an immediate trash candidate.
+- Default recruiter outreach to `gtd/import` as a review-style task. Exception: trash only when the recruiter message is a bulk mail to a generic address AND contains no specific role/company fit.
 - If a recruiter thread already has `gtd/import`, still create a task, but phrase it as a review task such as `Review recruiter outreach from <name>/<company> and send decline unless compelling`.
 
 ### LinkedIn InMail Detection
