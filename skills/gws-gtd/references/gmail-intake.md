@@ -87,6 +87,32 @@ Use this pattern for every repetitive email-decision queue. GARBAGE-FIRST orderi
 
 Garbage confirmation must complete BEFORE actionable items are presented. Do not mix them in one prompt.
 
+## Backlog Drain
+
+Use this procedure when the unlabeled inbox exceeds ~500 threads. Invoked via `/gtd-backlog-drain` (a ralph-loop wrapper). Single-phase: trash-only, iterated until the trash stream settles. Actionable review is deferred to the daily ceremony that follows.
+
+Each loop iteration:
+
+1. Consult `§ Backlog Drain Exit Conditions` below. If any condition is met, emit `<promise>TRASH_DRAINED</promise>` and write `{"kind":"loop-exit","command":"gtd-backlog-drain","reason":"<name>","ts":"<ISO>"}` to `System/.gtd-coach-state.jsonl`.
+2. Otherwise, run one `/gtd-junk-sweep` pass. The sweep handles its own `AskUserQuestion` confirmation, its own batch-trash mutation, and its own `kind:"junk-sweep"` JSONL event append.
+3. Ralph-loop re-enters and the cycle repeats.
+
+The junk-sweep agent's narrow scope (see `agents/gtd-junk-sweep.md`) is unchanged. The backlog drain is a loop wrapper around repeated invocations, not a widening of sweep behavior.
+
+After the loop exits, prompt the user to run `/gtd-daily` to review the deferred actionable mail. Do not auto-invoke.
+
+### Backlog Drain Exit Conditions
+
+Evaluate at the start of each loop iteration by reading the last 10 lines of `System/.gtd-coach-state.jsonl`. First match wins.
+
+1. **Zero candidates.** Candidate query (`in:inbox -label:gtd/import -label:gtd/waiting -label:gtd/reference -label:gtd/imported`) with `maxResults:1` returns zero threads.
+2. **Trash stream settled.** Last 2 `kind:"junk-sweep"` events both have `trashed:0` AND `deferred > 0`. No more junk to drain; remaining mail is actionable.
+3. **User disengagement.** Last 3 `kind:"junk-sweep"` events all have `trashed:0` AND `deferred:0`. User has been skipping every batch.
+4. **Sweep cap reached.** Sum of `trashed` across today's `kind:"junk-sweep"` events exceeds 800. Stop for review.
+5. **Stale loop.** Last `kind:"junk-sweep"` event is older than 5 minutes of wall-clock (user walked away).
+
+On exit, emit `<promise>TRASH_DRAINED</promise>` and the `loop-exit` event.
+
 ## Step 2 — Gmail Intake Gates
 
 1. Pull import candidates from Gmail label gate:
