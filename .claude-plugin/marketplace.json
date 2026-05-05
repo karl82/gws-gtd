@@ -6,10 +6,7 @@
   "plugins": [
     {
       "name": "gtd",
-      "source": {
-        "source": "github",
-        "repo": "karl82/gws-gtd"
-      },
+      "source": "..",
       "description": "Opinionated GTD vault workflow with Google Workspace integration and transcrypt utilities.",
       "version": "0.1.0",
       "author": {
