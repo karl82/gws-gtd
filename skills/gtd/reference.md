@@ -158,13 +158,21 @@ Pull unlabeled inbox candidates:
 in:inbox -label:gtd/import -label:gtd/waiting -label:gtd/reference -label:gtd/imported
 ```
 
-For efficient retrieval of snippets across all candidate threads in one call:
+For efficient retrieval across all candidate threads in one call:
 
 ```bash
-gws gmail users threads list --params '{"userId":"me","q":"<query>","maxResults":500}' --format json
+gws gmail +triage --query 'in:inbox -label:gtd/import -label:gtd/waiting -label:gtd/reference -label:gtd/imported' --max 100 --format json \
+  | jq '[.messages[] | {id, from, subject, date}]'
 ```
 
-This returns `id` + `snippet` for all threads. Don't call `messages.list` (IDs only) or `messages.get` per-message (expensive). Reach for `+read` only when the snippet doesn't give enough to decide.
+This returns structured `id` + `from` + `subject` + `date` for all threads. Pipe through `jq` for filtering and classification. Don't call `messages.list` (IDs only) or `messages.get` per-message (expensive). Reach for `+read` only when subject+sender isn't enough to decide.
+
+To get message IDs for `messages.batchModify` after classifying thread IDs:
+
+```bash
+gws gmail users threads get --params '{"userId":"me","id":"<thread_id>","format":"minimal"}' \
+  | jq '[.messages[].id]'
+```
 
 For each candidate, show sender + subject + snippet preview. Classify into one of:
 
@@ -507,10 +515,10 @@ A narrow, repeated lightweight version of Gmail intake Step 1 — garbage-only. 
 
 ### Procedure
 
-1. Pull the unlabeled inbox candidate set.
+1. Pull the unlabeled inbox candidate set via `gws gmail +triage --query '...' --format json | jq '[.messages[] | {id, from, subject}]'`.
 2. Classify only into `garbage` or `defer`. Don't make import / waiting / reference decisions — those go to daily.
 3. Present the trash batch via one `AskUserQuestion` with per-category options (`Trash 12 shipping`, `Trash 4 statements`, `Skip`, `Override individually`).
-4. On confirm, execute one `messages.batchModify` with `addLabelIds:["TRASH"]`.
+4. On confirm, collect message IDs via `threads get --format minimal`, then execute one `messages.batchModify` with `addLabelIds:["TRASH"]`.
 5. Output: `{trashed: N, deferred_for_daily: N}`.
 
 ### Invariants
