@@ -5,7 +5,7 @@
   },
   "plugins": [
     {
-      "name": "gws-gtd",
+      "name": "gtd",
       "source": {
         "source": "github",
         "repo": "karl82/gws-gtd"

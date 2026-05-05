@@ -1,5 +1,5 @@
 {
-  "name": "gws-gtd",
+  "name": "gtd",
   "version": "0.1.0",
   "description": "Opinionated GTD vault workflow with Google Workspace integration and transcrypt utilities.",
   "author": {
