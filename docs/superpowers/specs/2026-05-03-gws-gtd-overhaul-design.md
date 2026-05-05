@@ -495,3 +495,31 @@ This spec touches ~30 files in one branch, with renames, deletes, and new files.
 5. Approve the implementation sequencing in Part VI.
 
 Once approved, the next step is invoking `writing-plans` to generate a step-by-step implementation plan, then executing it on this branch.
+
+---
+
+## Part IX — Post-implementation amendments
+
+### IX.1 Backlog drain via ralph-loop (added 2026-05-04)
+
+After implementation completed, a 19th commit added `/gtd-backlog-drain` for one-shot bulk inbox cleanup. This was approved interactively after the main spec was written but is recorded here for traceability.
+
+**Files added/changed:**
+
+- `commands/gtd-backlog-drain.md` — new ralph-loop wrapper command.
+- `skills/gws-gtd/references/gmail-intake.md § Backlog Drain` — new section defining loop logic.
+- `skills/gws-gtd/references/gmail-intake.md § Backlog Drain Exit Conditions` — new section with 5 termination criteria.
+- `skills/gws-gtd/references/coach.md § State File` — new event kind `loop-exit` documented in schema.
+
+**Design decisions:**
+
+- Single-phase: trash-only iteration. Actionable review deferred to subsequent `/gtd-daily` invocation.
+- `gtd-junk-sweep` agent unchanged; backlog-drain wraps repeated invocations.
+- Five exit conditions: zero candidates, trash stream settled, user disengagement, sweep cap (800/day), stale loop (5min).
+- Default max iterations: 50.
+- Promise emitted: `<promise>TRASH_DRAINED</promise>`.
+
+**Out-of-scope (explicit):**
+
+- No phase-2 actionable-review variant in this spec amendment. If desired later, add as a separate `/gtd-actionable-drain` rather than widening the existing sweep.
+- No daily-ceremony rewire to use ralph-loop. Termination gates within `gtd-daily` agent already iterate-until-done within session context.
