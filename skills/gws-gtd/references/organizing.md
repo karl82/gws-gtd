@@ -20,18 +20,13 @@ Classify, normalize, and clean up notes and tasks according to vault lifecycle r
   - `Areas/Admin.md`
 - Keep reference-only material in `Resources/`.
 - Treat legacy top-level `Designs/` notes as adaptable and reconcile them toward the owning project or `Resources/`.
-- Move project notes with no open `#task` and no mtime update in 30+ days into `Archive/`.
+- Move project notes with no open `#task` AND mtime past the monthly archive threshold (see `conventions.md § Stalled Thresholds`) into `Archive/`.
 
 ## Taxes Convention
 
-- Annual notes live in `Projects/Taxes/YYYY.md`.
-- Required parent groups: `US`, `CZ`, `Payments`.
-- Keep tax tags minimal:
-  - `#payment` for payment items.
-  - `#waiting` only when blocked externally.
-- Template source: `System/Templates/Taxes Year.md`.
+See `canonical-vault.md § Taxes Convention`.
 
-## Organizing Output
+## Output
 
 - Moves or renames completed
 - Integrity violations

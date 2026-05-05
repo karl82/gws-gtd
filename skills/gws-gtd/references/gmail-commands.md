@@ -2,7 +2,7 @@
 
 Patterns and gotchas for `gws gmail` API calls discovered during live sessions. For Calendar and People command mechanics, see `calendar-commands.md` and `people-commands.md`.
 
-### threads.modify — label changes
+## threads.modify — label changes
 
 Use `--json` for the request body, NOT `--params`:
 
@@ -20,7 +20,7 @@ gws gmail users threads modify \
 
 Do NOT put `removeLabelIds`/`addLabelIds` inside `--params` — the API will either ignore them or return `"No label add or removes specified"`.
 
-### threads.trash / threads.untrash
+## threads.trash / threads.untrash
 
 Use dedicated endpoints, not `threads.modify` with a TRASH label:
 
@@ -32,7 +32,7 @@ gws gmail users threads untrash \
   --params '{"userId":"me","id":"<thread_id>"}'
 ```
 
-### messages.batchModify
+## messages.batchModify
 
 Requires **message IDs**, not thread IDs. Passing thread IDs returns `"No message ids specified"`.
 
@@ -49,7 +49,7 @@ gws gmail users messages batchModify --params '{
 }'
 ```
 
-### +forward
+## +forward
 
 Requires a message ID (not thread ID):
 
@@ -59,7 +59,7 @@ gws gmail +forward --message-id <message_id> --to plans@tripit.com
 
 For single-message threads the message ID equals the thread ID.
 
-### Inbox triage query
+## Inbox triage query
 
 Use `in:inbox` (not `is:unread`) to get all inbox threads regardless of read state or age:
 

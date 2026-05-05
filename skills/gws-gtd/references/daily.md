@@ -34,7 +34,7 @@ After reviewing due/next/waiting lists, group `#next` tasks by context tag for b
 
 At the start of each daily ceremony, after loading the calendar agenda, check for stale GTD Signals events whose corresponding vault tasks are already complete. Delegate the diff to `gtd-signal-diff` (Haiku), then offer to delete stale signals via `AskUserQuestion` before proceeding to the main ceremony.
 
-## Daily Guardrails
+## Guardrails
 
 - Do not require inbox zero in daily mode.
 - Keep `#inbox` tasks free of completed items (see `canonical-vault.md § Inbox Rules`).

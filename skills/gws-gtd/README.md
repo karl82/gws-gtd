@@ -2,7 +2,7 @@
 
 Unified skill for the opinionated `gws-gtd` workflow. Integrates GTD vault conventions with Google Workspace (`gws`) into one operating model.
 
-This skill is self-contained for core Gmail, Calendar, People, and shared Google Workspace operations. Use `skills/gws-gtd/references/command-reference.md` for the canonical `gws` command surface instead of installing generated `gws-*` skills.
+This skill is self-contained for core Gmail, Calendar, People, and shared Google Workspace operations. Use `references/gmail-commands.md`, `references/calendar-commands.md`, and `references/people-commands.md` for the canonical `gws` command surface instead of installing generated `gws-*` skills.
 
 ## Permissions
 
@@ -29,12 +29,14 @@ Not needed for GTD ceremonies:
 
 | Topic | Reference |
 |-------|-----------|
-| Capture model | `references/conventions.md` (Gmail Label Model), `references/daily-intake.md` |
+| Capture model | `references/conventions.md` (Gmail Label Model), `references/gmail-intake.md` |
 | Calendar signal model | `references/conventions.md` (Calendar Model), `references/signal-sync.md` |
 | Task lifecycle | `references/canonical-vault.md` (Task Syntax, Inbox Rules), `references/conventions.md` |
 | People notes sync | `references/people-linking.md` |
-| Label bootstrap | `references/daily-intake.md` (Step 0), `references/email-triage-policy.md` |
-| Gmail, Calendar, People commands | `references/command-reference.md` |
+| Label bootstrap | `references/gmail-intake.md` (Step 0), `references/email-triage-policy.md` |
+| Gmail commands | `references/gmail-commands.md` |
+| Calendar commands | `references/calendar-commands.md` |
+| People commands | `references/people-commands.md` |
 
 ## GTD Signals Sync
 

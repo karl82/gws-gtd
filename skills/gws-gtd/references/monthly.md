@@ -17,8 +17,8 @@ Template incorporation:
 2. Area Balance
    - Surface neglected or overloaded areas.
 3. Stalled and Stale Detection
-   - Projects inactive >30 days.
-   - Open tasks stale >30 days without due dates.
+   - Projects past the monthly archive threshold (see `conventions.md § Stalled Thresholds`).
+   - Open tasks past the monthly archive threshold without due dates.
 4. Pattern and Capacity Analysis
    - Review journal signals and recurring blockers.
    - Detect due-date clustering and constraints.
@@ -28,12 +28,12 @@ Template incorporation:
 6. Next Month Commitments
    - Recommend top commitments and elimination candidates.
 
-## Monthly Guardrails
+## Guardrails
 
 - Do not archive automatically.
 - Do not assume calendar availability.
 
-## Monthly Output
+## Output
 
 - Portfolio exceptions
 - Capacity and risk summary

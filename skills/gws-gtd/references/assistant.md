@@ -2,7 +2,7 @@
 
 The `assistant` mode is the persistent GTD assistant persona. Warm-start each session with a vault status snapshot, dispatch ceremony sub-agents on request, and route inline quick tasks to `quick-tasks.md`.
 
-## Warm-start
+## Warm-Start
 
 On the **first user message** of each session, before responding to anything else:
 

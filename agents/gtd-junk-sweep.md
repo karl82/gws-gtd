@@ -27,7 +27,7 @@ On completion, append one event line to `System/.gtd-coach-state.jsonl`:
 {"kind":"junk-sweep","ts":"<ISO>","trashed":N,"deferred":N,"categories":{...}}
 ```
 
-If `root/System/` is absent, fall back to vault-root `.gtd-coach-state.jsonl`.
+If `System/` is absent, fall back to vault-root `.gtd-coach-state.jsonl`.
 
 Constraints:
 - Follow the local `AGENTS.md` wrapper and package-owned workflow rules.

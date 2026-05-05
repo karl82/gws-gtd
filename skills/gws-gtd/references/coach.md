@@ -12,6 +12,7 @@ Event kinds:
 - `junk-sweep` — written by `gtd-junk-sweep` agent after each sweep.
 - `ceremony` — written by `gtd-daily` / `gtd-weekly` / `gtd-monthly` / `gtd-organizing` on exit, includes `residual` array.
 - `nudge` — written by coach when it emits a nudge.
+- `loop-exit` — written by `/gtd-backlog-drain` on ralph-loop termination, includes `command` and `reason`.
 
 Schema per kind:
 
@@ -20,6 +21,7 @@ Schema per kind:
 {"kind":"junk-sweep","ts":"2026-05-04T14:02:11Z","trashed":7,"deferred":3,"categories":{"shipping":4,"statement":2,"tripit":1}}
 {"kind":"ceremony","name":"daily","ts":"2026-05-04T09:32:00Z","outcome":"complete","residual":[]}
 {"kind":"nudge","label":"morning-ceremony-prompt","ts":"2026-05-04T09:15:00Z"}
+{"kind":"loop-exit","command":"gtd-backlog-drain","reason":"trash-stream-settled","ts":"2026-05-04T15:30:00Z","iterations":12}
 ```
 
 Coach reads the last 500 lines on every turn.
@@ -88,7 +90,7 @@ Coach reads `residual` from the last ceremony event on subsequent turns. If resi
 
 ## Relation to Other Modes
 
-- **`assistant.md` Warm-start** runs once per session (first turn). Coach runs every turn after.
+- **`assistant.md` Warm-Start** runs once per session (first turn). Coach runs every turn after.
 - **`quick-tasks.md`** handles inline capture/status queries. Coach does not interfere with quick-task turns.
 - **Ceremony agents** suppress coach while active. On exit, coach resumes.
 - **`gtd-junk-sweep`** writes `junk-sweep` events; coach reads them for `ambient-sweep-complete` nudges.

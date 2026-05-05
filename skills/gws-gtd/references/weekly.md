@@ -28,7 +28,7 @@
    - Review overdue and next-7-day due tasks.
    - Review `#waiting` items (full reconciliation handled in the Waiting Reconciliation section below).
    - Review possible next-step candidates and promote at most five to `#next`.
-   - Surface stalled projects: open projects with no modification in >14 days OR no open linked `#task`.
+   - Surface stalled projects: open projects past the warm-start threshold (see `conventions.md § Stalled Thresholds`) OR with no open linked `#task`.
 3. Get Creative
    - Review journal patterns from the week: recurring blockers, energy dips, repeated themes.
    - Scan `#someday` items; promote items with a concrete next action to active `#task`, or delete items stale >90 days with no supporting notes.
