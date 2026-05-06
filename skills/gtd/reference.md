@@ -72,13 +72,19 @@ Use `#waiting` only when someone else owes you the next move. Never use it for t
 
 ### `#inbox` clarify rule
 
-To clarify an inbox task: remove `#inbox`, add a `[[Projects/...]]` or `[[Areas/...]]` wikilink, move it to its owning file (or leave it in the journal if it's tied to a real event). An `#inbox` task that's marked complete is a bug — clarify and move, or delete.
+To clarify an inbox task: remove `#inbox`, add a `[[Projects/...]]` or `[[Areas/...]]` wikilink, and move it to today's daily journal note. Never move it into a project file. An `#inbox` task that's marked complete is a bug — clarify and move, or delete.
 
-## Inbox.md vs Journal-born tasks
+## Task placement — single instance rule
 
-`Inbox.md` is for raw Gmail imports only. Tasks leave on clarify.
+**Tasks live in journal daily notes only.** One task, one location in the vault. Never duplicate a task between Inbox.md, a project file, and the journal.
+
+- **Inbox.md** — raw Gmail imports only. Temporary. Tasks leave on clarify.
+- **Journal daily note** — canonical home for all tasks after clarification. Includes both Gmail-imported tasks (after clarify) and tasks born from real events (meetings, calls, decisions).
+- **Project files** — surface tasks via `dataviewjs` queries (`project-linked-open`, `project-linked-done`). Never hold inline `#task` items themselves.
 
 Tasks born from real events (meetings, calls, decisions you made) belong in the daily journal note for that day, with a wikilink to the relevant project or area. They don't go through `Inbox.md`.
+
+The project link on the task (`[[Projects/<Domain>/<Project>]]`) is what connects it to the project. The dataviewjs query in the project file picks it up automatically — no need to copy the task there.
 
 ## Stalled-project thresholds
 
