@@ -158,6 +158,22 @@ Verify `gtd`, `gtd/import`, `gtd/waiting`, `gtd/reference`, and `gtd/imported` e
 
 #### Step 1 — Classify
 
+**Before classifying any email as a new task, match it against existing vault state.** Most actionable email is correspondence on a thread you already have a `#waiting` or `#next` task for — not a new capture.
+
+For each candidate, check in this order:
+
+1. **Match by `gmail_thread_id`** — search the vault for the thread ID. If a `#waiting` task references it, the email is almost always an update or resolution to that task, not a new import.
+2. **Match by sender + project keywords** — if the sender appears in a `People/` note or project file, surface that link.
+3. **Match by tracking number / order number / case ID** — explicit identifiers in the email (USPS tracking, order numbers, case numbers like `ARAG #...`) often map to an existing waiting task.
+
+Match outcomes:
+
+- **Update existing task** — append a dated note (`📝 YYYY-MM-DD: ...`) to the matched task. If the email resolves the task, mark complete only with explicit user confirmation (anti-rule: don't auto-complete).
+- **Resolve existing waiting task** — same, plus close the loop with a journal entry if the resolution is project-significant.
+- **No match → classify as new** per the table below.
+
+Only items with no match proceed to fresh classification.
+
 Pull unlabeled inbox candidates:
 
 ```
@@ -312,6 +328,8 @@ For service/reservation/appointment confirmation or reschedule emails (classifie
    - Create a calendar event with `gws calendar +insert` using the date/time, summary, and location from the email.
    - Archive the email after creation.
 
+Applies to first-time confirmations as well as reschedules and reminders. Service/utility appointments (PSE energy assessment, dealer service, medical, etc.), Calendly/Cal.com confirmations for meetings already in the vault as `#waiting`, and travel itineraries that aren't TripIt-managed all flow through this rule.
+
 Never create a vault `#task` for an appointment that is already (or can be) reflected on the calendar.
 
 ## Signal sync
@@ -407,6 +425,8 @@ Quick. Drives execution from trusted lists. Inbox zero is NOT a daily gate.
    - Tasks with `📅` due today or earlier
    - `#next` queue
    - `#waiting` items (just review; full reconcile is weekly)
+
+   When capturing new tasks during this step, write them to **today's daily journal note**, never inline into a project or area file. The dataviewjs query in the project file picks them up via wikilink. If a project file already has inline `#task` items, that's legacy debt — flag for organizing ceremony, don't add more.
 6. **Optional context batching.** If `#next` has 3+ tasks in a single context (e.g. all `#phone`), batch them.
 7. **End.** Ask the user if anything else is needed; otherwise summarize and stop.
 
@@ -586,9 +606,10 @@ The default behavior when invoked without a specific ceremony — for example vi
 On the first user message of a session, before responding:
 
 1. Count `#inbox` items in `Inbox.md` that lack `✅`.
-2. Read today's `Journal/YYYY-MM-DD.md` — note what's already logged.
-3. Scan `Areas/` and top-level `Projects/` for `#task` due today or earlier.
-4. Scan top-level `Projects/` mtimes — flag any not modified in 14+ days as stalled.
+2. Detect `[x]` (completed) lines in `Inbox.md` — these are clutter per the clarify rule, flag for cleanup during weekly.
+3. Read today's `Journal/YYYY-MM-DD.md` — note what's already logged.
+4. Scan `Areas/` and top-level `Projects/` for `#task` due today or earlier.
+5. Scan top-level `Projects/` mtimes — flag any not modified in 14+ days as stalled.
 
 Output:
 
@@ -623,7 +644,7 @@ When the user asks for a ceremony, run the corresponding section above.
 These apply to every ceremony, every command, every interaction.
 
 - Don't invent deadlines. If the user hasn't given you a date, the task has no `📅`.
-- Don't auto-complete tasks. The user marks `✅`.
+- Don't auto-complete tasks. The user marks `✅`. When the user reports completion in conversation ("paid X today", "called Y"), capture the fact via a dated `📝` note on the task and ask before marking `✅`.
 - Don't auto-archive. The user moves things to `Archive/` (organizing ceremony surfaces candidates).
 - Don't create hidden states outside the canonical model.
 - Don't convert reference notes into GTD tasks without `#task`.

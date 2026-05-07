@@ -4,6 +4,8 @@ Patterns and gotchas for `gws` Gmail / Calendar / People CLI calls discovered du
 
 Always pass `--format json`. Always use `jq` (not `python3 -c`) for JSON parsing in Bash. See `reference.md § Interaction rules`.
 
+When piping `gws ... --format json` into `jq`, redirect stderr: `gws ... --format json 2>/dev/null | jq ...`. The CLI prints `Using keyring backend: ...` and other diagnostics that mix into stdout in some shells and break `jq` parsing. Suppress them.
+
 ## Gmail
 
 ### `threads.modify` — label changes
@@ -62,6 +64,21 @@ gws gmail +forward --message-id <message_id> --to plans@tripit.com
 ```
 
 For single-message threads, message ID equals thread ID.
+
+### `+reply` — reply target pitfall
+
+`gws gmail +reply --message-id <ID>` sends the reply to the **sender** of that message. So:
+
+- Pointing at a message **from the other party** → reply goes to them. ✓ Correct for nudges and follow-ups.
+- Pointing at **your own outgoing message** → reply goes to **yourself**. ✗ Wrong, and easy to miss because the thread looks correct.
+
+When following up on a stalled thread where your last email got no response, find the last message **from the other party** (often several messages back) and reply to that. Verify with `gws gmail +read --id <reply_id> --headers` after sending — `From` and `To` should both make sense.
+
+```bash
+# Find last non-self message in a thread
+gws gmail users threads get --params '{"userId":"me","id":"<thread_id>","format":"metadata"}' --format json 2>/dev/null \
+  | jq '[.messages[] | {id, from: (.payload.headers[] | select(.name=="From") | .value)}] | map(select(.from | contains("karel.rank") | not)) | last'
+```
 
 ### Inbox triage query
 
