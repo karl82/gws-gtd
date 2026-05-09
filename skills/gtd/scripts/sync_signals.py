@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import os
 import re
 import subprocess
 import sys
@@ -14,7 +15,17 @@ from pathlib import Path
 from typing import Any
 
 
-REPO_ROOT = Path(__file__).resolve().parents[4]
+def _resolve_vault_root() -> Path:
+    env = os.environ.get("GTD_VAULT")
+    if env:
+        return Path(env).expanduser().resolve()
+    cwd = Path.cwd().resolve()
+    if (cwd / "Inbox.md").exists():
+        return cwd
+    return Path(__file__).resolve().parents[4]
+
+
+REPO_ROOT = _resolve_vault_root()
 CALENDAR_SUMMARY = "GTD Signals"
 MANAGED_BY = "gtd-signals-sync"
 INCLUDE_PREFIXES = ("Projects/", "Areas/", "Journal/")
@@ -534,7 +545,20 @@ def sync_signals(apply: bool) -> int:
 def main() -> int:
     parser = argparse.ArgumentParser(description="Sync clarified dated GTD tasks into the GTD Signals calendar.")
     parser.add_argument("--apply", action="store_true", help="Apply changes. Without this flag, the script performs a dry run.")
+    parser.add_argument("--vault", help="Path to the Obsidian vault root. Overrides GTD_VAULT env var and cwd detection.")
     args = parser.parse_args()
+
+    if args.vault:
+        global REPO_ROOT
+        REPO_ROOT = Path(args.vault).expanduser().resolve()
+
+    if not (REPO_ROOT / "Inbox.md").exists():
+        print(
+            f"sync_signals: vault root {REPO_ROOT} does not look like a vault (no Inbox.md). "
+            "Run from inside the vault, set GTD_VAULT, or pass --vault PATH.",
+            file=sys.stderr,
+        )
+        return 2
 
     try:
         return sync_signals(apply=args.apply)
