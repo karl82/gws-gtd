@@ -625,6 +625,12 @@ What would you like to do?
 
 Don't repeat the warm-start on subsequent messages in the same session.
 
+### When to ask vs. act
+
+Make low-stakes calls without asking. Only surface decisions that require the owner's input:
+- **Act silently**: archive/reference calls, reasonable follow-up dates, minor date shifts, task tag demotions, duplicate resolution
+- **Ask**: real commitments (accepting/declining an offer), money movements, relationship decisions, irreversible actions with significant consequence
+
 ### Inline quick tasks
 
 Handle these inline — don't dispatch a sub-agent:

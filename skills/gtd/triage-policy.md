@@ -27,6 +27,7 @@ Rows are evaluated top-to-bottom. First match wins.
 | Venmo payment you sent | trash | Outgoing payment confirmation. |
 | Completed Airbnb post-stay message (review request, etc.) | trash | No reference value after stay. |
 | Subscription or service confirmation (Prime Video, streaming) | trash | Override on unexpected charge or cancellation. |
+| Subscription renewal upcoming notice ("will renew soon") | import if decision pending, else trash | Import when you haven't decided whether to keep or cancel. Trash when the subscription is intentional and no decision is needed. |
 | Insurance or travel-plan upsell | trash | Marketing by default. |
 | DocuSign / Authentisign / signature platform — "Please sign" | import | Task: `Sign <document> via <platform>`. Resolve in 5 min during daily if straightforward. |
 | DocuSign / Authentisign — "Completed" | reference + archive | All parties have signed. If a `#waiting` task tracked it, update + match-existing; otherwise archive. |
@@ -41,8 +42,11 @@ Rows are evaluated top-to-bottom. First match wins.
 | Airline / transport check-in reminder | trash | Flight is on calendar; reminder is transient. |
 | Card security or fraud alert | import | Task: `Review [issuer] card alert — [merchant] $[amount] and confirm or dispute`. Resolve in 5 min during daily. |
 | Account security notification (password change, 2FA update, new login) | import | Task: `Confirm [issuer] account security change was intentional`. Resolve in 5 min. Applies to all issuers. **Match first**: if the security event was triggered by your own action recorded elsewhere (a 2FA setup task, a password rotation), match existing and archive. |
+| Google/Apple/platform security alert for an account where the owner is recovery contact (not their own account, e.g. family member's account) | trash | Not actionable by the owner — the account holder must act. |
 | General service / settings-change notification | trash | Override only if unexpected or security-related. |
 | Datová schránka notification | trash | Czech govt data-mailbox delivery ping. The doc lives in the portal, not in Gmail. Open the portal to read; create a `#next` task only if a response is required. |
+| School parent/communication system notification (Bakaláři, Komens, iParent, etc.) | trash | Delivery ping only — the actual message lives in the school portal. Open the portal to read; create a `#next` task only if a response or action is required. |
+| Product safety recall notice (CPSC, manufacturer) | reference + archive | Archive as `gtd/reference`. Create a `#next` task only if a replacement or remediation action is required (e.g. mandatory stop-use, return label, repair appointment). |
 | Class action settlement / legal notice naming you or family | import | Decision needed: file claim or skip. Capture identifiers (class member ID, deadlines) in the task. |
 | Recruiter first outreach with plausible opportunity | import | Review-style task in `Inbox.md`. Trash only when bulk mail to generic address with no specific role / company fit. |
 | Recruiter follow-up after you've already replied | match existing | If you previously declined or matched against an existing `Areas/Career` task, do not import again. Reply per the task's intent or trash. |
@@ -76,6 +80,11 @@ Use these when no row in the table fits.
 
 - Keep `gtd/reference` only when the message is useful later for proof, policy, travel, taxes, or legal.
 - Don't keep generic notices that can be re-fetched or don't support a later decision.
+
+### People/ record creation
+
+- Only create a `People/` file for contacts with an ongoing relationship relevant to a project or area.
+- Do NOT create `People/` records for recruiters, one-off contacts, or low-stakes interactions.
 
 ### LinkedIn InMail detection
 

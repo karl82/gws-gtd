@@ -72,6 +72,8 @@ For single-message threads, message ID equals thread ID.
 - Pointing at a message **from the other party** → reply goes to them. ✓ Correct for nudges and follow-ups.
 - Pointing at **your own outgoing message** → reply goes to **yourself**. ✗ Wrong, and easy to miss because the thread looks correct.
 
+`--subject` is not a valid flag for `+reply` — drop it. The reply automatically inherits the thread subject.
+
 When following up on a stalled thread where your last email got no response, find the last message **from the other party** (often several messages back) and reply to that. Verify with `gws gmail +read --id <reply_id> --headers` after sending — `From` and `To` should both make sense.
 
 ```bash
