@@ -10,7 +10,7 @@ import re
 import subprocess
 import sys
 from dataclasses import dataclass
-from datetime import date, datetime, timedelta
+from datetime import date, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -71,7 +71,7 @@ DROP_TAGS = {
 
 COLOR_BY_SIGNAL = {
     "next": "10",
-    "follow_up": "5",
+    "waiting": "5",
 }
 
 
@@ -256,7 +256,6 @@ def mark_task_complete(vault_task_key: str, apply: bool) -> tuple[str, str]:
 
 def build_signals() -> dict[str, Signal]:
     signals: dict[str, Signal] = {}
-    today = datetime.now().date().isoformat()
     for record in iter_task_records():
         path = record.path
         task_text = record.task_text
@@ -290,14 +289,17 @@ def build_signals() -> dict[str, Signal]:
 
         if is_waiting:
             if due_date:
-                add_signal("follow_up", due_date, due_date, "FOLLOW UP")
+                add_signal("waiting", due_date, due_date, "WAITING")
             continue
 
         if not is_next:
             continue
 
-        signal_start = start_date or due_date or today
-        signal_end = due_date or start_date or today
+        if not start_date and not due_date:
+            continue  # undated #next tasks don't get a calendar signal
+
+        signal_start: str = start_date or due_date  # type: ignore[assignment]
+        signal_end: str = due_date or start_date  # type: ignore[assignment]
         if signal_start > signal_end:
             signal_start, signal_end = signal_end, signal_start
         add_signal("next", signal_start, signal_end, "NEXT")
