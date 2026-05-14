@@ -40,8 +40,8 @@ Rows are evaluated top-to-bottom. First match wins.
 | Brokerage order fill or partial fill notification | trash | Execution notice only. Applies to all brokerages. |
 | Appointment or reservation confirmation | calendar first | If already on calendar, archive. If not, create/update the calendar event then archive. Includes first-time confirmations (PSE energy assessment, dealer service, medical). See `reference.md § Appointment triage`. |
 | Airline / transport check-in reminder | trash | Flight is on calendar; reminder is transient. |
-| Card security or fraud alert | import | Task: `Review [issuer] card alert — [merchant] $[amount] and confirm or dispute`. Resolve in 5 min during daily. |
-| Account security notification (password change, 2FA update, new login) | import | Task: `Confirm [issuer] account security change was intentional`. Resolve in 5 min. Applies to all issuers. **Match first**: if the security event was triggered by your own action recorded elsewhere (a 2FA setup task, a password rotation), match existing and archive. |
+| Card security or fraud alert | import or trash | If the merchant is recognizable and the amount is expected (e.g. Uber Eats charge matching a same-day Uber Eats receipt), trash silently — no task, no ask. Only import when the merchant or amount is genuinely unfamiliar. Task if imported: `Review [issuer] card alert — [merchant] $[amount] and confirm or dispute`. |
+| Account security notification (password change, 2FA update, new login) | import or trash | Import only when the change is unexpected. If the email itself says "if you did this, disregard" and you recognize the action, trash silently. Task if imported: `Confirm [issuer] account security change was intentional`. **Match first**: if triggered by your own recorded action, match existing and archive. |
 | Google/Apple/platform security alert for an account where the owner is recovery contact (not their own account, e.g. family member's account) | trash | Not actionable by the owner — the account holder must act. |
 | General service / settings-change notification | trash | Override only if unexpected or security-related. |
 | Datová schránka notification | trash | Czech govt data-mailbox delivery ping. The doc lives in the portal, not in Gmail. Open the portal to read; create a `#next` task only if a response is required. |
@@ -58,6 +58,28 @@ Rows are evaluated top-to-bottom. First match wins.
 ## Heuristics
 
 Use these when no row in the table fits.
+
+### Importance order — surface high-signal items first
+
+Before presenting any batch to the user, sort by impact:
+1. **Security / financial alerts** with unrecognized merchants or unexpected amounts
+2. **Signing deadlines** or time-sensitive decisions (DocuSign, mortgage, legal)
+3. **Service appointments** or pickups happening today or tomorrow
+4. **Project-relevant updates** (replies from counterparties, document delivery)
+5. **Routine garbage** — present last as a bulk confirm
+
+Don't bury a signing deadline behind 18 newsletters.
+
+### Archive vs. trash
+
+`gtd/reference` is for things you may need to look up later (policy docs, travel confirmations, tax records). Everything else is trash. Default to trash for:
+- Payment confirmations for transactions you initiated (Venmo sent, Zelle sent, card receipts)
+- Auto-replies and out-of-office bounces
+- Routine deposit / statement / score-change notifications
+- Delivery notifications once the item has arrived or been actioned
+- Security notifications you recognize and have resolved
+
+When in doubt: if you'd never search for this email again, trash it.
 
 ### Next-actor check
 

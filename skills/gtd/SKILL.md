@@ -32,10 +32,12 @@ The user invokes a slash command (`/gtd`, `/gtd-sweep`, `/gtd-drain`) or asks ab
 - `triage-policy.md` — email classification table and heuristics. Frequently tuned.
 - `commands.md` — `gws` API mechanics for Gmail, Calendar, People.
 - `scripts/sync_signals.py` — the GTD Signals calendar sync helper.
+- `scripts/gws-auth.sh` — re-authenticates `gws` via browser OAuth2 with all required scopes.
 
 ## Prerequisites
 
 - `gws` binary on PATH, authenticated. Recommended scopes: `gmail.modify`, `calendar.readonly`, `contacts.readonly`. Plus `gmail.send` for replies, `calendar.events` for writing signal events.
+- On auth failure (401 / `token_valid: false`): run `bash "${CLAUDE_SKILL_DIR}/scripts/gws-auth.sh"` to re-authenticate, then retry the failed step.
 - `jq` for JSON parsing.
 - Obsidian vault following the canonical structure (see `reference.md § Vault structure`).
 - For backlog drain: the `ralph-loop` plugin.
@@ -59,7 +61,8 @@ The user invokes a slash command (`/gtd`, `/gtd-sweep`, `/gtd-drain`) or asks ab
 | Putting completed `[x]` lines in `Inbox.md` | Inbox is unclarified-only. Move to journal/project on clarify, delete on completion. |
 | Parsing `gws` JSON with Python | Use `jq` in Bash. |
 | Plain-text decisions | Always `AskUserQuestion`. |
-| `gws ... | jq` parse errors | Redirect stderr: `gws ... 2>/dev/null | jq ...`. |
+| `gws ... 2>&1 | jq` parse errors | Never use `2>&1` — it merges keyring stderr into stdout. Pipe directly: `gws ... --format json | jq ...`. |
+| `gws` returns 401 / token expired | Run `bash "${CLAUDE_SKILL_DIR}/scripts/gws-auth.sh"` to re-authenticate, then retry. |
 | `gws` without `--format json` | Always pass it. |
 | `messages.batchModify` with thread IDs | Requires message IDs. See `commands.md`. |
 | `threads.modify` with labels in `--params` | Labels go in `--json`, not `--params`. See `commands.md`. |

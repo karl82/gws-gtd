@@ -4,7 +4,7 @@ Patterns and gotchas for `gws` Gmail / Calendar / People CLI calls discovered du
 
 Always pass `--format json`. Always use `jq` (not `python3 -c`) for JSON parsing in Bash. See `reference.md § Interaction rules`.
 
-When piping `gws ... --format json` into `jq`, redirect stderr: `gws ... --format json 2>/dev/null | jq ...`. The CLI prints `Using keyring backend: ...` and other diagnostics that mix into stdout in some shells and break `jq` parsing. Suppress them.
+When piping `gws ... --format json` into `jq`, pipe stdout directly — no redirect needed. `--format json` outputs clean JSON to stdout; the `Using keyring backend: ...` diagnostic goes to stderr and does not interfere. **Never use `2>&1 | jq`** — that merges stderr into stdout and breaks jq parsing.
 
 ## Gmail
 
@@ -45,14 +45,10 @@ Requires **message IDs**, not thread IDs. Passing thread IDs returns `"No messag
 To get message IDs from a thread, use `gws gmail users threads get`. Single-message threads have `message_id == thread_id`.
 
 ```bash
-gws gmail users messages batchModify --params '{
-  "userId": "me",
-  "requestBody": {
-    "ids": ["<message_id_1>", "<message_id_2>"],
-    "addLabelIds": ["TRASH"],
-    "removeLabelIds": ["INBOX"]
-  }
-}'
+gws gmail users messages batchModify \
+  --params '{"userId":"me"}' \
+  --json '{"ids":["<message_id_1>","<message_id_2>"],"addLabelIds":["TRASH"],"removeLabelIds":["INBOX"]}' \
+  --format json
 ```
 
 ### `+forward`
@@ -78,7 +74,7 @@ When following up on a stalled thread where your last email got no response, fin
 
 ```bash
 # Find last non-self message in a thread
-gws gmail users threads get --params '{"userId":"me","id":"<thread_id>","format":"metadata"}' --format json 2>/dev/null \
+gws gmail users threads get --params '{"userId":"me","id":"<thread_id>","format":"metadata"}' --format json \
   | jq '[.messages[] | {id, from: (.payload.headers[] | select(.name=="From") | .value)}] | map(select(.from | contains("karel.rank") | not)) | last'
 ```
 
@@ -115,10 +111,12 @@ Returns events with `summary`, `start`, `end`, `attendees`, `description`, `loca
 ### Event creation
 
 ```bash
-gws calendar +insert --summary "<title>" --start "<ISO>" --end "<ISO>" --location "<loc>" --format json
+gws calendar +insert --summary "<title>" --start "<ISO>" --end "<ISO>" --location "<loc>" --description "<body>" --format json | jq '{id: .id, summary: .summary, start: .start, htmlLink: .htmlLink}'
 ```
 
 Used by appointment triage when the email has no matching calendar event.
+
+**Gotcha:** All event fields are individual flags — no `--json` flag exists for `+insert`. Never use `2>&1 | jq`: the keyring line goes to stderr and stays there; stdout is clean JSON. Just pipe directly.
 
 ### Event patch (reschedule)
 
