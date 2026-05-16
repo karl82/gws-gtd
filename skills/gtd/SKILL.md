@@ -55,6 +55,10 @@ The user invokes a slash command (`/gtd`, `/gtd-sweep`, `/gtd-drain`) or asks ab
 |---|---|
 | Skipping `reference.md` and inferring rules from the vault | Read it end-to-end before the first action. |
 | Treating new emails as standalone captures | Match by `gmail_thread_id` / sender / order ID against existing `#waiting` and `#next` tasks first. See `reference.md § Step 1 — Classify`. |
+| Re-classifying mail the ledger already knows | After match-first, look up `(from, pattern)` in `System/.gtd-state.jsonl`. Stable pairs (≥3 consistent, 0 overrides) classify silently. See `reference.md § Pattern ledger`. |
+| Keying the ledger on sender alone | Senders like Apple / DocuSign / your bank emit multiple patterns with different correct classes. Always key on `(from, pattern)` where pattern is the `triage-policy.md` row slug. |
+| Forgetting to write `classify` records after intake | Step 4 of intake appends one record per `(from, pattern, class)`. Without writes, the ledger never learns. |
+| Promoting a sender-only Gmail filter | Filters must combine `from:` AND subject keywords from `triage-policy.md § Filter keywords`. Sender-only would trash unrelated patterns from the same sender. |
 | Replying to your own sent message via `+reply` | Reply goes to yourself. Find last message **from the other party** in the thread. See `commands.md § +reply`. |
 | Marking `✅` when user reports completion in chat | Capture as a `📝` note; ask before marking complete. Anti-rule: don't auto-complete. |
 | Adding inline `#task` to a project file | Tasks live in journal daily notes; project files surface via dataviewjs. |

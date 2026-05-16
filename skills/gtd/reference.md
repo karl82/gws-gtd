@@ -170,9 +170,11 @@ Match outcomes:
 
 - **Update existing task** — append a dated note (`📝 YYYY-MM-DD: ...`) to the matched task. If the email resolves the task, mark complete only with explicit user confirmation (anti-rule: don't auto-complete).
 - **Resolve existing waiting task** — same, plus close the loop with a journal entry if the resolution is project-significant.
-- **No match → classify as new** per the table below.
+- **No match → consult pattern ledger, then classify** per the table.
 
-Only items with no match proceed to fresh classification.
+After match-first, **consult the pattern ledger** (see § Pattern ledger). The lookup key is `(from, pattern)` — the LLM still has to identify which `triage-policy.md` row applies (so it knows the pattern slug), but if `(from, pattern)` has count ≥ 3 with consistent class and zero user overrides, classify silently with the ledger's class and report it as `auto-classified per ledger`. Items with no ledger match or mixed history fall through to the table.
+
+The ledger key is `(from, pattern)` — not `from` alone — because senders like Apple, DocuSign, and your bank emit several patterns with different correct classes. Per-sender alone collapses those into "mixed history" and never auto-classifies.
 
 Pull unlabeled inbox candidates:
 
@@ -240,6 +242,32 @@ If `gtd/imported` exists, move the thread there after successful import. Otherwi
 
 For confirmed reference items, archive (remove `INBOX` label) — the `gtd/reference` label is enough; no need to keep in inbox.
 
+After all labels are applied, **append one `classify` record per (sender, pattern, class) to `System/.gtd-state.jsonl`** (see § Pattern ledger). Set `user_override: true` if the user changed the model's proposed class via `AskUserQuestion`. Excluded from ledger writes: rows with pattern `match-thread-id`, `match-by-id`, `match-calendly`, `label-import`, `label-waiting`, `self-capture` (label-driven, match-driven, or self-driven — none represent sender-pattern behavior).
+
+#### Step 5 — Filter promotion check
+
+After Step 4, scan the ledger for `(from, pattern)` pairs that have crossed the promotion threshold this run:
+
+- `count ≥ 5` with consistent class
+- Zero user overrides
+- Class is `trash` or `gtd/reference` (importable classes are not promoted — the LLM still has to clarify or create tasks)
+- Pattern appears in `triage-policy.md § Filter keywords` (some patterns are intentionally not promoteable — see that section)
+- No prior `filter_promoted` or `filter_declined` event for this `(from, pattern)`
+
+For each qualifying pair, present **one** `AskUserQuestion`:
+
+- Question: `Promote (<sender>, <pattern>) to a Gmail filter? Last 5 messages all classified <class>.`
+- Description: 3 representative subjects from the ledger.
+- Options: `Promote`, `Decline (don't ask again)`, `Skip (ask later)`.
+
+On `Promote`: build filter criteria as `from:<sender>` AND the subject keywords from `triage-policy.md § Filter keywords`. Create via `gws gmail users settings filters create` (see `commands.md § Gmail filters`). Append `{"kind":"filter_promoted","ts":"...","from":"...","pattern":"...","class":"...","filter_id":"..."}` to the state file.
+
+On `Decline`: append `{"kind":"filter_declined","ts":"...","from":"...","pattern":"...","class":"..."}`. Won't re-ask for this `(from, pattern)`.
+
+On `Skip`: append nothing; the prompt returns next ceremony.
+
+Promoted filters apply to **future** mail; existing inbox items are still classified by this run.
+
 #### Self-capture trash rule
 
 Self-sent capture emails (from:self) that are already captured in the vault — meaning the equivalent task is already in `Inbox.md`, a project/area file, or marked done — must be classified as `garbage` and trashed. Don't archive, don't keep in inbox, don't import a duplicate.
@@ -287,6 +315,96 @@ Czech government data-mailbox notifications (Datová schránka) are delivery pin
 - Open the Datová schránka portal to read the document.
 - Create a vault task only if the document requires a response — use `#next` with a `📅` deadline based on the response window.
 - Never create a vault task from the notification email alone.
+
+## Pattern ledger
+
+A learning layer over Gmail intake. The ledger remembers `(sender, pattern) → class` decisions, so repeated email patterns become priors and stable patterns are promoted to permanent Gmail filters. The LLM stops re-classifying the same (sender, pattern) forever.
+
+The key insight: the ledger is keyed on `(from, pattern)`, **not `from` alone**. Apple emits `shipping-notification` (trash), `order-confirmation` (waiting), and `subscription-confirmation` (trash); DocuSign emits `signing-request-pending` (import), `signing-request-completed` (reference), `signing-request-cancelled` (trash). Per-sender keying collapses those into mixed history and never auto-classifies. Per-(sender, pattern) lets each behavior accumulate independently.
+
+`pattern` is the slug of the `triage-policy.md` row that matched. The LLM emits `(class, pattern)` at classify time.
+
+### Storage
+
+Append-only JSONL at `System/.gtd-state.jsonl` (the same file used by sweep/drain — distinguished by `kind`).
+
+- `{"kind":"classify","ts":"<ISO>","from":"<email>","pattern":"<slug>","class":"<class>","subject":"<subject>","thread_id":"<id>","user_override":<bool>}` — one per (sender, pattern, class) confirmed during Step 4 of intake. `class` ∈ `{trash, gtd/import, gtd/waiting, gtd/reference, appointment, calendar-action, tripit-forward}`.
+- `{"kind":"filter_promoted","ts":"<ISO>","from":"<email>","pattern":"<slug>","class":"<class>","filter_id":"<gmail filter id>"}` — recorded when the user accepts a Step 5 promotion.
+- `{"kind":"filter_declined","ts":"<ISO>","from":"<email>","pattern":"<slug>","class":"<class>"}` — recorded when the user declines. Suppresses future asks for that `(from, pattern)`.
+
+Excluded from `classify` writes: patterns `match-thread-id`, `match-by-id`, `match-calendly` (already-matched, no fresh classification), `label-import`, `label-waiting` (label-driven), `self-capture` (capture alias is special).
+
+### Read pattern (used in Step 1)
+
+Aggregate `(from, pattern)` stats from the JSONL with `jq`:
+
+```bash
+jq -s --arg from "$FROM" --arg pattern "$PATTERN" '
+  map(select(.kind == "classify" and .from == $from and .pattern == $pattern)) as $rows |
+  if ($rows | length) == 0 then null
+  else {
+    count: ($rows | length),
+    last_class: ($rows | sort_by(.ts) | last | .class),
+    classes: ($rows | map(.class) | unique),
+    overrides: ($rows | map(select(.user_override == true)) | length),
+    consistent: (($rows | map(.class) | unique | length) == 1)
+  }
+  end
+' < System/.gtd-state.jsonl
+```
+
+If `consistent && overrides == 0 && count >= 3`, classify silently with `last_class`. Report in the run output as `auto-classified per ledger`.
+
+### Write pattern (used in Step 4)
+
+After labels are applied, for each candidate that wasn't a match-existing or label-driven row:
+
+```bash
+echo '{"kind":"classify","ts":"'$(date -u +%Y-%m-%dT%H:%M:%SZ)'","from":"<sender>","pattern":"<slug>","class":"<class>","subject":"<subject>","thread_id":"<thread_id>","user_override":<true|false>}' >> System/.gtd-state.jsonl
+```
+
+`user_override` is `true` only when the user explicitly changed the model's proposed class via `AskUserQuestion`. Acceptance of the proposal is `false`.
+
+### Promotion threshold (used in Step 5)
+
+A `(from, pattern)` pair becomes a filter candidate when:
+
+- `count >= 5` with consistent class
+- `overrides == 0`
+- `class` is `trash` or `gtd/reference`
+- The pattern appears in `triage-policy.md § Filter keywords` (deliberately curated; patterns absent from that table are not promoted even if otherwise eligible — see the rationale there)
+- No prior `filter_promoted` or `filter_declined` event exists for that `(from, pattern)`
+
+Importable classes (`gtd/import`, `gtd/waiting`, `appointment`, `calendar-action`, `tripit-forward`) are never promoted — the LLM still needs to clarify, create tasks, or perform side effects, so a filter wouldn't save end-to-end work. The ledger still acts as a strong prior for those classes (Step 1).
+
+### Filter construction
+
+Promoted filters always combine sender AND subject criteria so they don't bleed across patterns from the same sender:
+
+```json
+{
+  "criteria": {
+    "from": "<sender>",
+    "query": "<subject keywords from triage-policy.md § Filter keywords>"
+  },
+  "action": {
+    "addLabelIds": ["TRASH"],
+    "removeLabelIds": ["INBOX"]
+  }
+}
+```
+
+For `gtd/reference` class, replace `TRASH` with the resolved label ID for `gtd/reference` (look up via `gws gmail users labels list`). See `commands.md § Gmail filters`.
+
+### Reviewing and undoing filters
+
+List promoted filters from the ledger:
+
+```bash
+jq -s 'map(select(.kind == "filter_promoted"))' < System/.gtd-state.jsonl
+```
+
+Delete a filter (live in Gmail) with `gws gmail users settings filters delete --params '{"userId":"me","id":"<filter_id>"}'`. Append a corrective `filter_declined` record so the model doesn't re-promote.
 
 ## Calendar integration
 
@@ -542,10 +660,13 @@ A narrow, repeated lightweight version of Gmail intake Step 1 — garbage-only. 
 ### Procedure
 
 1. Pull the unlabeled inbox candidate set via `gws gmail +triage --query '...' --format json | jq '[.messages[] | {id, from, subject}]'`.
-2. Classify only into `garbage` or `defer`. Don't make import / waiting / reference decisions — those go to daily.
-3. Present the trash batch via one `AskUserQuestion` with per-category options (`Trash 12 shipping`, `Trash 4 statements`, `Skip`, `Override individually`).
-4. On confirm, collect message IDs via `threads get --format minimal`, then execute one `messages.batchModify` with `addLabelIds:["TRASH"]`.
-5. Output: `{trashed: N, deferred_for_daily: N}`.
+2. **Pattern-tag and consult ledger** (see § Pattern ledger). For each candidate, the LLM identifies the `triage-policy.md` row (pattern slug). Pairs `(from, pattern)` with `count ≥ 3` consistent `trash` history skip the AskUserQuestion entirely — auto-trash silently and report.
+3. Classify the remainder only into `garbage` or `defer`. Don't make import / waiting / reference decisions — those go to daily.
+4. Present the trash batch via one `AskUserQuestion` with per-category options (`Trash 12 shipping`, `Trash 4 statements`, `Skip`, `Override individually`).
+5. On confirm, collect message IDs via `threads get --format minimal`, then execute one `messages.batchModify` with `addLabelIds:["TRASH"]`.
+6. **Write `classify` records** to `System/.gtd-state.jsonl` for every trashed `(from, pattern)` (one per pair, `class:"trash"`, `user_override:false` for ledger auto-trashes and bulk confirms, `true` only if the user used `Override individually` to change the class).
+7. **Filter promotion check** (see § Pattern ledger Step 5). `(from, pattern)` pairs with `count ≥ 5` consistent trash history and a Filter-keywords entry → one `AskUserQuestion` per qualifying pair to promote.
+8. Output: `{trashed: N, deferred_for_daily: N, ledger_auto: N, filters_promoted: N}`.
 
 ### Invariants
 
@@ -589,13 +710,13 @@ Evaluate at the start of each iteration. First match wins.
 
 ### State file
 
-Optional: `System/.gtd-state.jsonl` (append-only JSONL). Each sweep writes one line:
+`System/.gtd-state.jsonl` (append-only JSONL). Multi-purpose — distinguished by `kind`:
 
-```jsonl
-{"kind":"sweep","ts":"<ISO>","trashed":N,"deferred":N,"categories":{...}}
-```
+- `{"kind":"sweep","ts":"<ISO>","trashed":N,"deferred":N,"categories":{...}}` — written per `/gtd-sweep` invocation. Backlog drain reads recent `sweep` lines to evaluate exit conditions.
+- `{"kind":"classify",...}` — written during Gmail intake Step 4 (see § Pattern ledger).
+- `{"kind":"filter_promoted",...}` / `{"kind":"filter_declined",...}` — written during Gmail intake Step 5 (see § Pattern ledger).
 
-The backlog drain reads recent lines to evaluate exit conditions. Unused otherwise.
+Drain's exit-condition logic only considers `kind == "sweep"`. The other kinds coexist without interference.
 
 ## Assistant mode
 

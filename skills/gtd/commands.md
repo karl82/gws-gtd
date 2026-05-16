@@ -96,6 +96,51 @@ gws gmail users threads list --params '{"userId":"me","q":"in:inbox","maxResults
 
 `messages.list` returns IDs only even with `--fields` — use `threads.list` for snippets.
 
+### Gmail filters
+
+Used by the pattern-ledger filter-promotion flow (`reference.md § Pattern ledger`). Promoted filters always combine `from:` AND a subject criterion so promoting one pattern from a sender doesn't bleed into other patterns from the same sender.
+
+```bash
+# List existing filters
+gws gmail users settings filters list --params '{"userId":"me"}' --format json
+
+# Get a single filter by ID
+gws gmail users settings filters get --params '{"userId":"me","id":"<filter_id>"}' --format json
+
+# Create a multi-criterion trash filter (sender + subject keywords)
+gws gmail users settings filters create \
+  --params '{"userId":"me"}' \
+  --json '{"criteria":{"from":"<sender@example.com>","query":"subject:(shipped OR delivered OR \"out for delivery\")"},"action":{"addLabelIds":["TRASH"],"removeLabelIds":["INBOX"]}}' \
+  --format json
+
+# Create an archive-with-label filter (e.g. gtd/reference)
+gws gmail users settings filters create \
+  --params '{"userId":"me"}' \
+  --json '{"criteria":{"from":"<sender@example.com>","query":"subject:(\"Completed:\" OR \"All parties have signed\")"},"action":{"addLabelIds":["<label_id>"],"removeLabelIds":["INBOX"]}}' \
+  --format json
+
+# Delete a filter
+gws gmail users settings filters delete --params '{"userId":"me","id":"<filter_id>"}'
+```
+
+**Multi-criterion construction:** put the structural sender match in `criteria.from` and the subject keywords in `criteria.query` using Gmail search syntax (`subject:(A OR B OR "phrase with spaces")`). Both criteria must match for the filter to fire — that's what keeps `(apple.com, shipping-notification) → TRASH` from also trashing `(apple.com, order-confirmation)`.
+
+**Label IDs** — filter `action.addLabelIds` requires Gmail label IDs, not names. Resolve with `gws gmail users labels list`:
+
+```bash
+gws gmail users labels list --params '{"userId":"me"}' --format json \
+  | jq --arg name 'gtd/reference' '.labels[] | select(.name == $name) | .id'
+```
+
+System labels (`TRASH`, `INBOX`, `STARRED`, `IMPORTANT`, `SPAM`) use those literal strings as IDs — no lookup needed.
+
+**Criteria gotchas:**
+- `criteria.from` matches header `From` exactly. Use the bare email (`noreply@example.com`), not `Display Name <noreply@example.com>`. Use `criteria.query` with `from:domain.com` for broader domain matches.
+- `criteria.query` accepts full Gmail search syntax. Quote multi-word phrases with `\"...\"` inside the JSON string.
+- Filters apply to **future** mail only. The promotion flow doesn't backfill; run the daily/sweep ceremony to clean current inbox.
+
+**Auth:** Filter operations require the `gmail.settings.basic` scope. On `insufficientPermissions`, run `gws-auth.sh` to re-authenticate with full scope set.
+
 ## Calendar
 
 ### Agenda fetch

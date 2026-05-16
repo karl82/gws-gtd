@@ -13,6 +13,6 @@ Core runtime assets:
 
 - `System/Templates/` — Daily, Weekly Review, Monthly Review, Project Template, Person, Design Note, Recruiter Decline Email
 - `System/Queries/` — Dataview queries for tasks, projects, journals
-- `System/.gtd-state.jsonl` — append-only sweep/drain event log (created on first sweep)
+- `System/.gtd-state.jsonl` — append-only event log: sweep events, pattern-ledger classifications, filter-promotion decisions (created on first write)
 
 Local vault notes should keep only vault-specific overrides or migration notes. Do not redefine GTD rules here when the package already defines them in `skills/gtd/reference.md`.
